@@ -1,7 +1,6 @@
 <template>
   <div>
     PageLikes
-    <card />
     <miniCard />
   </div>
 </template>
