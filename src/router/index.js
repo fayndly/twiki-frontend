@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: "/viewing/:id",
     name: "viewing",
@@ -15,6 +15,16 @@ const routes: Array<RouteRecordRaw> = [
     path: "/sympathy/:id",
     name: "sympathy",
     component: () => import("../views/PageSympathy.vue"),
+  },
+  {
+    path: "/preview/:id",
+    name: "preview",
+    component: () => import("../views/PagePreview.vue"),
+  },
+  {
+    path: "/test/:id",
+    name: "test",
+    component: () => import("../views/Test.vue"),
   },
   {
     path: "/:catchAll(.*)",

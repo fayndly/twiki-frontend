@@ -1,10 +1,16 @@
 <template>
-  <div>PageNotFound</div>
+  <error-component
+    :pathSticker="require('@/assets/emoji/json/YellowDuck thinks.json')"
+    :text="'Страница не найдена'"
+  ></error-component>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
-
-@Options({})
-export default class PageNotFound extends Vue {}
+<script>
+export default {
+  name: "PageNotFound",
+  data() {
+    return {
+    };
+  },
+};
 </script>
