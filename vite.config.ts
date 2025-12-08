@@ -16,5 +16,10 @@ export default defineConfig({
         additionalData: `@use "@/app/styles/index" as *;`
       }
     }
-  }
+  },
+  base: "/twiki/",
+  server: {
+    host: true,
+    allowedHosts: true,
+  },
 });
