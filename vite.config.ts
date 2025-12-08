@@ -13,7 +13,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/index" as *;`
+        additionalData: `@use "@/app/styles/index" as *;`
       }
     }
   }
