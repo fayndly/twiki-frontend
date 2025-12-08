@@ -25,6 +25,7 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
+    "@tma.js/sdk-react": "^3.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
