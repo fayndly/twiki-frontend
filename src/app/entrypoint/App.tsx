@@ -2,14 +2,22 @@ import { MainLayout } from "../layouts/mainLayout/index"
 import styles from "./app.module.scss"
 import { SectionWrapper } from "../layouts/sectionWrapper"
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 export default function App() {
   return (
     <MainLayout>
-      <SectionWrapper>
-        <section className={styles.section}>
-          <div className={styles.card}></div>
-        </section>
-      </SectionWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={
+            <SectionWrapper>
+              <section className={styles.section}>
+                <div className={styles.card} />
+              </section>
+            </SectionWrapper>
+          } />
+        </Routes>
+      </BrowserRouter>
       <nav className={styles.navbar}>
         <div className={styles.list_wrapper}>
           <button className={styles.circle}>

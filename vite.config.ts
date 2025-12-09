@@ -17,7 +17,6 @@ export default defineConfig({
       }
     }
   },
-  base: "/twiki/",
   server: {
     host: true,
     allowedHosts: true,
