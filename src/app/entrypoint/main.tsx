@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 
+import "../styles/global.scss"
+
 import { retrieveLaunchParams } from '@tma.js/sdk-react';
 import { init } from '../environment/init-tma.ts';
 

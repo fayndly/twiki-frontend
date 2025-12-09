@@ -1,1 +1,7 @@
+html {
+    overscroll-behavior-x: none;
+}
 
+#root {
+  overflow-x: clip;
+}
