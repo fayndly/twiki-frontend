@@ -1,4 +1,4 @@
-import styles from "./sectionWrapper.module.scss"
+import styles from "./SectionWrapper.module.scss"
 
 import { type ReactNode } from "react";
 

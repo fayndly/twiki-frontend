@@ -1,4 +1,4 @@
-import styles from "./mainLayout.module.scss"
+import styles from "./MainLayout.module.scss"
 
 import { type ReactNode } from "react";
 

@@ -1,23 +1,12 @@
-import { MainLayout } from "../layouts/mainLayout/index"
+import { MainLayout } from "../layouts/MainLayout/index"
 import styles from "./app.module.scss"
-import { SectionWrapper } from "../layouts/sectionWrapper"
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppRoutes } from "../routes"
 
 export default function App() {
   return (
     <MainLayout>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <SectionWrapper>
-              <section className={styles.section}>
-                <div className={styles.card} />
-              </section>
-            </SectionWrapper>
-          } />
-        </Routes>
-      </BrowserRouter>
+      <AppRoutes />
       <nav className={styles.navbar}>
         <div className={styles.list_wrapper}>
           <button className={styles.circle}>

@@ -1,1 +1,1 @@
-export { SectionWrapper } from "./sectionWrapper.tsx"
+export { SectionWrapper } from "./SectionWrapper.tsx"
