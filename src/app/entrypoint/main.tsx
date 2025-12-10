@@ -7,6 +7,8 @@ import "../styles/global.scss";
 import { retrieveLaunchParams } from "@tma.js/sdk-react";
 import { init } from "../environment/init-tma.ts";
 
+import { HashRouter } from "react-router";
+
 const root = createRoot(document.getElementById("root")!);
 
 try {
@@ -23,7 +25,9 @@ try {
   }).then(() => {
     root.render(
       <StrictMode>
-        <App />
+        <HashRouter>
+          <App />
+        </HashRouter>
       </StrictMode>
     );
   });
