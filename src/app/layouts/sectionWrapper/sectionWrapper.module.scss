@@ -5,6 +5,14 @@
   flex-direction: column;
 }
 
+$height_gap: 8px;
+$height_paddings_wrapper: calc(8px * 2);
+$height_paddings_button: calc(8px * 2);
+$height_icon: 36px;
+
 .has_margin_bottom {
-  margin-bottom: calc(36px + 12px * 2 + 8px);
+  margin-bottom: calc(
+    $height_gap + $height_paddings_wrapper + $height_paddings_button +
+      $height_icon
+  );
 }

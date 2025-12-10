@@ -1,22 +1,32 @@
-import { MainLayout } from "../layouts/MainLayout/index"
-import styles from "./app.module.scss"
+import { AppRoot } from "@telegram-apps/telegram-ui";
+import "@telegram-apps/telegram-ui/dist/styles.css";
 
-import { AppRoutes } from "../routes"
+import { themeParams, useSignal } from "@tma.js/sdk-react";
+
+import { AppRoutes } from "../routes";
+
+import { MainLayout } from "../layouts/MainLayout/index";
+import { Navbar } from "@/widgets/Navbar";
+import { useEffect, useState } from "react";
+
+const getTheme = () => {
+  const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
+  const isDark = useSignal(themeParams.isDark);
+
+  useEffect(() => {
+    isDark ? setTheme("dark") : setTheme("light");
+  }, [isDark]);
+
+  return theme;
+};
 
 export default function App() {
   return (
-    <MainLayout>
-      <AppRoutes />
-      <nav className={styles.navbar}>
-        <div className={styles.list_wrapper}>
-          <button className={styles.circle}>
-          </button>
-          <button className={styles.circle} >
-          </button>
-          <button className={styles.circle}>
-          </button>
-        </div>
-      </nav>
-    </MainLayout>
-  )
+    <AppRoot appearance={getTheme()}>
+      <MainLayout>
+        <AppRoutes />
+      </MainLayout>
+      <Navbar />
+    </AppRoot>
+  );
 }
