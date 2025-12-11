@@ -1,15 +1,18 @@
-import styles from "./MainLayout.module.scss"
+import styles from "./MainLayout.module.scss";
 
 import { type ReactNode } from "react";
 
 type Props = {
-    children: ReactNode;
+  children: ReactNode;
+  reverbBgColor?: boolean;
 };
 
-export function MainLayout({ children }: Props) {
-    return (
-        <main className={styles.main}>
-            {children}
-        </main>
-    )
+export function MainLayout({ children, reverbBgColor = false }: Props) {
+  return (
+    <main
+      className={`${styles.main} ${reverbBgColor && styles.reverb_bg_color}`}
+    >
+      {children}
+    </main>
+  );
 }

@@ -8,8 +8,9 @@ import { AppRoutes } from "../routes";
 import { MainLayout } from "../layouts/MainLayout/index";
 import { Navbar } from "@/widgets/Navbar";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const getTheme = () => {
+const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
   const isDark = useSignal(themeParams.isDark);
 
@@ -21,12 +22,22 @@ const getTheme = () => {
 };
 
 export default function App() {
+  const theme = useGetTheme();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Google Analytics
+    console.log(location);
+  }, [location]);
+
+  const isNavbarShow = location.pathname !== "/settings";
+
   return (
-    <AppRoot appearance={getTheme()}>
-      <MainLayout>
+    <AppRoot appearance={theme}>
+      <MainLayout reverbBgColor={!isNavbarShow && theme === "light"}>
         <AppRoutes />
       </MainLayout>
-      <Navbar />
+      <Navbar show={isNavbarShow} />
     </AppRoot>
   );
 }

@@ -24,6 +24,10 @@
 }
 // overscroll-behavior-x: contain
 
+.hide {
+  display: none;
+}
+
 .tab {
   path {
     fill: $tg_secondary_bg_color;

@@ -24,11 +24,9 @@ try {
     mockForMacOS: platform === "macos",
   }).then(() => {
     root.render(
-      <StrictMode>
-        <HashRouter>
-          <App />
-        </HashRouter>
-      </StrictMode>
+      <HashRouter>
+        <App />
+      </HashRouter>
     );
   });
 } catch (e) {

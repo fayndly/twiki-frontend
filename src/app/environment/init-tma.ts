@@ -10,6 +10,8 @@ import {
   emitEvent,
   miniApp,
   swipeBehavior,
+  settingsButton,
+  backButton,
 } from "@tma.js/sdk-react";
 
 import { config } from "./config";
@@ -64,6 +66,15 @@ export async function init(options: {
   }
 
   initData.restore();
+
+  if (settingsButton.mount.isAvailable()) {
+    settingsButton.mount();
+    settingsButton.show();
+  }
+
+  if (backButton.mount.isAvailable()) {
+    backButton.mount();
+  }
 
   if (miniApp.mount.isAvailable()) {
     themeParams.mount();

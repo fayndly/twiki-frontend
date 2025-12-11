@@ -87,12 +87,12 @@ const tabs = [
   },
 ];
 
-export function Navbar() {
+export function Navbar({ show = true }: { show?: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${!show ? styles.hide : ""}`}>
       <div className={styles.tabs_wrapper}>
         {tabs.map(({ name, pathTo, Icon }) => (
           <Tab
