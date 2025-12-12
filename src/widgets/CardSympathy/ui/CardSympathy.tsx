@@ -2,9 +2,9 @@ import styles from "./CardSympathy.module.scss";
 
 import { Text } from "@telegram-apps/telegram-ui";
 
-import { type ICardSympathy } from "../types/index.types";
+import { type IPropsCardSympathy } from "../types/index.types";
 import { useEffect, useState } from "react";
-import { themeParams, useSignal } from "@tma.js/sdk-react";
+import { hapticFeedback, themeParams, useSignal } from "@tma.js/sdk-react";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -23,15 +23,35 @@ export function CardSympathy({
   name,
   age,
   city,
-}: ICardSympathy) {
+}: IPropsCardSympathy) {
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    onClick?.();
+
+    setActive(true);
+
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("medium");
+    }
+
+    setTimeout(() => {
+      setActive(false);
+    }, 200);
+  };
+
   const theme = useGetTheme();
 
   return (
     <div
-      onClick={onClick}
-      className={`${styles.card_sympathy} ${
-        theme === "light" && styles.card_sympathy_light
-      }`}
+      onClick={handleClick}
+      className={`${styles.card_sympathy} 
+      ${
+        theme === "light"
+          ? styles.card_sympathy_light
+          : styles.card_sympathy_dark
+      } 
+      ${active ? styles.card_sympathy_active : ""}`}
     >
       <img className={styles.img} src={imgUrl} alt="img_sympathy" />
       <div className={styles.title}>

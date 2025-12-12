@@ -1,4 +1,4 @@
-export interface ICardSympathy {
+export interface IPropsCardSympathy {
   onClick?: () => void;
   imgUrl: string;
   name: string;

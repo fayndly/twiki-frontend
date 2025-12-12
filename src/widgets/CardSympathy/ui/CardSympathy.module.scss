@@ -26,17 +26,18 @@
     transition: inherit;
   }
 
-  &:hover {
+  &_active {
     transform: scale(1.02);
-    &::before {
-      background-color: rgba($color: #fff, $alpha: 0.1);
-    }
-  }
 
-  &_light {
-    &:hover {
+    &.card_sympathy_dark {
       &::before {
-        background-color: rgba($color: #000, $alpha: 0.1);
+        background-color: rgba(#fff, 0.1);
+      }
+    }
+
+    &.card_sympathy_light {
+      &::before {
+        background-color: rgba(#000, 0.1);
       }
     }
   }
