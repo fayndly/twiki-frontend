@@ -1,8 +1,8 @@
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 import styles from "./PageSettings.module.scss";
-import { useLocation, useNavigate } from "react-router-dom";
-import { backButton, themeParams, useSignal } from "@tma.js/sdk-react";
+import { useNavigate } from "react-router-dom";
+import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { Divider, Subheadline, Text } from "@telegram-apps/telegram-ui";
 
 import { type ICell } from "../types/index.types";
@@ -40,20 +40,8 @@ const MoveIcon = ({ className }: { className: string }) => {
 
 export function PageSettings() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const theme = useGetTheme();
-
-  if (location.pathname === "/settings") {
-    backButton.show();
-  }
-
-  function listener() {
-    navigate("/viewing");
-    backButton.hide();
-    backButton.offClick(listener);
-  }
-  backButton.onClick(listener);
 
   return (
     <SectionWrapper>
