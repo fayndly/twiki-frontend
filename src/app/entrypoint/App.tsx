@@ -21,20 +21,23 @@ const useGetTheme = () => {
   return theme;
 };
 
+const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
+const pagesReverbBg = ["/settings"];
+
 export default function App() {
   const theme = useGetTheme();
   const location = useLocation();
 
   useEffect(() => {
-    // Google Analytics
     console.log(location);
   }, [location]);
 
-  const isNavbarShow = location.pathname !== "/settings";
+  const isNavbarShow = pagesWithNavbar.includes(location.pathname);
+  const isReverbBgColor = pagesReverbBg.includes(location.pathname);
 
   return (
     <AppRoot appearance={theme}>
-      <MainLayout reverbBgColor={!isNavbarShow && theme === "light"}>
+      <MainLayout reverbBgColor={isReverbBgColor && theme === "light"}>
         <AppRoutes />
       </MainLayout>
       <Navbar show={isNavbarShow} />

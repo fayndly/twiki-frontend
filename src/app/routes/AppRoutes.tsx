@@ -5,6 +5,7 @@ import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
 import { PageSympathy } from "@/pages/sympathy";
 import { PageSettings } from "@/pages/settings";
+import { PageNotFound } from "@/pages/not-found";
 
 export function AppRoutes() {
   const navigate = useNavigate();
@@ -15,10 +16,11 @@ export function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/viewing" element={<PageViewing />} />
-      <Route path="/likes" element={<PageLikes />} />
-      <Route path="/sympathy" element={<PageSympathy />} />
-      <Route path="/settings" element={<PageSettings />} />
+      <Route path="viewing" element={<PageViewing />} />
+      <Route path="likes" element={<PageLikes />} />
+      <Route path="sympathy" element={<PageSympathy />} />
+      <Route path="settings" element={<PageSettings />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
