@@ -8,7 +8,9 @@ import { cards } from "../mocks/cards";
 import { useState } from "react";
 import type { ICardProfile } from "../types/index.types";
 
-export function PageLikes() {
+import { SectionNoContent } from "@/shared/SectionNoContent";
+
+function Content() {
   const [profileCards, setProfileCards] = useState(cards);
 
   const likeHandler = (card: ICardProfile) => {
@@ -39,28 +41,39 @@ export function PageLikes() {
       );
     }, 300);
   };
+
+  if (profileCards.length === 0) {
+    return <SectionNoContent text="Похоже что у вас ещё нет лайков" />;
+  }
+
+  return (
+    <section className={styles.section}>
+      {profileCards.map((card) => (
+        <CardProfile
+          isLiked={card.isLiked}
+          isDisliked={card.isDisliked}
+          onLike={() => {
+            likeHandler(card);
+          }}
+          onDislike={() => {
+            dislikeHandler(card);
+          }}
+          key={card.id}
+          imgUrl={card.imgUrl}
+          name={card.name}
+          age={card.age}
+          city={card.city}
+          description={card.description}
+        />
+      ))}
+    </section>
+  );
+}
+
+export function PageLikes() {
   return (
     <SectionWrapper>
-      <section className={styles.section}>
-        {profileCards.map((card) => (
-          <CardProfile
-            isLiked={card.isLiked}
-            isDisliked={card.isDisliked}
-            onLike={() => {
-              likeHandler(card);
-            }}
-            onDislike={() => {
-              dislikeHandler(card);
-            }}
-            key={card.id}
-            imgUrl={card.imgUrl}
-            name={card.name}
-            age={card.age}
-            city={card.city}
-            description={card.description}
-          />
-        ))}
-      </section>
+      <Content />
     </SectionWrapper>
   );
 }
