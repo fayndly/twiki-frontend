@@ -7,7 +7,10 @@
   position: absolute;
   padding: 4px;
   box-sizing: border-box;
-  // transform: rotate(10deg) translateX(100px);
+
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .img {
@@ -106,4 +109,47 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+
+  &_open {
+    max-height: 300px;
+
+    display: block;
+    -webkit-line-clamp: none;
+  }
+}
+
+.swipe_right {
+  animation-name: swipe-right;
+}
+
+.swipe_left {
+  animation-name: swipe-left;
+}
+
+@keyframes swipe-right {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes swipe-left {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120vw) rotate(-20deg);
+    opacity: 0;
+  }
 }

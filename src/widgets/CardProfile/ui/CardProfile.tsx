@@ -3,6 +3,8 @@ import styles from "./CardProfile.module.scss";
 import { type IPropsCardProfile } from "../types/index.types";
 
 import { IconButton, Text } from "@telegram-apps/telegram-ui";
+import { hapticFeedback } from "@tma.js/sdk-react";
+import { useState } from "react";
 
 export function CardProfile({
   onLike,
@@ -12,26 +14,59 @@ export function CardProfile({
   age,
   city,
   description,
+  isLiked,
+  isDisliked,
 }: IPropsCardProfile) {
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+
+  const handleClickButton = (onClick?: () => void) => {
+    onClick?.();
+
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("medium");
+    }
+  };
+
+  const handleClickDescription = () => {
+    setIsDescriptionOpen(!isDescriptionOpen);
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("soft");
+    }
+  };
+
   return (
-    <div className={styles.card_profile}>
+    <div
+      className={`${styles.card_profile} ${isLiked ? styles.swipe_right : ""} ${
+        isDisliked ? styles.swipe_left : ""
+      }`}
+    >
       <img className={styles.img} src={imgUrl} alt="img_profile" />
       <div className={styles.info}>
-        <div className={styles.info_description}>
+        <div
+          onClick={handleClickDescription}
+          className={styles.info_description}
+        >
           <Text className={styles.text} weight="2">
             <span className={styles.text_name}>{name}</span>
             <span>,</span>
             <span className={styles.text_age}>{age}</span>
             <span className={styles.text_city}>{city}</span>
           </Text>
-          <Text className={styles.description} weight="3">
+          <Text
+            className={`${styles.description} ${
+              isDescriptionOpen && styles.description_open
+            }`}
+            weight="3"
+          >
             {description}
           </Text>
         </div>
         <div className={styles.info_buttons}>
           <IconButton
             className={styles.button}
-            onClick={onLike}
+            onClick={() => {
+              handleClickButton(onLike);
+            }}
             mode="plain"
             size="l"
           >
@@ -58,7 +93,9 @@ export function CardProfile({
           </IconButton>
           <IconButton
             className={styles.button}
-            onClick={onDislike}
+            onClick={() => {
+              handleClickButton(onDislike);
+            }}
             mode="plain"
             size="l"
           >

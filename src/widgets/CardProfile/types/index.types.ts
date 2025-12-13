@@ -6,4 +6,6 @@ export interface IPropsCardProfile {
   age: number;
   city: string;
   description: string;
+  isLiked: boolean;
+  isDisliked: boolean;
 }
