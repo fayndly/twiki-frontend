@@ -6,7 +6,7 @@ import {
   type Location,
   type NavigateFunction,
 } from "react-router-dom";
-import { backButton, settingsButton } from "@tma.js/sdk-react";
+import { backButton, hapticFeedback, settingsButton } from "@tma.js/sdk-react";
 
 import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
@@ -17,6 +17,9 @@ import { useEffect } from "react";
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
   const goTo = (path: string) => {
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("medium");
+    }
     navigate(path);
     backButton.hide();
   };
@@ -40,6 +43,9 @@ export function AppRoutes() {
   useBackButton(location, navigate);
 
   settingsButton.onClick(() => {
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("light");
+    }
     navigate("/settings");
   });
 

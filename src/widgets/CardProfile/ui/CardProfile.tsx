@@ -23,7 +23,7 @@ export function CardProfile({
     onClick?.();
 
     if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("medium");
+      hapticFeedback.impactOccurred("light");
     }
   };
 

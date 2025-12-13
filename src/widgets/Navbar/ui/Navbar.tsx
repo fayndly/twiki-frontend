@@ -4,6 +4,7 @@ import { IconButton } from "@telegram-apps/telegram-ui";
 
 import { type TabProps } from "../types";
 import { useLocation, useNavigate } from "react-router-dom";
+import { hapticFeedback } from "@tma.js/sdk-react";
 
 const tabs = [
   {
@@ -91,6 +92,13 @@ export function Navbar({ show = true }: { show?: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const clickHandler = (pathTo: string) => {
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("soft");
+    }
+    navigate(pathTo);
+  };
+
   return (
     <nav className={`${styles.navbar} ${!show ? styles.hide : ""}`}>
       <div className={styles.tabs_wrapper}>
@@ -99,7 +107,7 @@ export function Navbar({ show = true }: { show?: boolean }) {
             key={name}
             icon={Icon}
             isActive={location.pathname === pathTo}
-            onClick={() => navigate(pathTo)}
+            onClick={() => clickHandler(pathTo)}
           />
         ))}
       </div>
