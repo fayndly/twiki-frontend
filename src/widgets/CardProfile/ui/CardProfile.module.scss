@@ -131,6 +131,9 @@
     transform: translate(0, 0) rotate(0deg);
     opacity: 1;
   }
+  20% {
+    transform: translate(0, 0) rotate(0deg);
+  }
   40% {
     opacity: 1;
   }
@@ -144,6 +147,9 @@
   0% {
     transform: translate(0, 0) rotate(0deg);
     opacity: 1;
+  }
+  20% {
+    transform: translate(0, 0) rotate(0deg);
   }
   40% {
     opacity: 1;
