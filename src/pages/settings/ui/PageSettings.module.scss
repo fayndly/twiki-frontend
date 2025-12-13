@@ -55,7 +55,7 @@
     }
   }
 
-  &:hover {
+  &_active {
     background-color: rgba($color: #fff, $alpha: 0.1);
   }
 }
@@ -63,7 +63,7 @@
 .wrapper_settings_reverb {
   background-color: $tg_bg_color;
 
-  .cell:hover {
+  .cell.wrapper_settings_active {
     background-color: rgba($color: #000, $alpha: 0.1);
   }
 

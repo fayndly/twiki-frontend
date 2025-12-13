@@ -2,7 +2,7 @@ import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 import styles from "./PageSettings.module.scss";
 import { useNavigate } from "react-router-dom";
-import { themeParams, useSignal } from "@tma.js/sdk-react";
+import { hapticFeedback, themeParams, useSignal } from "@tma.js/sdk-react";
 import { Divider, Subheadline, Text } from "@telegram-apps/telegram-ui";
 
 import { type ICell } from "../types/index.types";
@@ -74,8 +74,28 @@ export function PageSettings() {
 }
 
 const Cell = ({ title, moveTitle, onClick }: ICell) => {
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    onClick?.();
+
+    setActive(true);
+
+    if (hapticFeedback.isSupported()) {
+      hapticFeedback.impactOccurred("medium");
+    }
+
+    setTimeout(() => {
+      setActive(false);
+    }, 200);
+  };
+
   return (
-    <div onClick={onClick} className={styles.cell}>
+    <div
+      onClick={handleClick}
+      className={`${styles.cell} 
+      ${active ? styles.cell_active : ""}`}
+    >
       <Text className={styles.cell_title} weight="3">
         {title}
       </Text>
