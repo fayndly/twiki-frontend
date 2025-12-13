@@ -43,7 +43,9 @@ function Content() {
   };
 
   if (profileCards.length === 0) {
-    return <SectionNoContent text="Похоже что у вас ещё нет лайков" />;
+    return (
+      <SectionNoContent text="Когда кто-то поставит вам лайк, вы увидите это здесь" />
+    );
   }
 
   return (
