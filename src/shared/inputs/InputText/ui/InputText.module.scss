@@ -1,0 +1,20 @@
+.input_text {
+  div {
+    padding: 0px 4px;
+    background-color: transparent;
+
+    label {
+      background-color: $tg_bg_color;
+      // background-color: $tg_secondary_bg_color;
+    }
+
+    h6 {
+      top: -10px !important;
+      left: 16px !important;
+    }
+  }
+}
+
+.g_filled {
+  fill: $tg_text_color;
+}

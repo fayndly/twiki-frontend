@@ -22,7 +22,7 @@ const useGetTheme = () => {
 };
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
-const pagesReverbBg = ["/settings"];
+const pagesReverbBg = ["/settings", "/profile/update"];
 
 export default function App() {
   const theme = useGetTheme();

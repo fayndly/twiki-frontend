@@ -7,13 +7,14 @@ import {
   type NavigateFunction,
 } from "react-router-dom";
 import { backButton, hapticFeedback, settingsButton } from "@tma.js/sdk-react";
+import { useEffect } from "react";
 
 import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
 import { PageSympathy } from "@/pages/sympathy";
 import { PageSettings } from "@/pages/settings";
+import { PageProfileUpdate } from "@/pages/profile-update";
 import { PageNotFound } from "@/pages/not-found";
-import { useEffect } from "react";
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
   const goTo = (path: string) => {
@@ -55,6 +56,7 @@ export function AppRoutes() {
       <Route path="likes" element={<PageLikes />} />
       <Route path="sympathy" element={<PageSympathy />} />
       <Route path="settings" element={<PageSettings />} />
+      <Route path="profile/update" element={<PageProfileUpdate />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

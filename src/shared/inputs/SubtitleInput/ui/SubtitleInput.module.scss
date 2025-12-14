@@ -1,0 +1,16 @@
+.subtitle_input {
+  padding-left: 20px !important;
+  font-size: 14px;
+
+  &_error {
+    font-size: inherit;
+
+    color: $tg_destructive_text_color;
+  }
+
+  &_title {
+    font-size: inherit;
+
+    color: $tg_subtitle_text_color;
+  }
+}
