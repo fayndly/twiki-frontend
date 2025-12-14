@@ -1,0 +1,38 @@
+.input_file {
+  div {
+    padding: 0px 4px;
+    background-color: transparent;
+
+    label {
+      border-radius: 30px;
+      background-color: $tg_bg_color;
+    }
+
+    h6 {
+      top: -10px !important;
+      left: 16px !important;
+    }
+  }
+}
+
+.preview {
+  &_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: $tg_bg_color !important;
+    box-sizing: border-box;
+    border-radius: 30px;
+
+    &_active {
+      padding: 12px 12px 0px 12px !important;
+    }
+  }
+
+  &_photo {
+    border-radius: 15px;
+    align-self: center;
+    max-width: 200px;
+  }
+}

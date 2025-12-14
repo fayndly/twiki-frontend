@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { InputText } from "@/shared/inputs/InputText";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
 import { InputSelect } from "@/shared/inputs/InputSelect";
+import { InputFile } from "@/shared/inputs/InputFile";
 
 export function PageProfileUpdate() {
   const formik = useFormik({
@@ -15,6 +16,7 @@ export function PageProfileUpdate() {
       age: undefined,
       description: "",
       sex: "Мужской",
+      photo: undefined,
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -30,6 +32,14 @@ export function PageProfileUpdate() {
         "Описание должно содержать не более 200-та символов"
       ),
       sex: Yup.string().required("Это поле обязательное"),
+      photo: Yup.mixed<File>()
+        .required("Файл обязателен")
+        .test("size", "До 5MB", (f) => !f || f.size <= 5 * 1024 * 1024)
+        .test(
+          "type",
+          "Только JPG/PNG",
+          (f) => !f || ["image/jpeg", "image/png"].includes(f.type)
+        ),
     }),
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
@@ -89,6 +99,20 @@ export function PageProfileUpdate() {
             placeholder="Выберите ваш пол"
             subtitle="Ваш пол"
             options={["Мужской", "Женский"]}
+          />
+          <InputFile
+            errors={formik.errors.photo}
+            handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              console.log(e.currentTarget.files);
+
+              const file = e.currentTarget.files?.[0];
+              formik.setFieldValue("photo", file);
+            }}
+            id="photo"
+            name="photo"
+            label="Выбрать фото"
+            subtitle="Ваше фото"
+            photoPreview={formik.values.photo}
           />
         </form>
       </section>
