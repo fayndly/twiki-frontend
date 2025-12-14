@@ -3,13 +3,16 @@ import styles from "./PageProfileUpdate.module.scss";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
 import { InputText } from "@/shared/inputs/InputText";
+import { InputTextarea } from "@/shared/inputs/InputTextarea";
 
 export function PageProfileUpdate() {
   const formik = useFormik({
     initialValues: {
       firstName: "",
       age: undefined,
+      description: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -20,6 +23,10 @@ export function PageProfileUpdate() {
         .max(99, "Максимальный возраст 99 лет")
         .min(1, "Минимальный возраст 1 год")
         .required("Это поле обязательное"),
+      description: Yup.string().max(
+        200,
+        "Описание должно содержать не более 200-та символов"
+      ),
     }),
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
@@ -58,6 +65,16 @@ export function PageProfileUpdate() {
             header="Возвраст*"
             placeholder="Введите возраст"
             subtitle="Ваш возраст"
+          />
+          <InputTextarea
+            errors={formik.errors.description}
+            handleChange={formik.handleChange}
+            value={formik.values.description}
+            id="description"
+            name="description"
+            header="Описание"
+            placeholder="Введите описание"
+            subtitle="Ваше описание"
           />
         </form>
       </section>

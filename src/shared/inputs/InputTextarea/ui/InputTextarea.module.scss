@@ -1,0 +1,15 @@
+.input_textarea {
+  div {
+    padding: 0px 4px;
+    background-color: transparent;
+
+    label {
+      background-color: $tg_bg_color;
+    }
+
+    h6 {
+      top: -10px !important;
+      left: 16px !important;
+    }
+  }
+}
