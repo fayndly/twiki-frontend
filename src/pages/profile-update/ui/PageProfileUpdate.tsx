@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import { InputText } from "@/shared/inputs/InputText";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
+import { InputSelect } from "@/shared/inputs/InputSelect";
 
 export function PageProfileUpdate() {
   const formik = useFormik({
@@ -13,6 +14,7 @@ export function PageProfileUpdate() {
       firstName: "",
       age: undefined,
       description: "",
+      sex: "Мужской",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -27,6 +29,7 @@ export function PageProfileUpdate() {
         200,
         "Описание должно содержать не более 200-та символов"
       ),
+      sex: Yup.string().required("Это поле обязательное"),
     }),
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
@@ -75,6 +78,17 @@ export function PageProfileUpdate() {
             header="Описание"
             placeholder="Введите описание"
             subtitle="Ваше описание"
+          />
+          <InputSelect
+            errors={formik.errors.sex}
+            handleChange={formik.handleChange}
+            value={formik.values.sex}
+            id="sex"
+            name="sex"
+            header="Пол*"
+            placeholder="Выберите ваш пол"
+            subtitle="Ваш пол"
+            options={["Мужской", "Женский"]}
           />
         </form>
       </section>
