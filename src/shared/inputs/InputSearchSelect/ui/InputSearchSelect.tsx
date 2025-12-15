@@ -1,15 +1,15 @@
-import { Input } from "@telegram-apps/telegram-ui";
-
-import styles from "./InputSearchSelect.module.scss";
-
-import { type IPropsInputSearchSelect } from "../types/index.types";
-import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
 import { useState } from "react";
 
-import { sortValuesByMatch } from "../helpers/sortList";
+import styles from "./InputSearchSelect.module.scss";
+import { type IPropsInputSearchSelect } from "../types/index.types";
 
-import { ClearButton } from "../components/ClearButton/ClearButton";
+import { sortValuesByMatch } from "../helpers/sortList";
 import { Clue } from "../components/Clue/Clue";
+
+import { Input } from "@telegram-apps/telegram-ui";
+
+import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
+import { ClearButton } from "@/shared/inputs/ClearButton/ClearButton";
 
 export function InputSearchSelect({
   handleChange,

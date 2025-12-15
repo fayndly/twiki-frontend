@@ -3,7 +3,7 @@ import { type IPropsInputSubtitle } from "@/shared/inputs/SubtitleInput";
 
 export interface IPropsInputSearchSelect extends IPropsInputSubtitle {
   handleChange: FormikHandlers["handleChange"];
-  value: IPropsCell | string | undefined;
+  value: IPropsCell | string;
   id: string;
   name: string;
   header?: string;

@@ -1,8 +1,9 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import styles from "./PageProfileUpdate.module.scss";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 import { InputText } from "@/shared/inputs/InputText";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
@@ -11,7 +12,7 @@ import { InputFile } from "@/shared/inputs/InputFile";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 
 const cities = [
-  { value: "77", label: "Lockb" },
+  { value: "77", label: "Москва" },
   { value: "78", label: "Санкт-Петербург" },
   { value: "23", label: "Сочи" },
   { value: "16", label: "Казань" },
@@ -28,11 +29,11 @@ export function PageProfileUpdate() {
   const formik = useFormik({
     initialValues: {
       firstName: "",
-      age: undefined,
+      age: "",
       description: "",
       sex: "Мужской",
       photo: undefined,
-      city: undefined,
+      city: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()

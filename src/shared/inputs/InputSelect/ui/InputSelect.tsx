@@ -1,8 +1,8 @@
+import styles from "./InputSelect.module.scss";
+import { type IPropsInputSelect } from "../types/index.types";
+
 import { Select } from "@telegram-apps/telegram-ui";
 
-import styles from "./InputSelect.module.scss";
-
-import { type IPropsInputSelect } from "../types/index.types";
 import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
 
 export function InputSelect({
@@ -25,8 +25,8 @@ export function InputSelect({
         value={value}
         header={header}
       >
-        {options.map((value) => (
-          <option>{value}</option>
+        {options.map((value, index) => (
+          <option key={index}>{value}</option>
         ))}
       </Select>
       <SubtitleInput errors={errors} subtitle={subtitle} />
