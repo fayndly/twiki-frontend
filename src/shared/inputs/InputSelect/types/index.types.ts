@@ -8,4 +8,5 @@ export interface IPropsInputSelect extends IPropsInputSubtitle {
   name: string;
   header?: string;
   options: Array<string>;
+  onChange: () => void;
 }

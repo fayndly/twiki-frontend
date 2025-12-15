@@ -14,6 +14,7 @@ export function InputSelect({
   header,
   subtitle,
   options,
+  onChange,
 }: IPropsInputSelect) {
   return (
     <div className={styles.input_select}>
@@ -21,7 +22,10 @@ export function InputSelect({
         id={id}
         name={name}
         status={errors?.length ? "error" : undefined}
-        onChange={handleChange}
+        onChange={(e) => {
+          onChange?.();
+          handleChange(e);
+        }}
         value={value}
         header={header}
       >

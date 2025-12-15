@@ -13,6 +13,7 @@ export function InputFile({
   name,
   subtitle,
   photoPreview,
+  onChange,
 }: IPropsInputFile) {
   let photoUrlPreview = undefined;
   if (photoPreview) {
@@ -38,7 +39,10 @@ export function InputFile({
           name={name}
           type="file"
           label={label}
-          onChange={handleChange}
+          onChange={(e) => {
+            onChange?.();
+            handleChange(e);
+          }}
         />
       </div>
       <SubtitleInput errors={errors} subtitle={subtitle} />

@@ -14,6 +14,7 @@ export function InputTextarea({
   header,
   placeholder,
   subtitle,
+  onChange,
 }: IPropsInputTextarea) {
   return (
     <div className={styles.input_textarea}>
@@ -21,7 +22,10 @@ export function InputTextarea({
         id={id}
         name={name}
         status={errors?.length ? "error" : undefined}
-        onChange={handleChange}
+        onChange={(e) => {
+          onChange?.();
+          handleChange(e);
+        }}
         value={value}
         header={header}
         placeholder={placeholder}

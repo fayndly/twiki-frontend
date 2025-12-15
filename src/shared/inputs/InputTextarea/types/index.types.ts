@@ -8,4 +8,5 @@ export interface IPropsInputTextarea extends IPropsInputSubtitle {
   name: string;
   header?: string;
   placeholder?: string;
+  onChange: () => void;
 }

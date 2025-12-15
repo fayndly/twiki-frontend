@@ -10,6 +10,7 @@ export interface IPropsInputText extends IPropsInputSubtitle {
   placeholder?: string;
   clickClear?: () => void;
   type: "number" | "text";
+  onChange?: () => void;
 }
 
 export interface IPropsClearButton {

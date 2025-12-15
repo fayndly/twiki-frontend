@@ -24,6 +24,7 @@ export function InputSearchSelect({
   subtitle,
   type,
   options,
+  onChange,
 }: IPropsInputSearchSelect) {
   const [clueValue, setClueValue] = useState("");
   const suggestions = sortValuesByMatch(options, clueValue);
@@ -47,6 +48,7 @@ export function InputSearchSelect({
         type={type}
         status={errors?.length ? "error" : undefined}
         onChange={(e) => {
+          onChange?.();
           handleChange(e);
           setClueValue(e.target.value);
         }}

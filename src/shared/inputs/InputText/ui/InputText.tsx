@@ -17,6 +17,7 @@ export function InputText({
   placeholder,
   subtitle,
   type,
+  onChange,
 }: IPropsInputText) {
   return (
     <div className={styles.input_text}>
@@ -25,7 +26,10 @@ export function InputText({
         name={name}
         type={type}
         status={errors?.length ? "error" : undefined}
-        onChange={handleChange}
+        onChange={(e) => {
+          onChange?.();
+          handleChange(e);
+        }}
         value={value}
         header={header}
         placeholder={placeholder}

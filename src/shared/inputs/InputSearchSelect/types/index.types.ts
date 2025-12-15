@@ -12,6 +12,7 @@ export interface IPropsInputSearchSelect extends IPropsInputSubtitle {
   type: "number" | "text";
   handleChangeClue: (value: IPropsCell) => void;
   options: Array<IPropsCell>;
+  onChange: () => void;
 }
 
 export interface IPropsClearButton {
