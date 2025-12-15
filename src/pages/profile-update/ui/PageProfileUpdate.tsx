@@ -8,6 +8,21 @@ import { InputText } from "@/shared/inputs/InputText";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
 import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputFile } from "@/shared/inputs/InputFile";
+import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
+
+const cities = [
+  { value: "77", label: "Lockb" },
+  { value: "78", label: "Санкт-Петербург" },
+  { value: "23", label: "Сочи" },
+  { value: "16", label: "Казань" },
+  { value: "66", label: "Екатеринбург" },
+  { value: "54", label: "Новосибирск" },
+  { value: "52", label: "Нижний Новгород" },
+  { value: "39", label: "Калининград" },
+  { value: "24", label: "Красноярск" },
+  { value: "72", label: "Тюмень" },
+  { value: "20", label: "Грозный" },
+];
 
 export function PageProfileUpdate() {
   const formik = useFormik({
@@ -17,6 +32,7 @@ export function PageProfileUpdate() {
       description: "",
       sex: "Мужской",
       photo: undefined,
+      city: undefined,
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -40,6 +56,18 @@ export function PageProfileUpdate() {
           "Только JPG/PNG",
           (f) => !f || ["image/jpeg", "image/png"].includes(f.type)
         ),
+      city: Yup.mixed()
+        .nullable()
+        .test("city", function (value) {
+          const { createError } = this;
+
+          if (typeof value === "string") {
+            return createError({ message: "Выберите город из списка" });
+          }
+
+          return true;
+        })
+        .required("Это поле обязательное"),
     }),
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
@@ -75,7 +103,7 @@ export function PageProfileUpdate() {
             type="number"
             id="age"
             name="age"
-            header="Возвраст*"
+            header="Возраст*"
             placeholder="Введите возраст"
             subtitle="Ваш возраст"
           />
@@ -96,15 +124,12 @@ export function PageProfileUpdate() {
             id="sex"
             name="sex"
             header="Пол*"
-            placeholder="Выберите ваш пол"
             subtitle="Ваш пол"
             options={["Мужской", "Женский"]}
           />
           <InputFile
             errors={formik.errors.photo}
             handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              console.log(e.currentTarget.files);
-
               const file = e.currentTarget.files?.[0];
               formik.setFieldValue("photo", file);
             }}
@@ -113,6 +138,24 @@ export function PageProfileUpdate() {
             label="Выбрать фото"
             subtitle="Ваше фото"
             photoPreview={formik.values.photo}
+          />
+          <InputSearchSelect
+            errors={formik.errors.city}
+            handleChange={formik.handleChange}
+            value={formik.values.city}
+            clickClear={() => {
+              formik.setFieldValue("city", "");
+            }}
+            type="text"
+            id="city"
+            name="city"
+            header="Город*"
+            placeholder="Введите название города"
+            subtitle="Выберите город из выпадающего списка"
+            handleChangeClue={(value) => {
+              formik.setFieldValue("city", value);
+            }}
+            options={cities}
           />
         </form>
       </section>
