@@ -16,7 +16,7 @@ export function InputFile({
   onChange,
 }: IPropsInputFile) {
   let photoUrlPreview = undefined;
-  if (photoPreview) {
+  if (!errors && photoPreview) {
     photoUrlPreview = URL.createObjectURL(photoPreview);
   }
 
