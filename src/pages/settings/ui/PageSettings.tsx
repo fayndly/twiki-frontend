@@ -2,8 +2,14 @@ import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 import styles from "./PageSettings.module.scss";
 import { useNavigate } from "react-router-dom";
-import { hapticFeedback, themeParams, useSignal } from "@tma.js/sdk-react";
-import { Divider, Subheadline, Text } from "@telegram-apps/telegram-ui";
+import { themeParams, useSignal } from "@tma.js/sdk-react";
+import {
+  Cell,
+  Divider,
+  IconContainer,
+  Subheadline,
+  Text,
+} from "@telegram-apps/telegram-ui";
 
 import { type ICell } from "../types/index.types";
 import { useEffect, useState } from "react";
@@ -55,13 +61,13 @@ export function PageSettings() {
               theme === "light" && styles.wrapper_settings_reverb
             }`}
           >
-            <Cell
+            <CustomCell
               title="Фильтры"
               moveTitle="Изменить"
               onClick={() => navigate("/filters/update")}
             />
             <Divider className={styles.divider} />
-            <Cell
+            <CustomCell
               title="Анкета"
               moveTitle="Редактировать"
               onClick={() => navigate("/profile/update")}
@@ -73,38 +79,23 @@ export function PageSettings() {
   );
 }
 
-const Cell = ({ title, moveTitle, onClick }: ICell) => {
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    onClick?.();
-
-    setActive(true);
-
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("medium");
-    }
-
-    setTimeout(() => {
-      setActive(false);
-    }, 200);
-  };
-
+const CustomCell = ({ title, moveTitle, onClick }: ICell) => {
   return (
-    <div
-      onClick={handleClick}
-      className={`${styles.cell} 
-      ${active ? styles.cell_active : ""}`}
+    <Cell
+      onClick={onClick}
+      className={styles.cell}
+      after={
+        <div className={styles.cell_move}>
+          <Text className={styles.cell_move_title} weight="3">
+            {moveTitle}
+          </Text>
+          <IconContainer>
+            <MoveIcon className={styles.cell_move_icon} />
+          </IconContainer>
+        </div>
+      }
     >
-      <Text className={styles.cell_title} weight="3">
-        {title}
-      </Text>
-      <div className={styles.cell_move}>
-        <Text className={styles.cell_move_title} weight="3">
-          {moveTitle}
-        </Text>
-        <MoveIcon className={styles.cell_move_icon} />
-      </div>
-    </div>
+      {title}
+    </Cell>
   );
 };
