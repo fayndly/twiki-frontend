@@ -12,6 +12,7 @@ import {
   swipeBehavior,
   settingsButton,
   backButton,
+  mainButton,
 } from "@tma.js/sdk-react";
 
 import { config } from "./config";
@@ -66,6 +67,10 @@ export async function init(options: {
   }
 
   initData.restore();
+
+  if (mainButton.mount.isAvailable()) {
+    mainButton.mount();
+  }
 
   if (settingsButton.mount.isAvailable()) {
     settingsButton.mount();

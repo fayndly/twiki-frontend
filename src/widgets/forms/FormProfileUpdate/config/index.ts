@@ -1,3 +1,4 @@
+import { themeParams } from "@tma.js/sdk-react";
 import * as Yup from "yup";
 
 export const cities = [
@@ -57,4 +58,43 @@ export const initialValues = {
   sex: "Мужской",
   photo: undefined,
   city: "",
+};
+
+export const getParamsButton = () => {
+  return {
+    valid: {
+      bgColor: themeParams.buttonColor(),
+      hasShineEffect: true,
+      isEnabled: true,
+      text: "Подтвердить",
+      textColor: themeParams.buttonTextColor(),
+    },
+    noValid: {
+      bgColor: themeParams.hintColor(),
+      hasShineEffect: false,
+      isEnabled: false,
+      isLoaderVisible: false,
+      isVisible: true,
+      text: "Заполните форму",
+      textColor: themeParams.sectionHeaderTextColor(),
+    },
+    loading: {
+      isLoaderVisible: true,
+      hasShineEffect: false,
+    },
+    success: {
+      isLoaderVisible: false,
+      bgColor: "#3dcf5d" as `#${string}`,
+      text: "Отправлено",
+      isEnabled: false,
+      hasShineEffect: false,
+    },
+    error: {
+      isLoaderVisible: false,
+      bgColor: themeParams.destructiveTextColor(),
+      text: "Ошибка",
+      isEnabled: false,
+      hasShineEffect: false,
+    },
+  };
 };
