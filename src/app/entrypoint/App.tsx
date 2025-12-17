@@ -8,7 +8,7 @@ import { AppRoutes } from "../routes";
 import { Navbar } from "@/widgets/Navbar";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MainLayout } from "../layouts/mainLayout";
+import { MainLayout } from "../layouts/MainLayout";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);

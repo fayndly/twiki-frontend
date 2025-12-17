@@ -1,1 +1,1 @@
-export { MainLayout } from "./MainLayout.tsx"
+export { MainLayout } from "./ui/MainLayout.tsx";

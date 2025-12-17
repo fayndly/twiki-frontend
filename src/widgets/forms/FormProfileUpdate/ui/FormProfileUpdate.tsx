@@ -1,5 +1,5 @@
 import styles from "./FormProfileUpdate.module.scss";
-import { cities, initialValues, validationSchema } from "../config";
+import { cities, validationSchema, initialValues } from "../config";
 import { handleSubmit } from "../api";
 import { FormStateWatcher } from "../model";
 
