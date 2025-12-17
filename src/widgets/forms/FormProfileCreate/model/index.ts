@@ -1,11 +1,14 @@
-import { mainButton } from "@tma.js/sdk-react";
-import { useFormikContext } from "formik";
-import { useEffect, useState } from "react";
 import type { ButtonSubmitStatuses } from "../types";
-
 import { getParamsButton } from "../config";
 
+import { useEffect, useState } from "react";
+import { useFormikContext } from "formik";
+import { hapticFeedback, mainButton, miniApp } from "@tma.js/sdk-react";
+import { useNavigate } from "react-router-dom";
+
 export function FormStateWatcher() {
+  const navigate = useNavigate();
+
   const { isValid, dirty, isSubmitting, submitForm, validateForm } =
     useFormikContext<any>();
 
@@ -32,6 +35,9 @@ export function FormStateWatcher() {
 
   useEffect(() => {
     const handler = async () => {
+      if (hapticFeedback.isSupported()) {
+        hapticFeedback.impactOccurred("medium");
+      }
       setButtonStatus("loading");
       const errors = await validateForm();
       if (Object.keys(errors).length > 0) {
@@ -43,10 +49,19 @@ export function FormStateWatcher() {
         const result = await submitForm();
         console.log(result);
         setButtonStatus("success");
+        if (hapticFeedback.isSupported()) {
+          hapticFeedback.notificationOccurred("success");
+        }
+        setTimeout(() => {
+          miniApp.close();
+        }, 1000);
       } catch (e) {
         console.log(e);
 
         setButtonStatus("error");
+        if (hapticFeedback.isSupported()) {
+          hapticFeedback.notificationOccurred("error");
+        }
         setTimeout(() => {
           setButtonStatus(canShowButton ? "valid" : "noValid");
         }, 2000);

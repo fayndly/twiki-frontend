@@ -70,13 +70,13 @@ export const getParamsButton = () => {
       textColor: themeParams.buttonTextColor(),
     },
     noValid: {
-      bgColor: themeParams.hintColor(),
+      bgColor: themeParams.headerBgColor(),
       hasShineEffect: false,
       isEnabled: false,
       isLoaderVisible: false,
       isVisible: true,
       text: "Заполните форму",
-      textColor: themeParams.sectionHeaderTextColor(),
+      textColor: themeParams.textColor(),
     },
     loading: {
       isLoaderVisible: true,
