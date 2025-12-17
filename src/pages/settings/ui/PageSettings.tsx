@@ -64,13 +64,17 @@ export function PageSettings() {
             <CustomCell
               title="Фильтры"
               moveTitle="Изменить"
-              onClick={() => navigate("/filters/update")}
+              onClick={() => {
+                setTimeout(() => navigate("/filters/update"), 200);
+              }}
             />
             <Divider className={styles.divider} />
             <CustomCell
               title="Анкета"
               moveTitle="Редактировать"
-              onClick={() => navigate("/profile/update")}
+              onClick={() => {
+                setTimeout(() => navigate("/profile/update"), 200);
+              }}
             />
           </div>
         </div>

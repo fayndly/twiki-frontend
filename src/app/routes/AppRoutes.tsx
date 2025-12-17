@@ -6,7 +6,12 @@ import {
   type Location,
   type NavigateFunction,
 } from "react-router-dom";
-import { backButton, hapticFeedback, settingsButton } from "@tma.js/sdk-react";
+import {
+  backButton,
+  hapticFeedback,
+  mainButton,
+  settingsButton,
+} from "@tma.js/sdk-react";
 import { useEffect } from "react";
 
 import { PageViewing } from "@/pages/viewing";
@@ -16,25 +21,31 @@ import { PageSettings } from "@/pages/settings";
 import { PageProfileUpdate } from "@/pages/profile-update";
 import { PageNotFound } from "@/pages/not-found";
 
+const backButtonPaths = ["/settings", "/profile/update", "/filters/update"];
+const mainButtonPaths = ["/profile/update"];
+
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
-  const goTo = (path: string) => {
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("medium");
-    }
-    navigate(path);
-    backButton.hide();
-  };
+  useEffect(() => {
+    backButtonPaths.includes(location.pathname)
+      ? backButton.show()
+      : backButton.hide();
+
+    mainButtonPaths.includes(location.pathname)
+      ? mainButton.show()
+      : mainButton.hide();
+  }, [location]);
 
   useEffect(() => {
-    if (location.pathname === "/settings") {
-      backButton.show();
-      backButton.onClick(() => {
-        goTo("/viewing");
-      });
-    } else {
-      backButton.hide();
-    }
-  }, [location]);
+    const handler = () => {
+      hapticFeedback.isSupported() && hapticFeedback.impactOccurred("medium");
+      navigate(-1);
+    };
+    backButton.onClick(handler);
+
+    return () => {
+      backButton.offClick(handler);
+    };
+  });
 };
 
 export function AppRoutes() {
@@ -43,11 +54,17 @@ export function AppRoutes() {
 
   useBackButton(location, navigate);
 
-  settingsButton.onClick(() => {
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("light");
-    }
-    navigate("/settings");
+  useEffect(() => {
+    const handler = () => {
+      hapticFeedback.isSupported() && hapticFeedback.impactOccurred("light");
+      navigate("/settings");
+    };
+
+    settingsButton.onClick(handler);
+
+    return () => {
+      settingsButton.offClick(handler);
+    };
   });
 
   return (

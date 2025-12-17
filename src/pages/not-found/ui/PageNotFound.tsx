@@ -23,7 +23,7 @@ export function PageNotFound() {
           mode="filled"
           size="s"
         >
-          Вернуться
+          На главную
         </Button>
       </section>
     </SectionWrapper>
