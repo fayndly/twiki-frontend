@@ -20,9 +20,10 @@ import { PageSympathy } from "@/pages/sympathy";
 import { PageSettings } from "@/pages/settings";
 import { PageProfileUpdate } from "@/pages/profile-update";
 import { PageNotFound } from "@/pages/not-found";
+import { PageProfileCreate } from "@/pages/profile-create";
 
 const backButtonPaths = ["/settings", "/profile/update", "/filters/update"];
-const mainButtonPaths = ["/profile/update"];
+const mainButtonPaths = ["/profile/update", "/profile/create"];
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
   useEffect(() => {
@@ -74,6 +75,7 @@ export function AppRoutes() {
       <Route path="sympathy" element={<PageSympathy />} />
       <Route path="settings" element={<PageSettings />} />
       <Route path="profile/update" element={<PageProfileUpdate />} />
+      <Route path="profile/create" element={<PageProfileCreate />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

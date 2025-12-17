@@ -1,7 +1,7 @@
-import styles from "./PageProfileUpdate.module.scss";
+import styles from "./PageProfileCreate.module.scss";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-import { FormProfileUpdate } from "@/widgets/forms/FormProfileUpdate";
+import { FormProfileCreate } from "@/widgets/forms/FormProfileCreate";
 import { PlaceholderSticker } from "@/shared/Placeholder";
 
 export function PageProfileCreate() {
@@ -13,7 +13,7 @@ export function PageProfileCreate() {
           description="Это поможет создать вашу анкету"
           pathToSticker="/stickers/dog_writing.json"
         />
-        <FormProfileUpdate />
+        <FormProfileCreate />
       </section>
     </SectionWrapper>
   );

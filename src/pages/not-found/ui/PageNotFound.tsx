@@ -17,15 +17,26 @@ export function PageNotFound() {
           description="Возможно, ссылка устарела или была введена неверно"
           pathToSticker="/stickers/duck_thinking.json"
           actions={
-            <Button
-              onClick={() => {
-                navigate("/viewing");
-              }}
-              mode="filled"
-              size="l"
-            >
-              На главную
-            </Button>
+            <>
+              <Button
+                onClick={() => {
+                  navigate("/viewing");
+                }}
+                mode="filled"
+                size="l"
+              >
+                На главную
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/profile/create");
+                }}
+                mode="filled"
+                size="s"
+              >
+                Создать профиль
+              </Button>
+            </>
           }
         />
       </section>
