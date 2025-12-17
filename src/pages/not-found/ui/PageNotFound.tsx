@@ -1,9 +1,9 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-
 import styles from "./PageNotFound.module.scss";
 
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Button, Title } from "@telegram-apps/telegram-ui";
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
+import { PlaceholderSticker } from "@/shared/Placeholder";
+
+import { Button } from "@telegram-apps/telegram-ui";
 import { useNavigate } from "react-router-dom";
 
 export function PageNotFound() {
@@ -12,19 +12,22 @@ export function PageNotFound() {
   return (
     <SectionWrapper>
       <section className={styles.section}>
-        <DotLottieReact src="/stickers/duck_thinking.json" loop autoplay />
-        <Title className={styles.title} level="3" weight="3">
-          Страница не найдена
-        </Title>
-        <Button
-          onClick={() => {
-            navigate("/viewing");
-          }}
-          mode="filled"
-          size="s"
-        >
-          На главную
-        </Button>
+        <PlaceholderSticker
+          header="Страница не найдена"
+          description="Возможно, ссылка устарела или была введена неверно"
+          pathToSticker="/stickers/duck_thinking.json"
+          actions={
+            <Button
+              onClick={() => {
+                navigate("/viewing");
+              }}
+              mode="filled"
+              size="l"
+            >
+              На главную
+            </Button>
+          }
+        />
       </section>
     </SectionWrapper>
   );
