@@ -52,14 +52,12 @@ export const validationSchema = Yup.object({
 });
 
 export const initialValues = {
-  firstName: "Muhammad Ali",
-  age: 33,
-  description:
-    "Олимпийский чемпион 1960 года в полутяжёлой весовой категории, абсолютный чемпион мира в тяжёлом весе",
+  firstName: "",
+  age: "",
+  description: "",
   sex: "Мужской" as "Мужской" | "Женский",
   photo: undefined,
-  // photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Muhammad_Ali_NYWTS.jpg/500px-Muhammad_Ali_NYWTS.jpg",
-  city: { value: "77", label: "Москва" },
+  city: "",
 };
 
 export const getParamsButton = () => {

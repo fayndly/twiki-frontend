@@ -1,14 +1,14 @@
 import { cities, initialValues } from "../config";
-import { postProfileUpdate } from "../api";
+import { postProfileCreate } from "../api";
 import { FormStateWatcher } from "../model";
 
 import { FormProfile } from "@/widgets/forms/FormProfile";
 
-export function FormProfileUpdate() {
+export function FormProfileCreate() {
   return (
     <FormProfile
       initialValues={initialValues}
-      handleSubmit={postProfileUpdate}
+      handleSubmit={postProfileCreate}
       cities={cities}
       formStateWatcher={<FormStateWatcher />}
     />

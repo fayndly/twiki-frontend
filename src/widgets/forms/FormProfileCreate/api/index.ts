@@ -1,4 +1,4 @@
-export const postProfileUpdate = async (values: any): Promise<any> => {
+export const postProfileCreate = async (values: any): Promise<any> => {
   const isError = false;
   await new Promise((res) => setTimeout(res, 2000));
   if (isError) {
