@@ -65,7 +65,7 @@ export function PageSettings() {
               title="Фильтры"
               moveTitle="Изменить"
               onClick={() => {
-                setTimeout(() => navigate("/filters/update"), 200);
+                setTimeout(() => navigate("/filters"), 200);
               }}
             />
             <Divider className={styles.divider} />

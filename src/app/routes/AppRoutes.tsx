@@ -21,8 +21,9 @@ import { PageSettings } from "@/pages/settings";
 import { PageProfileUpdate } from "@/pages/profile-update";
 import { PageNotFound } from "@/pages/not-found";
 import { PageProfileCreate } from "@/pages/profile-create";
+import { PageFilters } from "@/pages/filters";
 
-const backButtonPaths = ["/settings", "/profile/update", "/filters/update"];
+const backButtonPaths = ["/settings", "/profile/update", "/filters"];
 const mainButtonPaths = ["/profile/update", "/profile/create"];
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
@@ -76,6 +77,7 @@ export function AppRoutes() {
       <Route path="settings" element={<PageSettings />} />
       <Route path="profile/update" element={<PageProfileUpdate />} />
       <Route path="profile/create" element={<PageProfileCreate />} />
+      <Route path="filters" element={<PageFilters />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

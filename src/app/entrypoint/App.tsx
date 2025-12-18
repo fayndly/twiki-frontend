@@ -34,7 +34,12 @@ export function setReverseColors(colors: Record<string, string>) {
 }
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
-const pagesReverbBg = ["/settings", "/profile/update", "/profile/create"];
+const pagesReverbBg = [
+  "/settings",
+  "/profile/update",
+  "/profile/create",
+  "/filters",
+];
 
 export default function App() {
   const theme = useGetTheme();
