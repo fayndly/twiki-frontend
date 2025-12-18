@@ -4,12 +4,13 @@
     background-color: transparent;
 
     label {
-      background-color: $tg_bg_color;
+      background-color: $tg_secondary_bg_color;
     }
 
     h6 {
       top: -10px !important;
       left: 16px !important;
+      background-color: $tg_secondary_bg_color !important;
     }
   }
 }

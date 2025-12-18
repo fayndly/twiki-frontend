@@ -4,11 +4,8 @@ import { getParamsButton } from "../config";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { hapticFeedback, mainButton, miniApp } from "@tma.js/sdk-react";
-import { useNavigate } from "react-router-dom";
 
 export function FormStateWatcher() {
-  const navigate = useNavigate();
-
   const { isValid, dirty, isSubmitting, submitForm, validateForm } =
     useFormikContext<any>();
 

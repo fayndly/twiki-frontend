@@ -1,18 +1,112 @@
 // telegram base colors
-$tg_accent_text_color: var(--tg-theme-accent-text-color); // #9472ee
-$tg_bg_color: var(--tg-theme-bg-color); // #ffffff
+$tg_accent_text_color: var(--tgui--accent_text_color);
+// $tg_bg_color: var(--tgui--bg_color);
+$tg_bg_color: var(--revers_bg_color);
 $tg_bottom_bar_bg_color: var(--tg-theme-bottom-bar-bg-color); // #f2f2f2
-$tg_button_color: var(--tg-theme-button-color); // #9472ee
-$tg_button_text_color: var(--tg-theme-button-text-color); // #ffffff
-$tg_destructive_text_color: var(--tg-theme-destructive-text-color); // #ff3b30
-$tg_header_bg_color: var(--tg-theme-header-bg-color); // #f8f8f8
-$tg_hint_color: var(--tg-theme-hint-color); // #8e8e93
-$tg_link_color: var(--tg-theme-link-color); // #9472ee
-$tg_secondary_bg_color: var(--tg-theme-secondary-bg-color); // #efeff4
-$tg_section_bg_color: var(--tg-theme-section-bg-color); // #ffffff
-$tg_section_header_text_color: var(
-  --tg-theme-section-header-text-color
-); // #6d6d72
+$tg_button_color: var(--tgui--button_color);
+$tg_button_text_color: var(--tgui--button_text_color);
+$tg_destructive_text_color: var(--tgui--destructive_text_color);
+$tg_header_bg_color: var(--tgui--header_bg_color);
+$tg_hint_color: var(--tgui--hint_color);
+$tg_link_color: var(--tgui--link_color);
+// $tg_secondary_bg_color: var(--tgui--secondary_bg_color);
+$tg_secondary_bg_color: var(--revers_secondary_bg_color);
+$tg_section_bg_color: var(--tgui--section_bg_color);
+$tg_section_header_text_color: var(--tgui--section_header_text_color);
 $tg_section_separator_color: var(--tg-theme-section-separator-color); // #c8c7cc
-$tg_subtitle_text_color: var(--tg-theme-subtitle-text-color); // #8e8e93
-$tg_text_color: var(--tg-theme-text-color); // #000000
+$tg_subtitle_text_color: var(--tgui--subtitle_text_color);
+$tg_text_color: var(--tgui--text_color);
+
+// --tg-theme-accent-text-color: #917bd4;
+// --tg-theme-bg-color: #000000;
+// --tg-theme-bottom-bar-bg-color: #1d1d1d;
+// --tg-theme-button-color: #917bd4;
+// --tg-theme-button-text-color: #ffffff;
+// --tg-theme-destructive-text-color: #eb5545;
+// --tg-theme-header-bg-color: #1a1a1a;
+// --tg-theme-hint-color: #98989e;
+// --tg-theme-link-color: #917bd4;
+// --tg-theme-secondary-bg-color: #1c1c1d;
+// --tg-theme-section-bg-color: #2c2c2e;
+// --tg-theme-section-header-text-color: #8d8e93;
+// --tg-theme-section-separator-color: #545458;
+// --tg-theme-subtitle-text-color: #98989e;
+// --tg-theme-text-color: #ffffff;
+// --tg-viewport-content-safe-area-inset-bottom: 0px;
+// --tg-viewport-content-safe-area-inset-left: 0px;
+// --tg-viewport-content-safe-area-inset-right: 0px;
+// --tg-viewport-content-safe-area-inset-top: 0px;
+// --tg-viewport-height: 676px;
+// --tg-viewport-safe-area-inset-bottom: 0px;
+// --tg-viewport-safe-area-inset-left: 0px;
+// --tg-viewport-safe-area-inset-right: 0px;
+// --tg-viewport-safe-area-inset-top: 0px;
+// --tg-viewport-stable-height: 676px;
+// --tg-viewport-width: 402px;
+
+// --tgui--accent_text_color: #917bd4;
+// --tgui--base--section--box_shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+// --tgui--bg_color: #000000;
+// --tgui--black: #000;
+// --tgui--border--width: .5px;
+// :#917bd4 ;
+// :#ffffff ;
+// --tgui--caption1--font_size: 13px;
+// --tgui--caption1--line_height: 20px;
+// --tgui--caption2--font_size: 11px;
+// --tgui--caption2--line_height: 16px;
+// --tgui--card_bg_color: #242424;
+// --tgui--destructive_background: rgba(255, 35, 35, 0.02);
+// :#eb5545 ;
+// --tgui--divider: hsla(0, 0%, 100%, 0.05);
+// --tgui--font_weight--accent1: 700;
+// --tgui--font_weight--accent2: 600;
+// --tgui--font_weight--accent3: 400;
+// --tgui--font-family: system-ui, -apple-system, BlinkMacSystemFont, "Roboto",
+//   "Apple Color Emoji", "Helvetica Neue", sans-serif;
+// --tgui--green: #32e55e;
+// --tgui--header_bg_color: #1a1a1a;
+// --tgui--headline--font_size: 19px;
+// --tgui--headline--line_height: 28px;
+// --tgui--hint_color: #98989e;
+// --tgui--large_title--font_size: 34px;
+// --tgui--large_title--line_height: 42px;
+// :#917bd4 ;
+// --tgui--outline: hsla(0, 0%, 100%, 0.1);
+// --tgui--plain_background: hsla(0, 0%, 100%, 0.08);
+// --tgui--plain_foreground: hsla(0, 0%, 100%, 0.95);
+// --tgui--primary_code_highlight: #2990ff;
+// --tgui--quartenary_bg_color: #2f2f2f;
+// --tgui--safe_area_inset_bottom: 0px;
+// :#1c1c1d ;
+// --tgui--secondary_code_highlight: #e937ed;
+// --tgui--secondary_fill: #917bd4color-mix(in srgb, #917bd4 15%, transparent);
+// --tgui--secondary_hint_color: #78797e;
+// :#2c2c2e ;
+// :#8d8e93 ;
+// --tgui--segmented_control_active_bg: #2f2f2f;
+// --tgui--skeleton: hsla(0, 0%, 100%, 0.03);
+// --tgui--subheadline1--font_size: 16px;
+// --tgui--subheadline1--line_height: 24px;
+// --tgui--subheadline2--font_size: 15px;
+// --tgui--subheadline2--line_height: 22px;
+// :#98989e ;
+// --tgui--surface_dark: rgba(56, 56, 56, 0.85);
+// --tgui--surface_primary: hsla(0, 0%, 9%, 0.95);
+// --tgui--tertiary_bg_color: #2a2a2a;
+// --tgui--tertiary_code_highlight: #5ae536;
+// :#ffffff ;
+// --tgui--text--font_size: 17px;
+// --tgui--text--line_height: 26px;
+// --tgui--title1--font_size: 28px;
+// --tgui--title1--line_height: 36px;
+// --tgui--title2--font_size: 24px;
+// --tgui--title2--line_height: 32px;
+// --tgui--title3--font_size: 20px;
+// --tgui--title3--line_height: 24px;
+// --tgui--toast_accent_color: #55a6ff;
+// --tgui--white: #fff;
+// --tgui--z-index--overlay: 3;
+// --tgui--z-index--simple: 1;
+// --tgui--z-index--skeleton: 2;
+// --tooltip_background_dark: rgba(0, 0, 0, 0.85);
