@@ -1,4 +1,3 @@
-import { themeParams } from "@tma.js/sdk-react";
 import * as Yup from "yup";
 
 export const validationSchema = Yup.object({
@@ -14,7 +13,20 @@ export const validationSchema = Yup.object({
     200,
     "Описание должно содержать не более 200-та символов"
   ),
-  sex: Yup.string().required("Это поле обязательное"),
+  sex: Yup.mixed()
+    .nullable()
+    .test("sex", function (value) {
+      const { createError } = this;
+
+      if (typeof value === "string") {
+        if (!["male", "female"].includes(value)) {
+          return createError({ message: "Выберите пол из списка" });
+        }
+      }
+
+      return true;
+    })
+    .required("Это поле обязательное"),
   photo: Yup.mixed<File>()
     .required("Файл обязателен")
     .test("size", "До 5MB", (f) => !f || f.size <= 5 * 1024 * 1024)
@@ -36,42 +48,3 @@ export const validationSchema = Yup.object({
     })
     .required("Это поле обязательное"),
 });
-
-export const getParamsButton = () => {
-  return {
-    valid: {
-      bgColor: themeParams.buttonColor(),
-      hasShineEffect: true,
-      isEnabled: true,
-      text: "Подтвердить",
-      textColor: themeParams.buttonTextColor(),
-    },
-    noValid: {
-      bgColor: themeParams.hintColor(),
-      hasShineEffect: false,
-      isEnabled: false,
-      isLoaderVisible: false,
-      isVisible: true,
-      text: "Заполните форму",
-      textColor: themeParams.sectionHeaderTextColor(),
-    },
-    loading: {
-      isLoaderVisible: true,
-      hasShineEffect: false,
-    },
-    success: {
-      isLoaderVisible: false,
-      bgColor: "#3dcf5d" as `#${string}`,
-      text: "Отправлено",
-      isEnabled: false,
-      hasShineEffect: false,
-    },
-    error: {
-      isLoaderVisible: false,
-      bgColor: themeParams.destructiveTextColor(),
-      text: "Ошибка",
-      isEnabled: false,
-      hasShineEffect: false,
-    },
-  };
-};

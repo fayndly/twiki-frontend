@@ -10,6 +10,17 @@ import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputFile } from "@/shared/inputs/InputFile";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 
+const sexOptions = [
+  {
+    value: "male",
+    label: "Мужской",
+  },
+  {
+    value: "female",
+    label: "Женский",
+  },
+];
+
 export function FormProfile({
   initialValues,
   handleSubmit,
@@ -98,7 +109,7 @@ export function FormProfile({
               name="sex"
               header="Пол*"
               subtitle="Ваш пол"
-              options={["Мужской", "Женский"]}
+              options={sexOptions}
             />
             <InputFile
               onChange={() => {

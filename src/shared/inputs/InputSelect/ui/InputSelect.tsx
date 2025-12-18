@@ -29,8 +29,10 @@ export function InputSelect({
         value={value}
         header={header}
       >
-        {options.map((value, index) => (
-          <option key={index}>{value}</option>
+        {options.map((value) => (
+          <option key={value.value} value={value.value}>
+            {value.label}
+          </option>
         ))}
       </Select>
       <SubtitleInput errors={errors} subtitle={subtitle} />
