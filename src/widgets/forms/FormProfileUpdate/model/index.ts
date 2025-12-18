@@ -1,6 +1,8 @@
 import type { ButtonSubmitStatuses } from "../types";
 import { getParamsButton } from "../config";
 
+import { useAnyFieldFocused } from "@/shared/helpers";
+
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 import { hapticFeedback, mainButton } from "@tma.js/sdk-react";
@@ -8,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 export function FormStateWatcher() {
   const navigate = useNavigate();
+
+  const isAnyFieldFocused = useAnyFieldFocused();
 
   const { isValid, dirty, isSubmitting, submitForm, validateForm } =
     useFormikContext<any>();
@@ -32,6 +36,10 @@ export function FormStateWatcher() {
       setButtonStatus(canShowButton ? "valid" : "noValid");
     }
   }, [canShowButton]);
+
+  useEffect(() => {
+    isAnyFieldFocused ? mainButton.hide() : mainButton.show();
+  }, [isAnyFieldFocused]);
 
   useEffect(() => {
     const handler = async () => {
