@@ -11,6 +11,7 @@ export interface IPropsInputText extends IPropsInputSubtitle {
   clickClear?: () => void;
   type: "number" | "text";
   onChange?: () => void;
+  showSubtitle?: boolean;
 }
 
 export interface IPropsClearButton {

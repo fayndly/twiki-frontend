@@ -24,7 +24,7 @@ import { PageProfileCreate } from "@/pages/profile-create";
 import { PageFilters } from "@/pages/filters";
 
 const backButtonPaths = ["/settings", "/profile/update", "/filters"];
-const mainButtonPaths = ["/profile/update", "/profile/create"];
+const mainButtonPaths = ["/profile/update", "/profile/create", "/filters"];
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
   useEffect(() => {

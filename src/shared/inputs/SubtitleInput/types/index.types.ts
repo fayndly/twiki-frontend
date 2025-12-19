@@ -1,4 +1,4 @@
 export interface IPropsInputSubtitle {
-  errors: string | undefined;
-  subtitle: string;
+  errors?: string | undefined;
+  subtitle?: string;
 }

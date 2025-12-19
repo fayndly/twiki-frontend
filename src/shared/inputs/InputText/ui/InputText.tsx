@@ -18,6 +18,7 @@ export function InputText({
   subtitle,
   type,
   onChange,
+  showSubtitle = true,
 }: IPropsInputText) {
   return (
     <div className={styles.input_text}>
@@ -41,7 +42,7 @@ export function InputText({
           )
         }
       />
-      <SubtitleInput errors={errors} subtitle={subtitle} />
+      {showSubtitle && <SubtitleInput errors={errors} subtitle={subtitle} />}
     </div>
   );
 }
