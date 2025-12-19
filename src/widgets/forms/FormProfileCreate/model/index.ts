@@ -1,7 +1,7 @@
 import type { ButtonSubmitStatuses } from "../types";
 import { getParamsButton } from "../config";
 
-import { useAnyFieldFocused } from "@/shared/helpers";
+import { useMobileKeyboard } from "@/shared/helpers";
 
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
@@ -10,8 +10,6 @@ import { hapticFeedback, mainButton, miniApp } from "@tma.js/sdk-react";
 export function FormStateWatcher() {
   const { isValid, dirty, isSubmitting, submitForm, validateForm } =
     useFormikContext<any>();
-
-  const isAnyFieldFocused = useAnyFieldFocused();
 
   const canShowButton = dirty && isValid && !isSubmitting;
 
@@ -34,9 +32,11 @@ export function FormStateWatcher() {
     }
   }, [canShowButton]);
 
+  const isKeyboardOpen = useMobileKeyboard();
+
   useEffect(() => {
-    isAnyFieldFocused ? mainButton.hide() : mainButton.show();
-  }, [isAnyFieldFocused]);
+    isKeyboardOpen ? mainButton.hide() : mainButton.show();
+  }, [isKeyboardOpen]);
 
   useEffect(() => {
     const handler = async () => {
