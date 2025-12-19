@@ -1,16 +1,17 @@
 import { Tappable } from "@telegram-apps/telegram-ui";
-import type { IPropsClearButton } from "../InputSearchSelect/types/index.types";
+import type { IPropsClearButton } from "../../InputSearchSelect/types/index.types";
 
 import styles from "./ClearButton.module.scss";
 
-export function ClearButton({ clickClear }: IPropsClearButton) {
+export function ClearButton({ onClick, className }: IPropsClearButton) {
   return (
     <Tappable
+      className={className}
       Component="div"
       style={{
         display: "flex",
       }}
-      onClick={clickClear}
+      onClick={onClick}
     >
       <svg
         width="24"

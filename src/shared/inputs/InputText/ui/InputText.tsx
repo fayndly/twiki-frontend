@@ -4,7 +4,7 @@ import { type IPropsInputText } from "../types/index.types";
 import { Input } from "@telegram-apps/telegram-ui";
 
 import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
-import { ClearButton } from "@/shared/inputs/ClearButton/ClearButton";
+import { ClearButton } from "@/shared/inputs/ClearButton";
 
 export function InputText({
   errors,
@@ -36,7 +36,7 @@ export function InputText({
         placeholder={placeholder}
         after={
           typeof value === "string" && value.length > 0 ? (
-            <ClearButton clickClear={clickClear} />
+            <ClearButton onClick={clickClear} />
           ) : (
             ""
           )

@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { InputText } from "@/shared/inputs/InputText";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
 import { InputSelect } from "@/shared/inputs/InputSelect";
-import { InputFile } from "@/shared/inputs/InputFile";
+import { InputImage } from "@/shared/inputs/InputImage";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 
 const sexOptions = [
@@ -111,7 +111,7 @@ export function FormProfile({
               subtitle="Ваш пол"
               options={sexOptions}
             />
-            <InputFile
+            <InputImage
               onChange={() => {
                 setFieldTouched("photo", true);
               }}
@@ -125,6 +125,9 @@ export function FormProfile({
               label="Выбрать фото"
               subtitle="Ваше фото"
               photoPreview={values.photo}
+              clearValue={() => {
+                setFieldValue("photo", undefined);
+              }}
             />
             <InputSearchSelect
               onChange={() => {

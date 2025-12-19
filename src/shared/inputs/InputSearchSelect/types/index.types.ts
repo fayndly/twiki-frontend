@@ -16,7 +16,8 @@ export interface IPropsInputSearchSelect extends IPropsInputSubtitle {
 }
 
 export interface IPropsClearButton {
-  clickClear?: () => void;
+  onClick?: () => void;
+  className?: string;
 }
 
 export interface IPropsCell {
