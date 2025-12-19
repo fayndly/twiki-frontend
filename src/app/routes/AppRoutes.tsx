@@ -25,6 +25,7 @@ import { PageFilters } from "@/pages/filters";
 
 const backButtonPaths = ["/settings", "/profile/update", "/filters"];
 const mainButtonPaths = ["/profile/update", "/profile/create", "/filters"];
+const settingsButtonPathsHide = ["/profile/create"];
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
   useEffect(() => {
@@ -35,6 +36,10 @@ const useBackButton = (location: Location, navigate: NavigateFunction) => {
     mainButtonPaths.includes(location.pathname)
       ? mainButton.show()
       : mainButton.hide();
+
+    !settingsButtonPathsHide.includes(location.pathname)
+      ? settingsButton.show()
+      : settingsButton.hide();
   }, [location]);
 
   useEffect(() => {

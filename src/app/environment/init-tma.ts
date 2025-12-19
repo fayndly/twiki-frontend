@@ -74,7 +74,6 @@ export async function init(options: {
 
   if (settingsButton.mount.isAvailable()) {
     settingsButton.mount();
-    settingsButton.show();
   }
 
   if (backButton.mount.isAvailable()) {
