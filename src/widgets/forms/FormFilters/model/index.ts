@@ -8,7 +8,11 @@ import { useFormikContext } from "formik";
 import { hapticFeedback, mainButton } from "@tma.js/sdk-react";
 import { useNavigate } from "react-router-dom";
 
-export function FormStateWatcher() {
+export function FormStateWatcher({
+  isDataLoading,
+}: {
+  isDataLoading: boolean;
+}) {
   const navigate = useNavigate();
 
   const { isValid, isSubmitting, submitForm, validateForm } =
@@ -38,8 +42,8 @@ export function FormStateWatcher() {
   const isKeyboardOpen = useMobileKeyboard();
 
   useEffect(() => {
-    isKeyboardOpen ? mainButton.hide() : mainButton.show();
-  }, [isKeyboardOpen]);
+    isKeyboardOpen || isDataLoading ? mainButton.hide() : mainButton.show();
+  }, [isKeyboardOpen, isDataLoading]);
 
   useEffect(() => {
     const handler = async () => {
