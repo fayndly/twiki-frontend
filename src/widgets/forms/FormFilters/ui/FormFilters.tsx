@@ -8,6 +8,8 @@ import { Formik } from "formik";
 import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 import { InputRange } from "@/shared/inputs/InputRange";
+import { SectionLoaderForm } from "@/shared/SectionLoaderForm";
+import { useState } from "react";
 
 const sexOptions = [
   {
@@ -21,7 +23,11 @@ const sexOptions = [
 ];
 
 export function FormFilters() {
-  return (
+  const [dataLoading, setDataLoading] = useState(true);
+
+  return dataLoading ? (
+    <SectionLoaderForm />
+  ) : (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
