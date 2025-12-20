@@ -5,7 +5,7 @@ interface ProfileInitialValues {
   age: string | number;
   description: string;
   sex: "male" | "female";
-  photo: undefined | File;
+  photo: undefined | File | string;
   city: string | IPropsCell;
 }
 

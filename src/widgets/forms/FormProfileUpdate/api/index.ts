@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const postProfileUpdate = async (values: any): Promise<any> => {
-  const isError = true;
+  const isError = false;
   await new Promise((res) => setTimeout(res, 2000));
   if (isError) {
     throw new Error("Ошибка");
@@ -42,8 +42,8 @@ const getProfile = async (): Promise<any> => {
     description:
       "Олимпийский чемпион 1960 года в полутяжёлой весовой категории, абсолютный чемпион мира в тяжёлом весе",
     sex: "male",
-    photo: undefined,
-    // photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Muhammad_Ali_NYWTS.jpg/500px-Muhammad_Ali_NYWTS.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Muhammad_Ali_NYWTS.jpg/500px-Muhammad_Ali_NYWTS.jpg",
     city: { value: "77", label: "Москва" },
   };
 

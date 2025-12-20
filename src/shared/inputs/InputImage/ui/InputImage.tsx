@@ -19,7 +19,11 @@ export function InputImage({
 }: IPropsInputFile) {
   let photoUrlPreview = undefined;
   if (!errors && photoPreview) {
-    photoUrlPreview = URL.createObjectURL(photoPreview);
+    if (typeof photoPreview === "string") {
+      photoUrlPreview = photoPreview;
+    } else {
+      photoUrlPreview = URL.createObjectURL(photoPreview);
+    }
   }
 
   return (

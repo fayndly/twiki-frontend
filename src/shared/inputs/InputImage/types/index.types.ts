@@ -6,7 +6,7 @@ export interface IPropsInputFile extends IPropsInputSubtitle {
   label: string;
   id: string;
   name: string;
-  photoPreview: Blob | MediaSource | undefined;
+  photoPreview: Blob | MediaSource | undefined | string;
   onChange: () => void;
   clearValue: () => void;
 }
