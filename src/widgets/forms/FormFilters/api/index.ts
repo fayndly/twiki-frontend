@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 export const postFiltersUpdate = async (values: any): Promise<any> => {
   const isError = false;
   await new Promise((res) => setTimeout(res, 2000));
@@ -8,7 +10,7 @@ export const postFiltersUpdate = async (values: any): Promise<any> => {
   }
 };
 
-export const getCities = async (): Promise<any> => {
+const getCities = async (): Promise<any> => {
   const isError = false;
   const cities = [
     { value: "77", label: "Москва" },
@@ -32,7 +34,7 @@ export const getCities = async (): Promise<any> => {
   }
 };
 
-export const getProfile = async (): Promise<any> => {
+const getProfile = async (): Promise<any> => {
   const isError = false;
   const profile = {
     firstAge: 32,
@@ -47,4 +49,40 @@ export const getProfile = async (): Promise<any> => {
   } else {
     return JSON.stringify(profile);
   }
+};
+
+export const useGetterData = () => {
+  const [cities, setCities] = useState([]);
+  const [profileData, setProfileData] = useState(null);
+  const [isDataLoading, setDataLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchAll = async () => {
+      setDataLoading(true);
+      try {
+        const [citiesResult, profileResult] = await Promise.all([
+          getCities(),
+          getProfile(),
+        ]);
+        if (!mounted) return;
+
+        setCities(JSON.parse(citiesResult));
+        setProfileData(JSON.parse(profileResult));
+      } catch (e) {
+        console.log(e);
+      } finally {
+        if (mounted) setDataLoading(false);
+      }
+    };
+
+    fetchAll();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  return { cities, profileData, isDataLoading };
 };

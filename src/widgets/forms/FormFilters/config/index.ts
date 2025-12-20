@@ -83,3 +83,14 @@ export const getParamsButton = () => {
     },
   };
 };
+
+export const sexOptions = [
+  {
+    value: "male",
+    label: "Мужской",
+  },
+  {
+    value: "female",
+    label: "Женский",
+  },
+];
