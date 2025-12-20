@@ -81,6 +81,14 @@ export const getParamsButton = () => {
       isEnabled: false,
       hasShineEffect: false,
     },
+    noChanges: {
+      bgColor: themeParams.headerBgColor(),
+      hasShineEffect: false,
+      isEnabled: false,
+      isLoaderVisible: false,
+      text: "Измените данные",
+      textColor: themeParams.textColor(),
+    },
   };
 };
 

@@ -31,6 +31,10 @@ export const validationSchema = Yup.object({
     const { createError } = this;
 
     if (value) {
+      if (typeof value === "string") {
+        return true;
+      }
+
       if (!["image/jpeg", "image/png"].includes(value.type)) {
         return createError({ message: "Только JPG/PNG" });
       }

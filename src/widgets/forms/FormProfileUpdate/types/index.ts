@@ -5,7 +5,8 @@ export type ButtonSubmitStatuses =
   | "noValid"
   | "loading"
   | "success"
-  | "error";
+  | "error"
+  | "noChanges";
 
 interface ParamsMainButton {
   isVisible?: boolean;

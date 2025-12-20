@@ -7,7 +7,8 @@ export const useStatusValidateButton = (
   buttonStatus: ButtonSubmitStatuses,
   setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
   canStatusButtonBeValidate: boolean,
-  validateForm: () => Promise<FormikErrors<any>>
+  validateForm: () => Promise<FormikErrors<any>>,
+  dirty?: boolean
 ) => {
   useEffect(() => {
     validateForm();
@@ -17,7 +18,11 @@ export const useStatusValidateButton = (
       buttonStatus !== "loading" &&
       buttonStatus !== "success"
     ) {
-      setButtonStatus(canStatusButtonBeValidate ? "valid" : "noValid");
+      if (!dirty) {
+        setButtonStatus("noChanges");
+      } else {
+        setButtonStatus(canStatusButtonBeValidate ? "valid" : "noValid");
+      }
     }
-  }, [canStatusButtonBeValidate]);
+  }, [canStatusButtonBeValidate, dirty]);
 };

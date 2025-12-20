@@ -3,7 +3,7 @@ import { useParamsButton } from "./useParamsButton.ts";
 
 import type { FormikErrors, FormikProps } from "formik";
 import type { ButtonSubmitStatuses } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const formStateWatcher = (
   isDataLoading: boolean,
@@ -12,7 +12,8 @@ export const formStateWatcher = (
     buttonStatus: ButtonSubmitStatuses,
     setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
     canStatusButtonBeValidate: boolean,
-    validateForm: () => Promise<FormikErrors<any>>
+    validateForm: () => Promise<FormikErrors<any>>,
+    dirty?: boolean
   ) => void,
   useClickButton: (
     setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
@@ -23,7 +24,7 @@ export const formStateWatcher = (
   ) => void,
   getParamsButton: () => any
 ) => {
-  const { isValid, isSubmitting, submitForm, validateForm } = formic;
+  const { isValid, isSubmitting, submitForm, validateForm, dirty } = formic;
 
   const canStatusButtonBeValidate = isValid && !isSubmitting;
 
@@ -36,7 +37,8 @@ export const formStateWatcher = (
     buttonStatus,
     setButtonStatus,
     canStatusButtonBeValidate,
-    validateForm
+    validateForm,
+    dirty
   );
 
   useShowButton(isDataLoading);

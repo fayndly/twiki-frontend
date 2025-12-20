@@ -6,7 +6,6 @@ export const initialValues = {
   description: "",
   sex: "male" as "male" | "female",
   photo: undefined,
-  // photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Muhammad_Ali_NYWTS.jpg/500px-Muhammad_Ali_NYWTS.jpg",
   city: { value: "77", label: "Москва" },
 };
 
@@ -44,6 +43,14 @@ export const getParamsButton = () => {
       text: "Ошибка",
       isEnabled: false,
       hasShineEffect: false,
+    },
+    noChanges: {
+      bgColor: themeParams.headerBgColor(),
+      hasShineEffect: false,
+      isEnabled: false,
+      isLoaderVisible: false,
+      text: "Измените данные",
+      textColor: themeParams.textColor(),
     },
   };
 };
