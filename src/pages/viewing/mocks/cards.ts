@@ -1,6 +1,6 @@
-import { type ICardProfile } from "../types/index.types";
+import { type ICartProfile } from "../types";
 
-export const cards: ICardProfile[] = [
+export const cards: ICartProfile[] = [
   {
     isLiked: false,
     isDisliked: false,

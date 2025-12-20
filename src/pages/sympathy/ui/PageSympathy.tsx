@@ -6,32 +6,41 @@ import { CardSympathy } from "@/widgets/CardSympathy";
 
 import { openTelegramLink } from "@tma.js/sdk-react";
 
-import { cards } from "../mocks/cards";
-import { useState } from "react";
 import { SectionNoContent } from "@/shared/SectionNoContent";
+import { useGetterData } from "../api";
+import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 
 function Content() {
-  const [sympathyCards, setSympathyCards] = useState(cards);
+  const { sympathyCarts, isDataLoading } = useGetterData();
 
-  if (sympathyCards.length === 0) {
+  if (sympathyCarts.length === 0 && !isDataLoading) {
     return <SectionNoContent text="Пока никто не ответил взаимной симпатией" />;
   }
 
   return (
-    <section className={styles.section}>
-      {sympathyCards.map(({ userId, imgUrl, name, age, city }, index) => (
-        <CardSympathy
-          onClick={() => {
-            openTelegramLink(`https://t.me/${userId}`);
-          }}
-          key={index}
-          imgUrl={imgUrl}
-          name={name}
-          age={age}
-          city={city}
+    <>
+      {isDataLoading ? (
+        <SectionLoaderCarts
+          header="Проверяем совпадения"
+          description="Ищем людей, с которыми симпатия оказалась взаимной."
         />
-      ))}
-    </section>
+      ) : (
+        <section className={styles.section}>
+          {sympathyCarts.map((cart, index) => (
+            <CardSympathy
+              onClick={() => {
+                openTelegramLink(`https://t.me/${cart.userId}`);
+              }}
+              key={index}
+              imgUrl={cart.imgUrl}
+              name={cart.name}
+              age={cart.age}
+              city={cart.city}
+            />
+          ))}
+        </section>
+      )}
+    </>
   );
 }
 

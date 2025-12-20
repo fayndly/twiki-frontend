@@ -1,4 +1,4 @@
-import { type ICardProfile } from "../types/index.types";
+import { type ICardProfile } from "../types";
 
 export const cards: ICardProfile[] = [
   {

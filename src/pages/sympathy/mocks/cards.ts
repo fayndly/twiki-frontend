@@ -1,6 +1,6 @@
-import { type ICardSympathy } from "../types/index.types";
+import { type ICartSympathy } from "../types";
 
-export const cards: ICardSympathy[] = [
+export const cards: ICartSympathy[] = [
   {
     userId: "fayndly",
     imgUrl:

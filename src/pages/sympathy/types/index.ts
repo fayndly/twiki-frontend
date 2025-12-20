@@ -1,5 +1,5 @@
 import { type IPropsCardSympathy } from "@/widgets/CardSympathy";
 
-export interface ICardSympathy extends IPropsCardSympathy {
+export interface ICartSympathy extends IPropsCardSympathy {
   userId: string;
 }

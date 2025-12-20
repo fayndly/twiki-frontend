@@ -1,6 +1,6 @@
 import { type IPropsCardProfile } from "@/widgets/CardProfile";
 
-export interface ICardProfile extends IPropsCardProfile {
+export interface ICartProfile extends IPropsCardProfile {
   userId: string;
   id: number;
 }
