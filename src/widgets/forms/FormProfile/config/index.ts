@@ -48,3 +48,14 @@ export const validationSchema = Yup.object({
     })
     .required("Это поле обязательное"),
 });
+
+export const sexOptions = [
+  {
+    value: "male",
+    label: "Мужской",
+  },
+  {
+    value: "female",
+    label: "Женский",
+  },
+];

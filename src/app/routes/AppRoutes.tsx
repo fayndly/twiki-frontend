@@ -24,7 +24,7 @@ import { PageProfileCreate } from "@/pages/profile-create";
 import { PageFilters } from "@/pages/filters";
 
 const backButtonPaths = ["/settings", "/profile/update", "/filters"];
-const mainButtonPaths = ["/profile/update", "/profile/create"];
+const mainButtonPaths = ["/profile/create", "/profile/update", "/filters"];
 const settingsButtonPathsHide = ["/profile/create"];
 
 const useBackButton = (location: Location, navigate: NavigateFunction) => {
@@ -33,9 +33,7 @@ const useBackButton = (location: Location, navigate: NavigateFunction) => {
       ? backButton.show()
       : backButton.hide();
 
-    mainButtonPaths.includes(location.pathname)
-      ? mainButton.show()
-      : mainButton.hide();
+    if (!mainButtonPaths.includes(location.pathname)) mainButton.hide();
 
     !settingsButtonPathsHide.includes(location.pathname)
       ? settingsButton.show()

@@ -4,7 +4,7 @@ interface ProfileInitialValues {
   firstName: string;
   age: string | number;
   description: string;
-  sex: "Мужской" | "Женский";
+  sex: "male" | "female";
   photo: undefined | File;
   city: string | IPropsCell;
 }
@@ -12,6 +12,16 @@ interface ProfileInitialValues {
 export interface PropsFormProfile {
   initialValues: ProfileInitialValues;
   handleSubmit: (values: any) => Promise<any>;
-  formStateWatcher: React.ReactNode;
   cities: IPropsCell[];
+  isDataLoading: boolean;
+  useStatusValidateButton: (...props: any) => void;
+  useClickButton: (...props: any) => void;
+  getParamsButton: () => any;
 }
+
+export type ButtonSubmitStatuses =
+  | "valid"
+  | "noValid"
+  | "loading"
+  | "success"
+  | "error";
