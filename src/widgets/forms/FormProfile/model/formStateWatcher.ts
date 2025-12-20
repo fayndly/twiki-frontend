@@ -3,7 +3,7 @@ import { useParamsButton } from "./useParamsButton.ts";
 
 import type { FormikErrors, FormikProps } from "formik";
 import type { ButtonSubmitStatuses } from "../types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const formStateWatcher = (
   isDataLoading: boolean,

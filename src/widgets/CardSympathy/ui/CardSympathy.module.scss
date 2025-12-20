@@ -68,6 +68,11 @@
   align-items: center;
   justify-content: center;
 
+  span {
+    max-height: 18px;
+    line-height: 18px;
+  }
+
   &_name {
     max-width: calc(100% - 28px);
     overflow: hidden;
