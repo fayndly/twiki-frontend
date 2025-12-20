@@ -4,7 +4,7 @@ export const cards: ICardSympathy[] = [
   {
     userId: "fayndly",
     imgUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGyJjq3op08sK2Wc-_od5Xckv9mfQN_LKejA&s",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Lana_Rhoades_2-2017.jpg/960px-Lana_Rhoades_2-2017.jpg",
     name: "Lana Rhodes",
     age: 21,
     city: "New Mexico",
@@ -13,30 +13,29 @@ export const cards: ICardSympathy[] = [
     userId: "fayndly",
     imgUrl:
       "https://images.thevoicemag.ru/upload/img_cache/e70/e707eb96cc68b5a7219e34fe6446f645_cropped_666x833.jpg",
-    name: "Elizabeth Sandra Murphy",
+    name: "Анна Игоревна",
     age: 20,
-    city: "Texas",
+    city: "Красноярск",
   },
   {
     userId: "fayndly",
     imgUrl:
       "https://i.pinimg.com/474x/7e/f9/37/7ef9378755b9e25c20b86b968c1bcbb3.jpg",
-    name: "Catherine Newton",
+    name: "Васильева Екатерина",
     age: 23,
-    city: "Pennsylvania",
+    city: "Нижний Новгород",
   },
   {
     userId: "fayndly",
     imgUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSns3P0ddhqag0tCUb-UqdOMPpnDeIoCLHkQg&s",
-    name: "Emma Adams",
+      "https://cs13.pikabu.ru/post_img/big/2023/04/30/7/1682853737173059876.jpg",
+    name: "Ангелина",
     age: 22,
-    city: "District of Columbia",
+    city: "Челябинск",
   },
   {
     userId: "fayndly",
-    imgUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX479vqWzMi9zRT-spJ2DYqM2MBfweIHgPAA&s",
+    imgUrl: "https://s.cq.ru/img/f/e/2025/3/03/541040.jpg",
     name: "Наталья Берникова",
     age: 25,
     city: "Саранск",
