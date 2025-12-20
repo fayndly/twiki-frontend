@@ -12,7 +12,8 @@ export const formStateWatcher = (
   useStatusValidateButton: (
     buttonStatus: ButtonSubmitStatuses,
     setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
-    canStatusButtonBeValidate: boolean
+    canStatusButtonBeValidate: boolean,
+    validateForm: () => Promise<FormikErrors<any>>
   ) => void,
   useClickButton: (
     setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
@@ -34,7 +35,8 @@ export const formStateWatcher = (
   useStatusValidateButton(
     buttonStatus,
     setButtonStatus,
-    canStatusButtonBeValidate
+    canStatusButtonBeValidate,
+    validateForm
   );
 
   useShowButton(isDataLoading);
