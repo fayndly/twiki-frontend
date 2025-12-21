@@ -2,6 +2,7 @@ import styles from "./PageNotFound.module.scss";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { PlaceholderSticker } from "@/shared/Placeholder";
+import { pathsToPublicSrc } from "@/shared/config";
 
 import { Button } from "@telegram-apps/telegram-ui";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ export function PageNotFound() {
         <PlaceholderSticker
           header="Страница не найдена"
           description="Возможно, ссылка устарела или была введена неверно"
-          pathToSticker="/stickers/duck_thinking.json"
+          pathToSticker={pathsToPublicSrc.stickers.notFound}
           actions={
             <>
               <Button

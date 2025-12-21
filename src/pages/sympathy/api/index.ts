@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const getSympathyCarts = async () => {
   const isError = false;
 
-  await new Promise((res) => setTimeout(res, 2000));
+  await new Promise((res) => setTimeout(res, 200000));
   if (isError) {
     throw new Error("Ошибка");
   } else {

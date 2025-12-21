@@ -3,6 +3,7 @@ import { PlaceholderSticker } from "@/shared/Placeholder";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { FormProfileUpdate } from "@/widgets/forms/FormProfileUpdate";
+import { pathsToPublicSrc } from "@/shared/config";
 
 export function PageProfileUpdate() {
   return (
@@ -11,7 +12,7 @@ export function PageProfileUpdate() {
         <PlaceholderSticker
           header="Обновите данные анкеты"
           description="Сделайте профиль актуальным и удобным для других"
-          pathToSticker="/stickers/bear_typing.json"
+          pathToSticker={pathsToPublicSrc.stickers.placeholderFormProfileUpdate}
         />
         <FormProfileUpdate />
       </section>

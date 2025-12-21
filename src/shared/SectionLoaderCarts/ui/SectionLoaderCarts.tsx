@@ -1,6 +1,8 @@
 import { PlaceholderSticker } from "@/shared/Placeholder";
 import styles from "./SectionLoaderCarts.module.scss";
 
+import { pathsToPublicSrc } from "@/shared/config";
+
 interface PropsSectionLoaderCarts {
   header?: string;
   description?: string;
@@ -15,7 +17,7 @@ export function SectionLoaderCarts({
       <PlaceholderSticker
         header={header}
         description={description}
-        pathToSticker="/stickers/cat_loading.json"
+        pathToSticker={pathsToPublicSrc.stickers.loadingCarts}
       />
     </section>
   );

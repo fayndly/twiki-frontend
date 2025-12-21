@@ -3,6 +3,7 @@ import styles from "./PageProfileCreate.module.scss";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { FormProfileCreate } from "@/widgets/forms/FormProfileCreate";
 import { PlaceholderSticker } from "@/shared/Placeholder";
+import { pathsToPublicSrc } from "@/shared/config";
 
 export function PageProfileCreate() {
   return (
@@ -11,7 +12,7 @@ export function PageProfileCreate() {
         <PlaceholderSticker
           header="Расскажите немного о себе"
           description="Это поможет создать вашу анкету"
-          pathToSticker="/stickers/dog_writing.json"
+          pathToSticker={pathsToPublicSrc.stickers.placeholderFormProfileCreate}
         />
         <FormProfileCreate />
       </section>

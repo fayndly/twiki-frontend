@@ -3,6 +3,7 @@ import { PlaceholderSticker } from "@/shared/Placeholder";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { FormFilters } from "@/widgets/forms/FormFilters";
+import { pathsToPublicSrc } from "@/shared/config";
 
 export function PageFilters() {
   return (
@@ -11,7 +12,7 @@ export function PageFilters() {
         <PlaceholderSticker
           header="Настройте фильтры"
           description="чтобы быстрее находить подходящие анкеты"
-          pathToSticker="/stickers/beard_searching.json"
+          pathToSticker={pathsToPublicSrc.stickers.placeholderFormFilters}
         />
         <FormFilters />
       </section>
