@@ -3,3 +3,11 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+.section_error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1;
+}

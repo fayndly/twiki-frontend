@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MainLayout } from "../layouts/MainLayout";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
   const isDark = useSignal(themeParams.isDark);
@@ -41,6 +43,8 @@ const pagesReverbBg = [
   "/filters",
 ];
 
+const queryClient = new QueryClient();
+
 export default function App() {
   const theme = useGetTheme();
   const location = useLocation();
@@ -69,11 +73,13 @@ export default function App() {
   }, [location, theme]);
 
   return (
-    <AppRoot className={styles.app_root} appearance={theme}>
-      <MainLayout>
-        <AppRoutes />
-      </MainLayout>
-      <Navbar show={isNavbarShow} />
-    </AppRoot>
+    <QueryClientProvider client={queryClient}>
+      <AppRoot className={styles.app_root} appearance={theme}>
+        <MainLayout>
+          <AppRoutes />
+        </MainLayout>
+        <Navbar show={isNavbarShow} />
+      </AppRoot>
+    </QueryClientProvider>
   );
 }

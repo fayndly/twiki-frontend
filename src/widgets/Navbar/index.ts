@@ -1,1 +1,1 @@
-export { Navbar } from "./ui/NavBar.tsx"
+export { Navbar } from "./ui/Navbar.tsx";

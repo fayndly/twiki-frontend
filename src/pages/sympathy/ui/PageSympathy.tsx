@@ -7,41 +7,49 @@ import { CardSympathy } from "@/widgets/CardSympathy";
 import { openTelegramLink } from "@tma.js/sdk-react";
 
 import { SectionNoContent } from "@/shared/SectionNoContent";
-import { useGetterData } from "../api";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 
-function Content() {
-  const { sympathyCarts, isDataLoading } = useGetterData();
+import { useSympathyCards } from "../model";
 
-  if (sympathyCarts.length === 0 && !isDataLoading) {
+function Content() {
+  const { data, isPending, isError, isSuccess } = useSympathyCards();
+
+  if (data && data.length === 0 && !isPending) {
     return <SectionNoContent text="Пока никто не ответил взаимной симпатией" />;
   }
 
-  return (
-    <>
-      {isDataLoading ? (
-        <SectionLoaderCarts
-          header="Проверяем совпадения"
-          description="Ищем людей, с которыми симпатия оказалась взаимной."
-        />
-      ) : (
-        <section className={styles.section}>
-          {sympathyCarts.map((cart, index) => (
+  if (isPending) {
+    return (
+      <SectionLoaderCarts
+        header="Проверяем совпадения"
+        description="Ищем людей, с которыми симпатия оказалась взаимной."
+      />
+    );
+  }
+
+  if (isError) {
+    return <h1>error</h1>;
+  }
+
+  if (isSuccess && !isError) {
+    return (
+      <section className={styles.section}>
+        {data &&
+          data.map((card, index) => (
             <CardSympathy
               onClick={() => {
-                openTelegramLink(`https://t.me/${cart.userId}`);
+                openTelegramLink(`https://t.me/${card.userId}`);
               }}
               key={index}
-              imgUrl={cart.imgUrl}
-              name={cart.name}
-              age={cart.age}
-              city={cart.city}
+              imgUrl={card.imgUrl}
+              name={card.name}
+              age={card.age}
+              city={card.city}
             />
           ))}
-        </section>
-      )}
-    </>
-  );
+      </section>
+    );
+  }
 }
 
 export function PageSympathy() {
