@@ -1,16 +1,16 @@
-import { cards } from "../mocks/cards";
+import axios from "axios";
 import type { ICartSympathy } from "../types";
 
 import { useEffect, useState } from "react";
 
 const getSympathyCarts = async () => {
-  const isError = false;
-
-  await new Promise((res) => setTimeout(res, 200000));
-  if (isError) {
-    throw new Error("Ошибка");
-  } else {
-    return JSON.stringify(cards);
+  try {
+    const { data } = await axios.get(
+      "https://twiki-api.ru.tuna.am/cards-sympathy"
+    );
+    return data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -28,7 +28,7 @@ export const useGetterData = () => {
         const [sympathyCartsResult] = await Promise.all([getSympathyCarts()]);
         if (!mounted) return;
 
-        setSympathyCarts(JSON.parse(sympathyCartsResult));
+        setSympathyCarts(sympathyCartsResult);
       } catch (e) {
         console.log(e);
       } finally {

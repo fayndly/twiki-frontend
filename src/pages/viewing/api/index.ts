@@ -1,18 +1,16 @@
-import { cards } from "../mocks/cards";
 import type { ICartProfile } from "../types";
-
-import { shuffle } from "@/shared/helpers";
+import axios from "axios";
 
 import { useEffect, useState } from "react";
 
 export const getProfileCarts = async () => {
-  const isError = false;
-
-  await new Promise((res) => setTimeout(res, 5000));
-  if (isError) {
-    throw new Error("Ошибка");
-  } else {
-    return JSON.stringify(cards);
+  try {
+    const { data } = await axios.get(
+      "https://twiki-api.ru.tuna.am/cards-profile"
+    );
+    return data;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -27,12 +25,12 @@ export const useGetterData = () => {
     const fetchAll = async () => {
       setDataLoading(true);
       try {
-        const [profileCartsResult] = await Promise.all([getProfileCarts()]);
+        const [profileCardsResult]: [Array<ICartProfile>] = await Promise.all([
+          getProfileCarts(),
+        ]);
         if (!mounted) return;
 
-        const carts: ICartProfile[] = JSON.parse(profileCartsResult);
-
-        setProfileCarts(shuffle(carts));
+        setProfileCarts(profileCardsResult);
       } catch (e) {
         console.log(e);
       } finally {

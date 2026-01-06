@@ -1,7 +1,6 @@
 import type { ButtonSubmitStatuses } from "../types";
 
-import { useNavigate } from "react-router-dom";
-import { hapticFeedback, mainButton } from "@tma.js/sdk-react";
+import { hapticFeedback, mainButton, miniApp } from "@tma.js/sdk-react";
 import type { FormikErrors } from "formik";
 import { useEffect } from "react";
 
@@ -12,8 +11,6 @@ export const useClickButton = (
   canShowButton: boolean,
   isSubmitting: boolean
 ) => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const handler = async () => {
       if (hapticFeedback.isSupported()) {
@@ -29,13 +26,18 @@ export const useClickButton = (
       try {
         const result = await submitForm();
         console.log(result);
-        setButtonStatus("success");
-        if (hapticFeedback.isSupported()) {
-          hapticFeedback.notificationOccurred("success");
+
+        if (result.data) {
+          setButtonStatus("success");
+          if (hapticFeedback.isSupported()) {
+            hapticFeedback.notificationOccurred("success");
+          }
+          setTimeout(() => {
+            miniApp.close();
+          }, 1000);
+        } else {
+          throw new Error(result.response.data.message);
         }
-        setTimeout(() => {
-          navigate(-1);
-        }, 1000);
       } catch (e) {
         console.log(e);
 

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { initData } from "@tma.js/sdk-react";
 
-export const postProfileCreate = async (values: any): Promise<any> => {
-  const isError = false;
-  await new Promise((res) => setTimeout(res, 2000));
-  if (isError) {
-    throw new Error("Ошибка");
-  } else {
-    return JSON.stringify(values, null, 2);
+export const postProfileCreate = async (values: any) => {
+  console.log(initData.user());
+
+  try {
+    return await axios.post("https://twiki-api.ru.tuna.am/profile/create", {
+      ...values,
+      chatId: initData.user()?.id,
+    });
+  } catch (error) {
+    return error;
   }
 };
 
