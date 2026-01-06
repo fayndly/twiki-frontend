@@ -10,9 +10,10 @@ import { SectionNoContent } from "@/shared/SectionNoContent";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 
 import { useSympathyCards } from "../model";
+import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
 
 function Content() {
-  const { data, isPending, isError, isSuccess } = useSympathyCards();
+  const { data, isPending, isError, isSuccess, refetch } = useSympathyCards();
 
   if (data && data.length === 0 && !isPending) {
     return <SectionNoContent text="Пока никто не ответил взаимной симпатией" />;
@@ -28,7 +29,13 @@ function Content() {
   }
 
   if (isError) {
-    return <h1>error</h1>;
+    return (
+      <SectionErrorLoadCards
+        onClick={refetch}
+        header="Любовь взяла тайм-аут"
+        description="Анкеты временно недоступны. Мы уже разбираемся — попробуйте ещё раз через минуту."
+      />
+    );
   }
 
   if (isSuccess && !isError) {
