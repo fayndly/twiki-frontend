@@ -1,56 +1,64 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-
 import styles from "./PageViewing.module.scss";
-
-import { CardProfile } from "@/widgets/CardProfile";
-
+import { useViewingCards } from "../model";
 import type { ICartProfile } from "../types";
 
-import { useGetterData } from "../api";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
+import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
+import { CardProfile } from "@/widgets/CardProfile";
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
+import { useEffect } from "react";
 
-export function PageViewing() {
-  const { profileCarts, setProfileCarts, isDataLoading } = useGetterData();
+export function Content() {
+  const {
+    data,
+    isPending,
+    isError,
+    isSuccess,
+    refetch,
+    isFetching,
+    viewingCardsMutations,
+  } = useViewingCards();
 
   const likeHandler = (card: ICartProfile) => {
-    console.log(card.name + " liked!");
-    remove(card.id, "right");
+    viewingCardsMutations.mutate({ reaction: "like", cardId: card.id });
   };
 
   const dislikeHandler = (card: ICartProfile) => {
-    console.log(card.name + " disliked!");
-    remove(card.id, "left");
+    viewingCardsMutations.mutate({ reaction: "dislike", cardId: card.id });
   };
 
-  const remove = (id: number, way: "right" | "left") => {
-    setProfileCarts(() => {
-      if (way === "right") {
-        return profileCarts.map((i) =>
-          i.id === id ? { ...i, isLiked: true } : i
-        );
-      }
-      return profileCarts.map((i) =>
-        i.id === id ? { ...i, isDisliked: true } : i
-      );
-    });
+  useEffect(() => {
+    if (data?.length === 0) {
+      console.log("refetch");
 
-    setTimeout(() => {
-      setProfileCarts((profileCarts) =>
-        profileCarts.filter((i) => i.id !== id)
-      );
-    }, 300);
-  };
+      refetch();
+    }
+  }, [data]);
 
-  return (
-    <SectionWrapper>
-      {isDataLoading ? (
-        <SectionLoaderCarts
-          header="Подбираем подходящие анкеты"
-          description="Ищем людей, которые могут вам понравиться. Это займёт всего пару секунд."
-        />
-      ) : (
-        <section className={styles.section}>
-          {profileCarts.map((card) => (
+  if (isPending || isFetching) {
+    return (
+      <SectionLoaderCarts
+        header="Подбираем подходящие анкеты"
+        description="Ищем людей, которые могут вам понравиться. Это займёт всего пару секунд."
+      />
+    );
+  }
+
+  if (isError) {
+    return (
+      <SectionErrorLoadCards
+        onClick={refetch}
+        header="Анкеты не загрузились"
+        description="Кажется, произошёл сбой. Обновите страницу или попробуйте ещё раз чуть позже."
+      />
+    );
+  }
+
+  if (isSuccess && !isError) {
+    return (
+      <section className={styles.section}>
+        {data &&
+          data.map((card) => (
             <CardProfile
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
@@ -68,8 +76,15 @@ export function PageViewing() {
               description={card.description}
             />
           ))}
-        </section>
-      )}
+      </section>
+    );
+  }
+}
+
+export function PageViewing() {
+  return (
+    <SectionWrapper>
+      <Content />
     </SectionWrapper>
   );
 }
