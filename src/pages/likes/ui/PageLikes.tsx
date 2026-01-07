@@ -1,63 +1,55 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-
-import styles from "./PageLikes.module.scss";
-
-import { CardProfile } from "@/widgets/CardProfile";
-
+import { useLikesCards } from "../model";
 import type { ICartProfile } from "../types";
+import styles from "./PageLikes.module.scss";
 
 import { SectionNoContent } from "@/shared/SectionNoContent";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
-import { useGetterData } from "../api";
+import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
+import { CardProfile } from "@/widgets/CardProfile";
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 function Content() {
-  const { profileCarts, setProfileCarts, isDataLoading } = useGetterData();
+  const { data, isPending, isError, isSuccess, refetch, likesCardsMutations } =
+    useLikesCards();
 
   const likeHandler = (card: ICartProfile) => {
-    console.log(card.name + " liked!");
-    remove(card.id, "right");
+    likesCardsMutations.mutate({ reaction: "like", cardId: card.id });
   };
 
   const dislikeHandler = (card: ICartProfile) => {
-    console.log(card.name + " disliked!");
-    remove(card.id, "left");
+    likesCardsMutations.mutate({ reaction: "dislike", cardId: card.id });
   };
 
-  const remove = (id: number, way: "right" | "left") => {
-    setProfileCarts(() => {
-      if (way === "right") {
-        return profileCarts.map((i) =>
-          i.id === id ? { ...i, isLiked: true } : i
-        );
-      }
-      return profileCarts.map((i) =>
-        i.id === id ? { ...i, isDisliked: true } : i
-      );
-    });
-
-    setTimeout(() => {
-      setProfileCarts((profileCarts) =>
-        profileCarts.filter((i) => i.id !== id)
-      );
-    }, 300);
-  };
-
-  if (profileCarts.length === 0 && !isDataLoading) {
+  if (data && data.length === 0 && !isPending) {
     return (
       <SectionNoContent text="Когда кто-то поставит вам лайк, вы увидите это здесь" />
     );
   }
 
-  return (
-    <>
-      {isDataLoading ? (
-        <SectionLoaderCarts
-          header="Загружаем симпатии"
-          description="Собираем анкеты людей, которым вы уже понравились."
-        />
-      ) : (
-        <section className={styles.section}>
-          {profileCarts.map((card) => (
+  if (isPending) {
+    return (
+      <SectionLoaderCarts
+        header="Загружаем симпатии"
+        description="Собираем анкеты людей, которым вы уже понравились."
+      />
+    );
+  }
+
+  if (isError) {
+    return (
+      <SectionErrorLoadCards
+        onClick={refetch}
+        header="Анкеты не загрузились"
+        description="Кажется, произошёл сбой. Обновите страницу или попробуйте ещё раз чуть позже."
+      />
+    );
+  }
+
+  if (isSuccess && !isError) {
+    return (
+      <section className={styles.section}>
+        {data &&
+          data.map((card) => (
             <CardProfile
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
@@ -75,10 +67,9 @@ function Content() {
               description={card.description}
             />
           ))}
-        </section>
-      )}
-    </>
-  );
+      </section>
+    );
+  }
 }
 
 export function PageLikes() {

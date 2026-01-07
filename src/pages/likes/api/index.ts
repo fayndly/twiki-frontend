@@ -1,47 +1,18 @@
-import type { ICartProfile } from "../types";
+import type { PropsPostReaction } from "../types";
+
+import { apiConfig } from "@/app/config";
+
 import axios from "axios";
 
-import { useEffect, useState } from "react";
-
-export const getProfileCarts = async () => {
-  try {
-    const { data } = await axios.get(
-      "https://twiki-api.ru.tuna.am/cards-likes"
-    );
-    return data;
-  } catch (error) {
-    return error;
-  }
+export const getLikesCards = async () => {
+  const { data } = await axios.get(`${apiConfig.baseUrl}/cards-likes`);
+  return data;
 };
 
-export const useGetterData = () => {
-  const [profileCarts, setProfileCarts] = useState<ICartProfile[]>([]);
-
-  const [isDataLoading, setDataLoading] = useState(true);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchAll = async () => {
-      setDataLoading(true);
-      try {
-        const [profileCartsResult] = await Promise.all([getProfileCarts()]);
-        if (!mounted) return;
-
-        setProfileCarts(profileCartsResult);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        if (mounted) setDataLoading(false);
-      }
-    };
-
-    fetchAll();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  return { profileCarts, setProfileCarts, isDataLoading };
+export const postReaction = async ({ reaction, cardId }: PropsPostReaction) => {
+  const { data } = await axios.post(`${apiConfig.baseUrl}/reaction/likes`, {
+    cardId,
+    reaction,
+  });
+  return data;
 };

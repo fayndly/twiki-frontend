@@ -2,17 +2,16 @@ import { AppRoot } from "@telegram-apps/telegram-ui";
 import "@telegram-apps/telegram-ui/dist/styles.css";
 
 import styles from "./App.module.scss";
-
-import { themeParams, useSignal } from "@tma.js/sdk-react";
-
 import { AppRoutes } from "../routes";
 
+import { MainLayout } from "@/app/layouts/MainLayout";
+import { queryClient } from "@/app/store";
 import { Navbar } from "@/widgets/Navbar";
+
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MainLayout } from "../layouts/MainLayout";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { themeParams, useSignal } from "@tma.js/sdk-react";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -42,8 +41,6 @@ const pagesReverbBg = [
   "/profile/create",
   "/filters",
 ];
-
-const queryClient = new QueryClient();
 
 export default function App() {
   const theme = useGetTheme();

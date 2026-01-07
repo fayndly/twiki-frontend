@@ -1,3 +1,5 @@
+import { apiConfig } from "@/app/config";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { initData } from "@tma.js/sdk-react";
@@ -6,7 +8,7 @@ export const postProfileCreate = async (values: any) => {
   console.log(initData.user());
 
   try {
-    return await axios.post("https://twiki-api.ru.tuna.am/profile/create", {
+    return await axios.post(`${apiConfig.baseUrl}/profile/create`, {
       ...values,
       chatId: initData.user()?.id,
     });
