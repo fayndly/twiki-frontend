@@ -7,6 +7,7 @@ import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
 import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useEffect } from "react";
+import { queryClient } from "@/app/store";
 
 export function Content() {
   const {
@@ -28,11 +29,23 @@ export function Content() {
   };
 
   useEffect(() => {
-    if (data?.length === 0) {
-      console.log("refetch");
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    if (data) {
+      const canRefetch = data.every(
+        (item) => item.isLiked === true || item.isDisliked === true
+      );
 
-      refetch();
+      if (canRefetch) {
+        timer = setTimeout(() => {
+          console.log("refetch");
+          refetch();
+        }, 300);
+      }
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [data]);
 
   if (isPending || isFetching) {
@@ -60,6 +73,14 @@ export function Content() {
         {data &&
           data.map((card) => (
             <CardProfile
+              canRemove={() => {
+                if (card.isRemoving) {
+                  queryClient.setQueryData<ICartProfile[]>(
+                    ["viewingCards"],
+                    (old = []) => old.filter((c) => c.id !== card.id)
+                  );
+                }
+              }}
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
               onLike={() => {

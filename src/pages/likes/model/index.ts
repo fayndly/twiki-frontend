@@ -22,29 +22,22 @@ const likesCardsMutationOptions: PropsLikesCardsMutationOptions = {
   onMutate: async (reaction: PropsPostReaction) => {
     await queryClient.cancelQueries({ queryKey: ["likesCards"] });
 
-    const previousLikesCards: ICartProfile[] | undefined =
-      queryClient.getQueryData(["likesCards"]);
+    const previousLikesCards = queryClient.getQueryData<ICartProfile[]>([
+      "likesCards",
+    ]);
 
-    const newLikesCards = previousLikesCards?.length
-      ? previousLikesCards.map((card: ICartProfile) => {
-          if (card.id === reaction.cardId) {
-            return reaction.reaction === "like"
-              ? { ...card, isLiked: true }
-              : { ...card, isDisliked: true };
-          } else {
-            return card;
-          }
-        })
-      : [];
-
-    setTimeout(() => {
-      queryClient.setQueryData(
-        ["likesCards"],
-        newLikesCards.filter((card) => card.id !== reaction.cardId)
-      );
-    }, 300);
-
-    queryClient.setQueryData(["likesCards"], newLikesCards || []);
+    queryClient.setQueryData<ICartProfile[]>(["likesCards"], (old = []) =>
+      old.map((card) =>
+        card.id === reaction.cardId
+          ? {
+              ...card,
+              isRemoving: true,
+              isLiked: reaction.reaction === "like",
+              isDisliked: reaction.reaction === "dislike",
+            }
+          : card
+      )
+    );
 
     return { previousLikesCards };
   },

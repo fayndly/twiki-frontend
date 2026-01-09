@@ -8,4 +8,5 @@ export interface IPropsCardProfile {
   description: string;
   isLiked: boolean;
   isDisliked: boolean;
+  canRemove: () => void;
 }

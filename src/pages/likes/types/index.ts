@@ -5,6 +5,7 @@ import type { UseMutationOptions } from "@tanstack/react-query";
 export interface ICartProfile extends IPropsCardProfile {
   userId: string;
   id: number;
+  isRemoving: boolean;
 }
 
 export interface PropsPostReaction {

@@ -3,11 +3,7 @@ import { getViewingCards, postReaction } from "../api";
 
 import { queryClient } from "@/app/store";
 
-import type {
-  ICartProfile,
-  PropsPostReaction,
-  PropsViewingCardsMutationOptions,
-} from "../types";
+import type { ICartProfile, PropsViewingCardsMutationOptions } from "../types";
 
 const viewingCardsQueryOptions = () =>
   queryOptions<ICartProfile[]>({
@@ -19,41 +15,34 @@ const viewingCardsQueryOptions = () =>
 
 const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
   mutationFn: postReaction,
-  onMutate: async (reaction: PropsPostReaction) => {
+  onMutate: async (reaction) => {
     await queryClient.cancelQueries({ queryKey: ["viewingCards"] });
 
-    const previousViewingCards: ICartProfile[] | undefined =
-      queryClient.getQueryData(["viewingCards"]);
+    const previousViewingCards = queryClient.getQueryData<ICartProfile[]>([
+      "viewingCards",
+    ]);
 
-    const newViewingCards = previousViewingCards?.length
-      ? previousViewingCards.map((card: ICartProfile) => {
-          if (card.id === reaction.cardId) {
-            return reaction.reaction === "like"
-              ? { ...card, isLiked: true }
-              : { ...card, isDisliked: true };
-          } else {
-            return card;
-          }
-        })
-      : [];
-
-    setTimeout(() => {
-      queryClient.setQueryData(
-        ["viewingCards"],
-        newViewingCards.filter((card) => card.id !== reaction.cardId)
-      );
-    }, 300);
-
-    queryClient.setQueryData(["viewingCards"], newViewingCards || []);
+    queryClient.setQueryData<ICartProfile[]>(["viewingCards"], (old = []) =>
+      old.map((card) =>
+        card.id === reaction.cardId
+          ? {
+              ...card,
+              isRemoving: true,
+              isLiked: reaction.reaction === "like",
+              isDisliked: reaction.reaction === "dislike",
+            }
+          : card
+      )
+    );
 
     return { previousViewingCards };
   },
   onSuccess: async (data: any) => {
     console.log("onSuccess data: " + data);
   },
-  onError: (error, variables) => {
-    console.log(error);
-    console.log(variables);
+  onError: (err, vars) => {
+    console.log(err);
+    console.log(vars);
   },
 };
 

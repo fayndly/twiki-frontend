@@ -16,6 +16,7 @@ export function CardProfile({
   description,
   isLiked,
   isDisliked,
+  canRemove,
 }: IPropsCardProfile) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
@@ -36,9 +37,14 @@ export function CardProfile({
 
   return (
     <div
-      className={`${styles.card_profile} ${isLiked ? styles.swipe_right : ""} ${
-        isDisliked ? styles.swipe_left : ""
+      className={`${styles.card_profile} ${isLiked && styles.swipe_right} ${
+        isDisliked && styles.swipe_left
       }`}
+      onAnimationStart={() => {
+        setTimeout(() => {
+          canRemove();
+        }, 300);
+      }}
     >
       <img className={styles.img} src={imgUrl} alt="img_profile" />
       <div className={styles.info}>

@@ -31,6 +31,7 @@
     "@tma.js/sdk-react": "^3.0.11",
     "axios": "^1.13.2",
     "formik": "^2.4.9",
+    "framer-motion": "^12.24.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.10.1",
