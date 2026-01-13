@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { WarningSnackbarContainer } from "@/widgets/WarningSnackbar";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -75,6 +76,7 @@ export default function App() {
         <MainLayout>
           <AppRoutes />
         </MainLayout>
+        <WarningSnackbarContainer />
         <Navbar show={isNavbarShow} />
       </AppRoot>
     </QueryClientProvider>

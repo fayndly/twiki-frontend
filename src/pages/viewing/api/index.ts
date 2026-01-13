@@ -10,6 +10,8 @@ export const getViewingCards = async () => {
 };
 
 export const postReaction = async ({ reaction, cardId }: PropsPostReaction) => {
+  console.log("post reaction");
+
   const { data } = await axios.post(`${apiConfig.baseUrl}/reaction/viewing`, {
     cardId,
     reaction,

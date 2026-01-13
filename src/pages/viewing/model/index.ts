@@ -5,6 +5,8 @@ import { queryClient } from "@/app/store";
 
 import type { ICartProfile, PropsViewingCardsMutationOptions } from "../types";
 
+import { useAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+
 const viewingCardsQueryOptions = () =>
   queryOptions<ICartProfile[]>({
     queryKey: ["viewingCards"],
@@ -40,9 +42,18 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
   onSuccess: async (data: any) => {
     console.log("onSuccess data: " + data);
   },
-  onError: (err, vars) => {
-    console.log(err);
-    console.log(vars);
+  onError: (_err, vars, _onMutateResult, context) => {
+    const addWarningSnackbar = useAddWarningSnackbar();
+    addWarningSnackbar(
+      `Не удалось отправить ${vars.reaction === "like" ? "лайк" : "дизлайк"}`,
+      `Пользователь ${vars.cardId} не получил ${
+        vars.reaction === "like" ? "лайк" : "дизлайк"
+      }`,
+      postReaction,
+      vars
+    );
+    // console.log(err);
+    console.log(context);
   },
 };
 
