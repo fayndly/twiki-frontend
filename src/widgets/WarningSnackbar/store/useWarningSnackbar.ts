@@ -24,7 +24,7 @@ const warningSnackbar: UseWarningSnackbar = (set) => ({
         if (index !== -1) state.container.splice(index, 1);
       },
       false,
-      "delete"
+      "delete",
     ),
   add: (header, description, retryFunction, ...args) =>
     set(
@@ -40,15 +40,17 @@ const warningSnackbar: UseWarningSnackbar = (set) => ({
         });
       },
       false,
-      "add"
+      "add",
     ),
 });
 
 const useWarningSnackbarStore = create<WarningSnackbarState>()(
-  immer(devtools(warningSnackbar))
+  immer(devtools(warningSnackbar)),
 );
 export const useContainerWarningSnackbar = () =>
   useWarningSnackbarStore((state) => state.container);
+export const getAddWarningSnackbar = () =>
+  useWarningSnackbarStore.getState().add;
 export const useAddWarningSnackbar = () =>
   useWarningSnackbarStore.getState().add;
 export const useDeleteWarningSnackbar = () =>

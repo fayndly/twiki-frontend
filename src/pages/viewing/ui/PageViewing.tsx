@@ -8,6 +8,7 @@ import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useEffect } from "react";
 import { queryClient } from "@/app/store";
+import { useOpenAppelModal } from "@/widgets/AppealModal/store/useAppelModal";
 
 export function Content() {
   const {
@@ -32,7 +33,7 @@ export function Content() {
     let timer: ReturnType<typeof setTimeout> | null = null;
     if (data) {
       const canRefetch = data.every(
-        (item) => item.isLiked === true || item.isDisliked === true
+        (item) => item.isLiked === true || item.isDisliked === true,
       );
 
       if (canRefetch) {
@@ -47,6 +48,8 @@ export function Content() {
       if (timer) clearTimeout(timer);
     };
   }, [data]);
+
+  const openAppelModal = useOpenAppelModal();
 
   if (isPending || isFetching) {
     return (
@@ -77,12 +80,13 @@ export function Content() {
                 if (card.isRemoving) {
                   queryClient.setQueryData<ICartProfile[]>(
                     ["viewingCards"],
-                    (old = []) => old.filter((c) => c.id !== card.id)
+                    (old = []) => old.filter((c) => c.id !== card.id),
                   );
                 }
               }}
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
+              isAppealed={card.isAppealed}
               onLike={() => {
                 likeHandler(card);
               }}
@@ -95,6 +99,9 @@ export function Content() {
               age={card.age}
               city={card.city}
               description={card.description}
+              onAppeal={() => {
+                openAppelModal(card.id);
+              }}
             />
           ))}
       </section>

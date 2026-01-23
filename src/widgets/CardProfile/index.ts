@@ -1,2 +1,2 @@
 export { CardProfile } from "./ui/CardProfile.tsx";
-export { type IPropsCardProfile } from "./types/index.types.ts";
+export type { PropsCardProfile } from "./types/index.types.ts";

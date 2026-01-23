@@ -3,9 +3,35 @@ import { getViewingCards, postReaction } from "../api";
 
 import { queryClient } from "@/app/store";
 
-import type { ICartProfile, PropsViewingCardsMutationOptions } from "../types";
+import type {
+  ICartProfile,
+  PropsViewingCardsMutationOptions,
+  PropsPostReaction,
+} from "../types";
 
-import { useAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+import { getAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+
+const mutateSetStatuses = (
+  reaction: PropsPostReaction,
+  canDeleteAppeal: boolean = false,
+) => {
+  queryClient.setQueryData<ICartProfile[]>(["viewingCards"], (old = []) =>
+    old.map((card) =>
+      card.id === reaction.cardId
+        ? {
+            ...card,
+            isRemoving:
+              reaction.reaction !== "appeal"
+                ? true
+                : reaction.reaction === "appeal" && canDeleteAppeal,
+            isLiked: reaction.reaction === "like",
+            isDisliked: reaction.reaction === "dislike",
+            isAppealed: reaction.reaction === "appeal" && canDeleteAppeal,
+          }
+        : card,
+    ),
+  );
+};
 
 const viewingCardsQueryOptions = () =>
   queryOptions<ICartProfile[]>({
@@ -24,35 +50,27 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
       "viewingCards",
     ]);
 
-    queryClient.setQueryData<ICartProfile[]>(["viewingCards"], (old = []) =>
-      old.map((card) =>
-        card.id === reaction.cardId
-          ? {
-              ...card,
-              isRemoving: true,
-              isLiked: reaction.reaction === "like",
-              isDisliked: reaction.reaction === "dislike",
-            }
-          : card
-      )
-    );
+    mutateSetStatuses(reaction);
 
     return { previousViewingCards };
   },
-  onSuccess: async (data: any) => {
+  onSuccess: async (data: any, reaction) => {
     console.log("onSuccess data: " + data);
+    if (reaction.reaction === "appeal") {
+      mutateSetStatuses(reaction, true);
+    }
   },
   onError: (_err, vars, _onMutateResult, context) => {
-    const addWarningSnackbar = useAddWarningSnackbar();
+    const addWarningSnackbar = getAddWarningSnackbar();
+
     addWarningSnackbar(
       `Не удалось отправить ${vars.reaction === "like" ? "лайк" : "дизлайк"}`,
       `Пользователь ${vars.cardId} не получил ${
         vars.reaction === "like" ? "лайк" : "дизлайк"
       }`,
       postReaction,
-      vars
+      vars,
     );
-    // console.log(err);
     console.log(context);
   },
 };

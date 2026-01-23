@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { WarningSnackbarContainer } from "@/widgets/WarningSnackbar";
+import { AppealModal } from "@/widgets/AppealModal";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -69,13 +70,14 @@ export default function App() {
       });
     }
   }, [location, theme]);
-
+  // platform={"ios"}
   return (
     <QueryClientProvider client={queryClient}>
       <AppRoot className={styles.app_root} appearance={theme}>
         <MainLayout>
           <AppRoutes />
         </MainLayout>
+        <AppealModal></AppealModal>
         <WarningSnackbarContainer />
         <Navbar show={isNavbarShow} />
       </AppRoot>

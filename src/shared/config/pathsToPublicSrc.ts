@@ -7,5 +7,6 @@ export const pathsToPublicSrc = {
     placeholderFormProfileUpdate: "/stickers/bear_typing.lottie",
     placeholderFormProfileCreate: "/stickers/dog_writing.lottie",
     error: "/stickers/hamster_error.lottie",
+    appeal: "/stickers/duck_policeman.lottie",
   },
 };

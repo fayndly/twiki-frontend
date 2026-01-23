@@ -1,3 +1,6 @@
-export { useAddWarningSnackbar } from "./store/useWarningSnackbar";
+export {
+  useAddWarningSnackbar,
+  getAddWarningSnackbar,
+} from "./store/useWarningSnackbar";
 
 export { WarningSnackbarContainer } from "./ui/WarningSnackbarContainer";

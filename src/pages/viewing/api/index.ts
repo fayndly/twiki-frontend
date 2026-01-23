@@ -9,12 +9,19 @@ export const getViewingCards = async () => {
   return data;
 };
 
-export const postReaction = async ({ reaction, cardId }: PropsPostReaction) => {
+export const postReaction = async ({
+  reaction,
+  cardId,
+  appealData,
+}: PropsPostReaction) => {
   console.log("post reaction");
 
-  const { data } = await axios.post(`${apiConfig.baseUrl}/reaction/viewing`, {
-    cardId,
-    reaction,
-  });
+  const { data } = await axios.post(
+    `${apiConfig.baseUrl}/reaction/${reaction}`,
+    {
+      cardId,
+      appealData,
+    },
+  );
   return data;
 };
