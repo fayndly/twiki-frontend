@@ -1,8 +1,8 @@
-import { type IPropsCardProfile } from "@/widgets/CardProfile";
+import type { PropsCardProfile } from "@/widgets/CardProfile";
 
 import type { UseMutationOptions } from "@tanstack/react-query";
 
-export interface ICartProfile extends IPropsCardProfile {
+export interface ICartProfile extends PropsCardProfile {
   userId: string;
   id: number;
   isRemoving: boolean;

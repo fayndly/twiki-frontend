@@ -14,6 +14,7 @@ import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { WarningSnackbarContainer } from "@/widgets/WarningSnackbar";
 import { AppealModal } from "@/widgets/AppealModal";
+import { BackButton } from "@/shared/BackButton";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -77,6 +78,7 @@ export default function App() {
         <MainLayout>
           <AppRoutes />
         </MainLayout>
+        <BackButton />
         <AppealModal></AppealModal>
         <WarningSnackbarContainer />
         <Navbar show={isNavbarShow} />

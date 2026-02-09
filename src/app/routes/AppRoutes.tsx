@@ -1,18 +1,4 @@
-import {
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-  type Location,
-  type NavigateFunction,
-} from "react-router-dom";
-import {
-  backButton,
-  hapticFeedback,
-  mainButton,
-  settingsButton,
-} from "@tma.js/sdk-react";
-import { useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
@@ -23,18 +9,18 @@ import { PageNotFound } from "@/pages/not-found";
 import { PageProfileCreate } from "@/pages/profile-create";
 import { PageFilters } from "@/pages/filters";
 
-const backButtonPaths = ["/settings", "/profile/update", "/filters"];
+import { useEffect } from "react";
+import { hapticFeedback, mainButton, settingsButton } from "@tma.js/sdk-react";
+
 const mainButtonPaths = ["/profile/create", "/profile/update", "/filters"];
 const settingsButtonPathsHide = ["/profile/create"];
 
-const useBackButton = (location: Location, navigate: NavigateFunction) => {
+export function AppRoutes() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
-    backButtonPaths.includes(location.pathname)
-      ? backButton.show()
-      : backButton.hide();
-
     if (!mainButtonPaths.includes(location.pathname)) mainButton.hide();
-
     !settingsButtonPathsHide.includes(location.pathname)
       ? settingsButton.show()
       : settingsButton.hide();
@@ -42,36 +28,15 @@ const useBackButton = (location: Location, navigate: NavigateFunction) => {
 
   useEffect(() => {
     const handler = () => {
-      hapticFeedback.isSupported() && hapticFeedback.impactOccurred("medium");
-      navigate(-1);
-    };
-    backButton.onClick(handler);
-
-    return () => {
-      backButton.offClick(handler);
-    };
-  });
-};
-
-export function AppRoutes() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useBackButton(location, navigate);
-
-  useEffect(() => {
-    const handler = () => {
       hapticFeedback.isSupported() && hapticFeedback.impactOccurred("light");
       navigate("/settings");
     };
-
     settingsButton.onClick(handler);
 
     return () => {
       settingsButton.offClick(handler);
     };
   });
-
   return (
     <Routes>
       <Route path="viewing" element={<PageViewing />} />
