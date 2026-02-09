@@ -33,7 +33,7 @@ export function SettingsButton() {
     canShowHTMLButton && (
       <Button
         onClick={() => {
-          onPressSettingsButtonHandler(navigate);
+          onPressSettingsButtonHandler(navigate, "HTML");
         }}
         className={styles.settings_button}
         before={<Settings />}

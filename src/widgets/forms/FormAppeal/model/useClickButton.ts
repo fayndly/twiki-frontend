@@ -1,12 +1,13 @@
 import type { ButtonSubmitStatuses } from "../types";
 
-import { hapticFeedback, mainButton } from "@tma.js/sdk-react";
+import { mainButton } from "@tma.js/sdk-react";
 import type { FormikErrors } from "formik";
 import { useEffect } from "react";
 
 import { useCloseAppelModal } from "@/widgets/AppealModal";
 import { useCardIdAppelModal } from "@/widgets/AppealModal";
 import { useViewingCards } from "@/pages/viewing/model";
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
 export const useClickButton = (
   setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,
@@ -21,9 +22,7 @@ export const useClickButton = (
 
   useEffect(() => {
     const handler = async () => {
-      if (hapticFeedback.isSupported()) {
-        hapticFeedback.impactOccurred("medium");
-      }
+      supportHapticFeedback("medium");
       setButtonStatus("loading");
       const errors = await validateForm();
       if (Object.keys(errors).length > 0) {
@@ -46,9 +45,7 @@ export const useClickButton = (
           });
 
           setButtonStatus("success");
-          if (hapticFeedback.isSupported()) {
-            hapticFeedback.notificationOccurred("success");
-          }
+          supportHapticFeedback("success");
 
           closeAppelModal();
         } else {
@@ -58,9 +55,8 @@ export const useClickButton = (
         console.log(e);
 
         setButtonStatus("error");
-        if (hapticFeedback.isSupported()) {
-          hapticFeedback.notificationOccurred("error");
-        }
+        supportHapticFeedback("error");
+
         setTimeout(() => {
           setButtonStatus(canShowButton ? "valid" : "noValid");
         }, 2000);

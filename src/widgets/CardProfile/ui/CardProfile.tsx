@@ -8,8 +8,8 @@ import type {
 } from "../types/index.types";
 
 import { IconButton, Text } from "@telegram-apps/telegram-ui";
-import { hapticFeedback } from "@tma.js/sdk-react";
 import { useState } from "react";
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
 const ButtonReaction = ({ onClick, type }: PropsButtonReaction) => {
   return (
@@ -106,10 +106,9 @@ const DescriptionCard = ({
 
   const handleClickDescription = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("soft");
-    }
+    supportHapticFeedback("soft");
   };
+
   return (
     <div onClick={handleClickDescription} className={styles.info_description}>
       <Text className={styles.text} weight="2">
@@ -147,9 +146,7 @@ export function CardProfile({
   const handleClickButton = (onClick?: () => void) => {
     onClick?.();
 
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("light");
-    }
+    supportHapticFeedback("light");
   };
 
   return (

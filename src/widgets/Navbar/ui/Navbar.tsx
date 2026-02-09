@@ -1,10 +1,10 @@
 import styles from "./NavBar.module.scss";
+import { type TabProps } from "../types";
 
 import { IconButton } from "@telegram-apps/telegram-ui";
-
-import { type TabProps } from "../types";
 import { useLocation, useNavigate } from "react-router-dom";
-import { hapticFeedback } from "@tma.js/sdk-react";
+
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
 const tabs = [
   {
@@ -93,9 +93,7 @@ export function Navbar({ show = true }: { show?: boolean }) {
   const location = useLocation();
 
   const clickHandler = (pathTo: string) => {
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("soft");
-    }
+    supportHapticFeedback("soft");
     navigate(pathTo);
   };
 

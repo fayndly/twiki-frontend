@@ -4,7 +4,8 @@ import { Text } from "@telegram-apps/telegram-ui";
 
 import { type IPropsCardSympathy } from "../types/index.types";
 import { useEffect, useState } from "react";
-import { hapticFeedback, themeParams, useSignal } from "@tma.js/sdk-react";
+import { themeParams, useSignal } from "@tma.js/sdk-react";
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -31,9 +32,7 @@ export function CardSympathy({
 
     setActive(true);
 
-    if (hapticFeedback.isSupported()) {
-      hapticFeedback.impactOccurred("medium");
-    }
+    supportHapticFeedback("medium");
 
     setTimeout(() => {
       setActive(false);

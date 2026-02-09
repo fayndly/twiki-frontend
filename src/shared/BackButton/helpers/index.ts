@@ -1,11 +1,12 @@
-import { backButton, hapticFeedback } from "@tma.js/sdk-react";
+import { backButton } from "@tma.js/sdk-react";
 import { useEffect } from "react";
 import type { NavigateFunction, Location } from "react-router-dom";
 import { backButtonPaths } from "../config";
 import { useHideBackButton, useShowBackButton } from "../store";
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
 export const onPressBackButtonHandler = (navigate: NavigateFunction) => {
-  hapticFeedback.isSupported() && hapticFeedback.impactOccurred("medium");
+  supportHapticFeedback("light");
   navigate(-1);
 };
 

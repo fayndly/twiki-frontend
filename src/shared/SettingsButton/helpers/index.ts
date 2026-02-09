@@ -1,11 +1,15 @@
-import { hapticFeedback, settingsButton } from "@tma.js/sdk-react";
+import { settingsButton } from "@tma.js/sdk-react";
 import { useEffect } from "react";
 import type { NavigateFunction, Location } from "react-router-dom";
 import { settingsButtonPaths } from "../config";
 import { useHideSettingsButton, useShowSettingsButton } from "../store";
+import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
 
-export const onPressSettingsButtonHandler = (navigate: NavigateFunction) => {
-  hapticFeedback.isSupported() && hapticFeedback.impactOccurred("medium");
+export const onPressSettingsButtonHandler = (
+  navigate: NavigateFunction,
+  from: "tg" | "HTML" = "tg",
+) => {
+  from === "HTML" && supportHapticFeedback("light");
   navigate("/settings");
 };
 
