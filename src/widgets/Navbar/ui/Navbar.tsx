@@ -4,7 +4,7 @@ import { type TabProps } from "../types";
 import { IconButton } from "@telegram-apps/telegram-ui";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 const tabs = [
   {

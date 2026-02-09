@@ -5,7 +5,7 @@ import { mainButton } from "@tma.js/sdk-react";
 import type { FormikErrors } from "formik";
 import { useEffect } from "react";
 
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export const useClickButton = (
   setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,

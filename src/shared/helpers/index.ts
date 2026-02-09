@@ -1,4 +1,5 @@
-export { useMobileKeyboard } from "./useMobileKeyboard.ts";
+export { useMobileKeyboard } from "./useMobileKeyboard";
+export { supportHapticFeedback } from "./supportHapticFeedback";
 
 export const shuffle = <T>(array: T[]): T[] => {
   const result = [...array];

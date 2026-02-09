@@ -5,7 +5,7 @@ import { Text } from "@telegram-apps/telegram-ui";
 import { type IPropsCardSympathy } from "../types/index.types";
 import { useEffect, useState } from "react";
 import { themeParams, useSignal } from "@tma.js/sdk-react";
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);

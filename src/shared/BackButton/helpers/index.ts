@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import type { NavigateFunction, Location } from "react-router-dom";
 import { backButtonPaths } from "../config";
 import { useHideBackButton, useShowBackButton } from "../store";
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export const onPressBackButtonHandler = (navigate: NavigateFunction) => {
   supportHapticFeedback("light");

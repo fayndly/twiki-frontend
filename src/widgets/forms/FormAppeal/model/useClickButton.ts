@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useCloseAppelModal } from "@/widgets/AppealModal";
 import { useCardIdAppelModal } from "@/widgets/AppealModal";
 import { useViewingCards } from "@/pages/viewing/model";
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export const useClickButton = (
   setButtonStatus: React.Dispatch<React.SetStateAction<ButtonSubmitStatuses>>,

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import type { NavigateFunction, Location } from "react-router-dom";
 import { settingsButtonPaths } from "../config";
 import { useHideSettingsButton, useShowSettingsButton } from "../store";
-import { supportHapticFeedback } from "@/shared/helpers/supportHapticFeedback";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export const onPressSettingsButtonHandler = (
   navigate: NavigateFunction,
