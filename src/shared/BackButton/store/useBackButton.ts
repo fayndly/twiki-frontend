@@ -52,7 +52,7 @@ const useBackButton = create<BackButtonState>()(
 
 export const useIsVisibleBackButton = () =>
   useBackButton((state) => state.isVisible);
-export const useIsTgButtonSupporting = () =>
+export const useIsTgBackButtonSupporting = () =>
   useBackButton((state) => state.isTgButtonSupporting);
 export const useShowBackButton = () => useBackButton.getState().show;
 export const useHideBackButton = () => useBackButton.getState().hide;

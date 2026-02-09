@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
@@ -10,33 +10,16 @@ import { PageProfileCreate } from "@/pages/profile-create";
 import { PageFilters } from "@/pages/filters";
 
 import { useEffect } from "react";
-import { hapticFeedback, mainButton, settingsButton } from "@tma.js/sdk-react";
+import { mainButton } from "@tma.js/sdk-react";
 
 const mainButtonPaths = ["/profile/create", "/profile/update", "/filters"];
-const settingsButtonPathsHide = ["/profile/create"];
 
 export function AppRoutes() {
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     if (!mainButtonPaths.includes(location.pathname)) mainButton.hide();
-    !settingsButtonPathsHide.includes(location.pathname)
-      ? settingsButton.show()
-      : settingsButton.hide();
   }, [location]);
-
-  useEffect(() => {
-    const handler = () => {
-      hapticFeedback.isSupported() && hapticFeedback.impactOccurred("light");
-      navigate("/settings");
-    };
-    settingsButton.onClick(handler);
-
-    return () => {
-      settingsButton.offClick(handler);
-    };
-  });
   return (
     <Routes>
       <Route path="viewing" element={<PageViewing />} />

@@ -1,8 +1,7 @@
 export {
   useIsVisibleBackButton,
-  useIsTgButtonSupporting,
+  useIsTgBackButtonSupporting,
   useCheckBackButton,
   useShowBackButton,
   useHideBackButton,
-  // useOnClickTgButton,
 } from "./useBackButton";
