@@ -48,7 +48,7 @@ export const getParams = (): ParamsSubmitButton => {
       bgColor: themeParams.headerBgColor(),
       hasShineEffect: false,
       isEnabled: false,
-      isVisible: true,
+      isVisible: false,
       isLoaderVisible: false,
       text: "void",
       textColor: themeParams.headerBgColor(),

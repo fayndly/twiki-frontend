@@ -2,6 +2,7 @@ import styles from "./SubmitButton.module.scss";
 import type { PropsButtonDefault, PropsSubmitButton } from "../types";
 import { getParams, useTgSubmitButtonOnPressHandler } from "../helpers";
 import {
+  useHideSubmitButton,
   useIsVisibleSubmitButton,
   useSetTypeSubmitButton,
   useStatusSubmitButton,
@@ -11,6 +12,7 @@ import { Button } from "@telegram-apps/telegram-ui";
 import { themeParams } from "@tma.js/sdk-react";
 
 import { supportHapticFeedback } from "@/shared/helpers";
+import { useEffect } from "react";
 
 function ButtonDefault({
   isLoading,
@@ -36,14 +38,18 @@ function ButtonDefault({
   );
 }
 
-export function SubmitButton({ type, onSubmit }: PropsSubmitButton) {
+export function SubmitButton({ type = "tg", onSubmit }: PropsSubmitButton) {
   const isVisibleSubmitButton = useIsVisibleSubmitButton();
   const statusSubmitButton = useStatusSubmitButton();
 
   const params = getParams();
   const paramsFromStatus = params[statusSubmitButton];
 
-  useSetTypeSubmitButton()(type);
+  const setTypeSubmitButton = useSetTypeSubmitButton();
+
+  useEffect(() => {
+    setTypeSubmitButton(type);
+  }, [type, setTypeSubmitButton]);
 
   const onPressSubmitButtonHandler = () => {
     if (!paramsFromStatus.isEnabled) {
@@ -55,6 +61,14 @@ export function SubmitButton({ type, onSubmit }: PropsSubmitButton) {
   };
 
   useTgSubmitButtonOnPressHandler(onPressSubmitButtonHandler);
+
+  const hideSubmitButton = useHideSubmitButton();
+
+  useEffect(() => {
+    return () => {
+      hideSubmitButton();
+    };
+  }, []);
 
   if (isVisibleSubmitButton) {
     if (type === "html") {

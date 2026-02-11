@@ -1,25 +1,15 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { PageViewing } from "@/pages/viewing";
 import { PageLikes } from "@/pages/likes";
 import { PageSympathy } from "@/pages/sympathy";
 import { PageSettings } from "@/pages/settings";
 import { PageProfileUpdate } from "@/pages/profile-update";
-import { PageNotFound } from "@/pages/not-found";
 import { PageProfileCreate } from "@/pages/profile-create";
 import { PageFilters } from "@/pages/filters";
-
-import { useEffect } from "react";
-import { mainButton } from "@tma.js/sdk-react";
-
-const mainButtonPaths = ["/profile/create", "/profile/update", "/filters"];
+import { PageNotFound } from "@/pages/not-found";
 
 export function AppRoutes() {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (!mainButtonPaths.includes(location.pathname)) mainButton.hide();
-  }, [location]);
   return (
     <Routes>
       <Route path="viewing" element={<PageViewing />} />

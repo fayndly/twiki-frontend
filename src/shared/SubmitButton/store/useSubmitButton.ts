@@ -13,7 +13,7 @@ import { getParams } from "../helpers";
 
 const initialState: InitialState = {
   isVisible: false,
-  type: null,
+  type: "tg",
   status: "void",
 };
 

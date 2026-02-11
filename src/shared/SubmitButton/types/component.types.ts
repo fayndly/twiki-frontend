@@ -12,7 +12,7 @@ export type StatusSubmitButton =
 export type TypeSubmitButton = "tg" | "button" | "html";
 
 export interface PropsSubmitButton {
-  type: TypeSubmitButton;
+  type?: TypeSubmitButton;
   onSubmit: () => void;
 }
 

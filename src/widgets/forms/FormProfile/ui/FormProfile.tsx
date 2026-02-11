@@ -2,8 +2,6 @@ import styles from "./FormProfile.module.scss";
 import { validationSchema, sexOptions } from "../config";
 import type { PropsFormProfile } from "../types";
 
-import { formStateWatcher } from "../model";
-
 import { useFormik } from "formik";
 
 import { InputText } from "@/shared/inputs/InputText";
@@ -12,15 +10,19 @@ import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputImage } from "@/shared/inputs/InputImage";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 import { SectionLoaderForm } from "@/shared/SectionLoaderForm";
+import {
+  SubmitButton,
+  useButtonSubmitForFormic,
+  submitEventHandler,
+} from "@/shared/SubmitButton";
 
 export function FormProfile({
   initialValues,
   handleSubmit,
   cities,
   isDataLoading,
-  useStatusValidateButton,
-  useClickButton,
-  getParamsButton,
+  validateNoChanges,
+  successActionFn,
 }: PropsFormProfile) {
   const formik = useFormik({
     initialValues: initialValues,
@@ -29,13 +31,7 @@ export function FormProfile({
     onSubmit: handleSubmit,
   });
 
-  formStateWatcher(
-    isDataLoading,
-    formik,
-    useStatusValidateButton,
-    useClickButton,
-    getParamsButton
-  );
+  useButtonSubmitForFormic(formik, validateNoChanges, isDataLoading);
 
   const {
     errors,
@@ -157,6 +153,11 @@ export function FormProfile({
               setFieldValue("city", value);
             }}
             options={cities}
+          />
+          <SubmitButton
+            onSubmit={() => {
+              submitEventHandler(formik, successActionFn);
+            }}
           />
         </form>
       )}

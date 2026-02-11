@@ -10,7 +10,7 @@ interface Actions {
 
 export interface InitialState {
   isVisible: boolean;
-  type: TypeSubmitButton | null;
+  type: TypeSubmitButton;
   status: StatusSubmitButton;
 }
 

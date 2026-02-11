@@ -49,9 +49,13 @@ export const useButtonSubmitForFormic = <T>(
   const isKeyboardOpen = useMobileKeyboard();
 
   useEffect(() => {
-    (isKeyboardOpen && typeSubmitButton === "tg") || waitLoadFormData
-      ? hideSubmitButton()
-      : showSubmitButton();
+    if (isKeyboardOpen && typeSubmitButton !== "button") {
+      hideSubmitButton();
+    } else if (waitLoadFormData) {
+      hideSubmitButton();
+    } else {
+      showSubmitButton();
+    }
   }, [isKeyboardOpen, waitLoadFormData]);
 
   return null;

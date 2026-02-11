@@ -1,11 +1,14 @@
-import { getParamsButton, initialValues } from "../config";
+import { initialValues } from "../config";
 import { postProfileUpdate, useGetterData } from "../api";
-import { useClickButton, useStatusValidateButton } from "../model";
+
+import { useNavigate } from "react-router-dom";
 
 import { FormProfile } from "@/widgets/forms/FormProfile";
 
 export function FormProfileUpdate() {
   const { cities, profileData, isDataLoading } = useGetterData();
+
+  const navigate = useNavigate();
 
   return (
     <FormProfile
@@ -13,9 +16,10 @@ export function FormProfileUpdate() {
       handleSubmit={postProfileUpdate}
       cities={cities}
       isDataLoading={isDataLoading}
-      useStatusValidateButton={useStatusValidateButton}
-      useClickButton={useClickButton}
-      getParamsButton={getParamsButton}
+      validateNoChanges={true}
+      successActionFn={() => {
+        navigate(-1);
+      }}
     />
   );
 }

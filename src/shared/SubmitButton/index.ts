@@ -7,4 +7,4 @@ export {
   useTypeSubmitButton,
 } from "./store";
 export type { StatusSubmitButton } from "./types";
-export { useButtonSubmitForFormic } from "./helpers";
+export { useButtonSubmitForFormic, submitEventHandler } from "./helpers";

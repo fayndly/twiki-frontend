@@ -1,10 +1,5 @@
 import styles from "./FormFilters.module.scss";
 import { initialValues, validationSchema, sexOptions } from "../config";
-import {
-  formStateWatcher,
-  useStatusValidateButton,
-  useClickButton,
-} from "../model";
 import { postFiltersUpdate, useGetterData } from "../api";
 
 import { useFormik } from "formik";
@@ -13,8 +8,15 @@ import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
 import { InputRange } from "@/shared/inputs/InputRange";
 import { SectionLoaderForm } from "@/shared/SectionLoaderForm";
+import {
+  SubmitButton,
+  useButtonSubmitForFormic,
+  submitEventHandler,
+} from "@/shared/SubmitButton";
+import { useNavigate } from "react-router-dom";
 
 export function FormFilters() {
+  const navigate = useNavigate();
   const { cities, profileData, isDataLoading } = useGetterData();
 
   const formik = useFormik({
@@ -24,12 +26,7 @@ export function FormFilters() {
     onSubmit: postFiltersUpdate,
   });
 
-  formStateWatcher(
-    isDataLoading,
-    formik,
-    useStatusValidateButton,
-    useClickButton
-  );
+  useButtonSubmitForFormic(formik, true, isDataLoading);
 
   const {
     errors,
@@ -39,6 +36,7 @@ export function FormFilters() {
     setFieldTouched,
     touched,
   } = formik;
+
   return (
     <>
       {isDataLoading ? (
@@ -100,6 +98,13 @@ export function FormFilters() {
               setFieldValue("city", value);
             }}
             options={cities}
+          />
+          <SubmitButton
+            onSubmit={() => {
+              submitEventHandler(formik, () => {
+                navigate(-1);
+              });
+            }}
           />
         </form>
       )}

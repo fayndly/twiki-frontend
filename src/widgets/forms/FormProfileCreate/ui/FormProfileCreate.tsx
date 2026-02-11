@@ -1,8 +1,9 @@
-import { getParamsButton, initialValues } from "../config";
+import { initialValues } from "../config";
 import { postProfileCreate, useGetterData } from "../api";
-import { useClickButton, useStatusValidateButton } from "../model";
 
 import { FormProfile } from "@/widgets/forms/FormProfile";
+
+import { miniApp } from "@tma.js/sdk-react";
 
 export function FormProfileCreate() {
   const { cities, isDataLoading } = useGetterData();
@@ -13,9 +14,10 @@ export function FormProfileCreate() {
       handleSubmit={postProfileCreate}
       cities={cities}
       isDataLoading={isDataLoading}
-      useStatusValidateButton={useStatusValidateButton}
-      useClickButton={useClickButton}
-      getParamsButton={getParamsButton}
+      validateNoChanges={false}
+      successActionFn={() => {
+        miniApp.close();
+      }}
     />
   );
 }

@@ -4,11 +4,12 @@ import {
   useSetStatusSubmitButton,
 } from "@/shared/SubmitButton";
 
-export async function handler<T>(
+export const submitEventHandler = async <T>(
   formik: FormikProps<T>,
   successFn: () => void,
-) {
+) => {
   const setStatusSubmitButton = useSetStatusSubmitButton();
+  const hideSubmitButton = useHideSubmitButton();
 
   const { isSubmitting, isValid, submitForm, validateForm } = formik;
 
@@ -30,7 +31,7 @@ export async function handler<T>(
 
     setTimeout(() => {
       successFn();
-      useHideSubmitButton()();
+      hideSubmitButton();
       setStatusSubmitButton("void");
     }, 500);
   } catch (e) {
@@ -42,4 +43,4 @@ export async function handler<T>(
       setStatusSubmitButton(canStatusButtonBeValidate ? "valid" : "noValid");
     }, 500);
   }
-}
+};

@@ -14,14 +14,6 @@ export interface PropsFormProfile {
   handleSubmit: (values: any) => Promise<any>;
   cities: IPropsCell[];
   isDataLoading: boolean;
-  useStatusValidateButton: (...props: any) => void;
-  useClickButton: (...props: any) => void;
-  getParamsButton: () => any;
+  validateNoChanges: boolean;
+  successActionFn: () => void;
 }
-
-export type ButtonSubmitStatuses =
-  | "valid"
-  | "noValid"
-  | "loading"
-  | "success"
-  | "error";

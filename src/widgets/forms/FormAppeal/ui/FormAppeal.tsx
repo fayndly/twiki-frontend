@@ -1,13 +1,16 @@
 import styles from "./FormAppeal.module.scss";
 import { initialValues, validationSchema, typeOptions } from "../config";
-import { handler } from "../helpers";
 import { submit } from "../api";
 
 import { useFormik } from "formik";
 
 import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputTextarea } from "@/shared/inputs/InputTextarea";
-import { SubmitButton, useButtonSubmitForFormic } from "@/shared/SubmitButton";
+import {
+  SubmitButton,
+  useButtonSubmitForFormic,
+  submitEventHandler,
+} from "@/shared/SubmitButton";
 import {
   useCardIdAppealModal,
   useCloseAppealModal,
@@ -70,7 +73,7 @@ export function FormAppeal() {
       <SubmitButton
         type="html"
         onSubmit={() => {
-          handler(formik, closeAppealModal);
+          submitEventHandler(formik, closeAppealModal);
         }}
       />
     </form>
