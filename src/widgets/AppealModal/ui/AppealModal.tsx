@@ -2,8 +2,8 @@ import style from "./AppealModal.module.scss";
 
 import { Modal } from "@telegram-apps/telegram-ui";
 import {
-  useCloseAppelModal,
-  useIsOpenAppelModal,
+  useCloseAppealModal,
+  useIsOpenAppealModal,
 } from "../store/useAppelModal";
 import { PlaceholderSticker } from "@/shared/Placeholder";
 import { pathsToPublicSrc } from "@/shared/config";
@@ -11,8 +11,8 @@ import { FormAppeal } from "@/widgets/forms/FormAppeal";
 import { mainButton } from "@tma.js/sdk-react";
 
 export function AppealModal() {
-  const IsOpen = useIsOpenAppelModal();
-  const closeAppelModal = useCloseAppelModal();
+  const IsOpen = useIsOpenAppealModal();
+  const closeAppelModal = useCloseAppealModal();
 
   return (
     <Modal
@@ -23,6 +23,7 @@ export function AppealModal() {
           mainButton.hide();
         }
       }}
+      header={<Modal.Header />}
     >
       <div className={style.modal_content}>
         <PlaceholderSticker

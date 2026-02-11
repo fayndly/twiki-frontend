@@ -1,2 +1,6 @@
 export { AppealModal } from "./ui/AppealModal";
-export { useCloseAppelModal, useCardIdAppelModal } from "./store/useAppelModal";
+export {
+  useCloseAppealModal,
+  useCardIdAppealModal,
+} from "./store/useAppelModal";
+export type { CardId } from "./types";

@@ -5,14 +5,16 @@ interface Actions {
   close: () => void;
 }
 
+export type CardId = null | number;
+
 export interface InitialState {
   isOpen: boolean;
-  cardId: null | number;
+  cardId: CardId;
 }
 
-export interface AppelModalState extends Actions, InitialState {}
+export interface AppealModalState extends Actions, InitialState {}
 
-export type UseAppelModal = StateCreator<
-  AppelModalState,
+export type UseAppealModal = StateCreator<
+  AppealModalState,
   [["zustand/immer", never], ["zustand/devtools", never]]
 >;

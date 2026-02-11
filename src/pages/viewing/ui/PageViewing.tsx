@@ -8,7 +8,7 @@ import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useEffect } from "react";
 import { queryClient } from "@/app/store";
-import { useOpenAppelModal } from "@/widgets/AppealModal/store/useAppelModal";
+import { useOpenAppealModal } from "@/widgets/AppealModal/store/useAppelModal";
 
 export function Content() {
   const {
@@ -49,7 +49,7 @@ export function Content() {
     };
   }, [data]);
 
-  const openAppelModal = useOpenAppelModal();
+  const openAppealModal = useOpenAppealModal();
 
   if (isPending || isFetching) {
     return (
@@ -100,7 +100,7 @@ export function Content() {
               city={card.city}
               description={card.description}
               onAppeal={() => {
-                openAppelModal(card.id);
+                openAppealModal(card.id);
               }}
             />
           ))}

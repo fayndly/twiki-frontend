@@ -1,5 +1,6 @@
 export type {
   InitialState,
-  AppelModalState,
-  UseAppelModal,
+  AppealModalState,
+  UseAppealModal,
+  CardId,
 } from "./store.types";
