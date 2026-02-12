@@ -73,17 +73,20 @@ function Content() {
                 if (card.isRemoving) {
                   queryClient.setQueryData<ICartProfile[]>(
                     ["likesCards"],
-                    (old = []) => old.filter((c) => c.id !== card.id)
+                    (old = []) => old.filter((c) => c.id !== card.id),
                   );
                 }
               }}
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
-              onLike={() => {
+              onClickButtonLike={() => {
                 likeHandler(card);
               }}
-              onDislike={() => {
+              onClickButtonDislike={() => {
                 dislikeHandler(card);
+              }}
+              onClickButtonAppeal={() => {
+                // openAppealModal(card.id);
               }}
               key={card.id}
               imgUrl={card.imgUrl}

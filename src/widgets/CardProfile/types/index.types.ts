@@ -1,6 +1,6 @@
 export interface PropsCardProfile {
-  onDislike?: () => void;
-  onLike?: () => void;
+  onClickButtonDislike?: () => void;
+  onClickButtonLike?: () => void;
   imgUrl: string;
   name: string;
   age: number;
@@ -10,7 +10,7 @@ export interface PropsCardProfile {
   isDisliked: boolean;
   isAppealed?: boolean;
   canRemove: () => void;
-  onAppeal?: () => void;
+  onClickButtonAppeal?: () => void;
 }
 
 export interface PropsDescriptionCard {
@@ -27,4 +27,9 @@ export interface PropsButtonAppeal {
 export interface PropsButtonReaction {
   onClick: () => void;
   type: "like" | "dislike";
+}
+
+export interface PropsImageWithStatus {
+  src: string;
+  alt: string;
 }

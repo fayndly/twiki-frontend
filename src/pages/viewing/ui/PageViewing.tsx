@@ -87,11 +87,14 @@ export function Content() {
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
               isAppealed={card.isAppealed}
-              onLike={() => {
+              onClickButtonLike={() => {
                 likeHandler(card);
               }}
-              onDislike={() => {
+              onClickButtonDislike={() => {
                 dislikeHandler(card);
+              }}
+              onClickButtonAppeal={() => {
+                openAppealModal(card.id);
               }}
               key={card.id}
               imgUrl={card.imgUrl}
@@ -99,9 +102,6 @@ export function Content() {
               age={card.age}
               city={card.city}
               description={card.description}
-              onAppeal={() => {
-                openAppealModal(card.id);
-              }}
             />
           ))}
       </section>

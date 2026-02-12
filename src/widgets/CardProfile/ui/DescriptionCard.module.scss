@@ -1,0 +1,62 @@
+.info_description {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  width: calc(100% - 45px - 8px * 2 - 12px * 2);
+  box-sizing: border-box;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.text {
+  color: white;
+  font-size: 16px;
+
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &_name {
+    max-width: calc(100% - 36px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &_city {
+    color: rgba(255, 255, 255, 0.7);
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    text-wrap: nowrap;
+  }
+
+  &_age {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  max-width: 100%;
+
+  width: 252px;
+  max-height: 60px;
+
+  line-height: 20px;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+
+  &_open {
+    max-height: 300px;
+
+    display: block;
+    -webkit-line-clamp: none;
+  }
+}
