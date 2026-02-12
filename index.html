@@ -1,12 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>twiki</title>
+    <style>
+      #app-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .loader {
+        position: relative;
+        width: 64px;
+        height: 64px;
+      }
+
+      .loader svg {
+        position: absolute;
+        top: 0;
+        animation-duration: 1.2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+
+      .loader svg:first-child {
+        right: 0px;
+        animation-name: heartBeatFirstSegment;
+      }
+
+      .loader svg:last-child {
+        left: 0px;
+        animation-name: heartBeatSecondSegment;
+      }
+
+      @keyframes heartBeatSecondSegment {
+        0% {
+          transform: scale(1.15);
+        }
+        5% {
+          transform: scale(1.3);
+        }
+        39% {
+          transform: scale(1.05);
+        }
+        45% {
+          transform: scale(1.2);
+        }
+        60% {
+          transform: scale(1.15);
+        }
+        100% {
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes heartBeatFirstSegment {
+        0% {
+          transform: scale(1.1);
+        }
+        5% {
+          transform: scale(1.15);
+        }
+        39% {
+          transform: scale(1.2);
+        }
+        45% {
+          transform: scale(1.05);
+        }
+        60% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1.15);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="app-loader">
+        <span class="loader">
+          <svg
+            width="33"
+            height="41"
+            viewBox="0 0 33 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16.2412 0C25.189 0 32.4424 7.18006 32.4424 16.0371C32.4423 22.801 29.7586 28.8183 24.5127 31.1094C24.2096 31.2592 23.9999 31.553 23.96 31.8887L23.0059 39.9033C22.9154 40.6624 22.0414 41.0433 21.4238 40.5928L12.873 34.3555C12.6692 34.2068 12.4173 34.1417 12.166 34.1641C8.10557 34.5253 3.82673 33.068 0 30.915C0.307063 30.7797 0.613481 30.6404 0.917969 30.4961C3.69514 29.1801 6.50059 27.4479 8.99902 25.6582C11.4961 23.8694 13.736 21.9884 15.373 20.3516C16.1873 19.5373 16.8902 18.7451 17.4053 18.0264C17.6623 17.6676 17.9012 17.2883 18.082 16.9033C18.2496 16.5466 18.4423 16.0301 18.4424 15.4395C18.4423 14.8412 18.244 14.3189 18.0732 13.959C17.8886 13.5698 17.6457 13.1854 17.3828 12.8213C16.8556 12.0913 16.1345 11.2854 15.2998 10.4561C13.6221 8.78918 11.3287 6.87484 8.77832 5.06445C8.00053 4.51234 7.19231 3.96931 6.36719 3.44043C10.0689 1.39607 13.6157 1.46624e-05 16.2412 0ZM15.3945 13.5137L15.5869 13.7578C15.5024 13.6477 15.4115 13.5349 15.3154 13.4189C15.3419 13.451 15.3689 13.4821 15.3945 13.5137ZM14.9873 13.0361C15.0798 13.1407 15.1685 13.2432 15.2529 13.3438C15.1684 13.2432 15.0798 13.1407 14.9873 13.0361ZM14.6328 12.6465C14.7352 12.7562 14.834 12.8638 14.9287 12.9697C14.8341 12.8638 14.7351 12.7563 14.6328 12.6465ZM14.1748 12.166C14.313 12.3073 14.4457 12.4463 14.5732 12.582C14.4458 12.4462 14.313 12.3073 14.1748 12.166Z"
+              fill="#FC5584"
+            />
+          </svg>
+          <svg
+            width="40"
+            height="36"
+            viewBox="0 0 40 36"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0 15.4397C0 21.0142 3.0248 25.8986 7.55885 28.6129C7.82019 28.7694 8.00505 29.0293 8.05458 29.3299L8.98703 34.9877C9.11586 35.7694 10.0592 36.098 10.6458 35.5656L15.523 31.139C15.707 30.972 15.9417 30.8817 16.19 30.8717C24.9818 30.5158 40 18.1331 40 15.4397C40 12.707 24.5399 0 15.8089 0C7.07789 0 0 6.91261 0 15.4397Z"
+              fill="#45AEE5"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
     <script type="module" src="/src/app/entrypoint/main.tsx"></script>
   </body>
 </html>
