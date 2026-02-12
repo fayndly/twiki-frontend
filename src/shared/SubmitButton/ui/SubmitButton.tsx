@@ -77,7 +77,7 @@ export function SubmitButton({ type = "tg", onSubmit }: PropsSubmitButton) {
           <div className={styles.padding}></div>
           <div
             className={styles.button_container}
-            style={{ backgroundColor: themeParams.headerBgColor() }}
+            style={{ backgroundColor: themeParams.bottomBarBgColor() }}
           >
             <ButtonDefault
               isLoading={paramsFromStatus.isLoaderVisible}

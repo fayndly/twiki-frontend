@@ -8,70 +8,25 @@ import { MainLayout } from "@/app/layouts/MainLayout";
 import { queryClient } from "@/app/store";
 import { Navbar } from "@/widgets/Navbar";
 
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { WarningSnackbarContainer } from "@/widgets/WarningSnackbar";
 import { AppealModal } from "@/widgets/AppealModal";
 import { BackButton } from "@/shared/BackButton";
 import { SettingsButton } from "@/shared/SettingsButton";
-
-const useGetTheme = () => {
-  const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
-  const isDark = useSignal(themeParams.isDark);
-
-  useEffect(() => {
-    isDark ? setTheme("dark") : setTheme("light");
-  }, [isDark]);
-
-  return theme;
-};
-
-export function setReverseColors(colors: Record<string, string>) {
-  const root = document.querySelector<HTMLElement>(`.${styles.app_root}`);
-
-  if (!root) return;
-
-  Object.entries(colors).forEach(([key, value]) => {
-    root.style.setProperty(`--${key}`, value);
-  });
-}
+import { useGetTheme, useReverbBgColor } from "../helpers";
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
-const pagesReverbBg = [
-  "/settings",
-  "/profile/update",
-  "/profile/create",
-  "/filters",
-];
 
 export default function App() {
-  const theme = useGetTheme();
   const location = useLocation();
 
   const isNavbarShow = pagesWithNavbar.includes(location.pathname);
 
-  useEffect(() => {
-    const isReverb = pagesReverbBg.includes(location.pathname);
-    if (theme === "light") {
-      setReverseColors({
-        revers_bg_color: isReverb
-          ? "var(--tgui--secondary_bg_color)"
-          : "var(--tgui--bg_color)",
-        revers_secondary_bg_color: isReverb
-          ? "var(--tgui--bg_color)"
-          : "var(--tgui--secondary_bg_color)",
-      });
-    }
+  const theme = useGetTheme();
 
-    if (theme === "dark") {
-      setReverseColors({
-        revers_bg_color: "var(--tgui--bg_color)",
-        revers_secondary_bg_color: "var(--tgui--secondary_bg_color)",
-      });
-    }
-  }, [location, theme]);
+  useReverbBgColor(theme, location);
+
   // platform={"ios"}
   return (
     <QueryClientProvider client={queryClient}>

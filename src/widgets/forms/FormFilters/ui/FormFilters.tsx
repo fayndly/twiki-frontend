@@ -106,6 +106,14 @@ export function FormFilters() {
               });
             }}
           />
+          {/* <SubmitButton
+            type="html"
+            onSubmit={() => {
+              submitEventHandler(formik, () => {
+                navigate(-1);
+              });
+            }}
+          /> */}
         </form>
       )}
     </>

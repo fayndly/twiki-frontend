@@ -11,7 +11,7 @@ export const getParams = (): ParamsSubmitButton => {
       textColor: themeParams.buttonTextColor(),
     },
     noValid: {
-      bgColor: themeParams.headerBgColor(),
+      bgColor: themeParams.bottomBarBgColor(),
       hasShineEffect: false,
       isEnabled: false,
       isLoaderVisible: false,
@@ -37,7 +37,7 @@ export const getParams = (): ParamsSubmitButton => {
       hasShineEffect: false,
     },
     noChanges: {
-      bgColor: themeParams.headerBgColor(),
+      bgColor: themeParams.bottomBarBgColor(),
       hasShineEffect: false,
       isEnabled: false,
       isLoaderVisible: false,
@@ -45,13 +45,13 @@ export const getParams = (): ParamsSubmitButton => {
       textColor: themeParams.textColor(),
     },
     void: {
-      bgColor: themeParams.headerBgColor(),
+      bgColor: themeParams.bottomBarBgColor(),
       hasShineEffect: false,
       isEnabled: false,
       isVisible: false,
       isLoaderVisible: false,
       text: "void",
-      textColor: themeParams.headerBgColor(),
+      textColor: themeParams.bottomBarBgColor(),
     },
   };
 };

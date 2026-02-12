@@ -2,7 +2,6 @@ import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 
 import styles from "./PageSettings.module.scss";
 import { useNavigate } from "react-router-dom";
-import { themeParams, useSignal } from "@tma.js/sdk-react";
 import {
   Cell,
   Divider,
@@ -12,18 +11,6 @@ import {
 } from "@telegram-apps/telegram-ui";
 
 import { type ICell } from "../types/index.types";
-import { useEffect, useState } from "react";
-
-const useGetTheme = () => {
-  const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
-  const isDark = useSignal(themeParams.isDark);
-
-  useEffect(() => {
-    isDark ? setTheme("dark") : setTheme("light");
-  }, [isDark]);
-
-  return theme;
-};
 
 const MoveIcon = ({ className }: { className: string }) => {
   return (
@@ -47,8 +34,6 @@ const MoveIcon = ({ className }: { className: string }) => {
 export function PageSettings() {
   const navigate = useNavigate();
 
-  const theme = useGetTheme();
-
   return (
     <SectionWrapper>
       <section className={styles.section}>
@@ -56,11 +41,7 @@ export function PageSettings() {
           <Subheadline className={styles.header} plain weight="3">
             НАСТРОЙКИ
           </Subheadline>
-          <div
-            className={`${styles.wrapper_settings} ${
-              theme === "light" && styles.wrapper_settings_reverb
-            }`}
-          >
+          <div className={styles.wrapper_settings}>
             <CustomCell
               title="Фильтры"
               moveTitle="Изменить"
