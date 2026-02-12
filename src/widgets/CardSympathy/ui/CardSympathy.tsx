@@ -6,6 +6,7 @@ import { type IPropsCardSympathy } from "../types/index.types";
 import { useEffect, useState } from "react";
 import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { supportHapticFeedback } from "@/shared/helpers";
+import { ImageWithStatus } from "./ImageWithStatus";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -52,7 +53,7 @@ export function CardSympathy({
       } 
       ${active ? styles.card_sympathy_active : ""}`}
     >
-      <img className={styles.img} src={imgUrl} alt="img_sympathy" />
+      <ImageWithStatus src={imgUrl} />
       <div className={styles.title}>
         <Text className={styles.text} weight="2">
           <span className={styles.text_name}>{name}</span>

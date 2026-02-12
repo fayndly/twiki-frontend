@@ -5,3 +5,7 @@ export interface IPropsCardSympathy {
   age: number;
   city: string;
 }
+
+export interface PropsImageWithStatus {
+  src: string;
+}

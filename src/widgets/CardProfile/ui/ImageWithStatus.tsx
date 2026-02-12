@@ -1,21 +1,17 @@
 import styles from "./ImageWithStatus.module.scss";
 import type { PropsImageWithStatus } from "../types/index.types";
 
-import { Skeleton, Text } from "@telegram-apps/telegram-ui";
+import { Skeleton } from "@telegram-apps/telegram-ui";
 import { useState } from "react";
+import { ImageOff } from "lucide-react";
 
-export const ImageWithStatus = ({ src, alt }: PropsImageWithStatus) => {
+export const ImageWithStatus = ({ src }: PropsImageWithStatus) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   return (
     <div className={styles.img_container}>
-      {error && (
-        <div className={styles.error_container}>
-          <Text weight="1">Ошибка</Text>
-          <Text weight="3">Не удалось загрузить изображение</Text>
-        </div>
-      )}
+      {error && <ImageOff size={48} />}
 
       {!error && (
         <Skeleton
@@ -25,7 +21,7 @@ export const ImageWithStatus = ({ src, alt }: PropsImageWithStatus) => {
         >
           <img
             src={src}
-            alt={alt}
+            alt="img_profile"
             style={{
               display: loading || error ? "none" : "block",
             }}

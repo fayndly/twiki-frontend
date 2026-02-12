@@ -4,7 +4,7 @@ import { ButtonReaction } from "./ButtonReaction";
 import { ButtonAppeal } from "./ButtonAppeal";
 import { DescriptionCard } from "./DescriptionCard";
 
-import { ImageWithStatus } from "@/shared/ImgWithStatus";
+import { ImageWithStatus } from "./ImageWithStatus";
 
 export function CardProfile({
   onClickButtonLike,
@@ -33,7 +33,7 @@ export function CardProfile({
     >
       <div className={styles.card_content}>
         <ButtonAppeal onClick={() => onClickButtonAppeal?.()} />
-        <ImageWithStatus src={imgUrl} alt="profile_img" />
+        <ImageWithStatus src={imgUrl} />
         <div className={styles.info}>
           <DescriptionCard
             name={name}

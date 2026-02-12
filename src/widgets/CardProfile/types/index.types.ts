@@ -31,5 +31,4 @@ export interface PropsButtonReaction {
 
 export interface PropsImageWithStatus {
   src: string;
-  alt: string;
 }

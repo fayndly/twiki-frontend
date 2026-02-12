@@ -1,10 +1,10 @@
 .card_sympathy {
-  width: calc(50% - 8px / 2);
+  width: calc(50% - 4px);
   background-color: $tg_secondary_bg_color;
   padding: 2px;
   box-sizing: border-box;
   border-radius: 15px;
-  align-self: baseline;
+  // align-self: baseline;
 
   position: relative;
 
@@ -41,14 +41,6 @@
       }
     }
   }
-}
-
-.img {
-  width: 100%;
-  border-radius: 15px;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  object-fit: cover;
 }
 
 .title {
