@@ -1,5 +1,5 @@
 import styles from "./DescriptionCard.module.scss";
-import type { PropsDescriptionCard } from "../types/index.types";
+import type { PropsDescriptionCard } from "../types";
 
 import { Text } from "@telegram-apps/telegram-ui";
 import { useState } from "react";

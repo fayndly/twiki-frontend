@@ -1,10 +1,10 @@
 import styles from "./CardProfile.module.scss";
-import type { PropsCardProfile } from "../types/index.types";
+import type { PropsCardProfile } from "../types";
 import { ButtonReaction } from "./ButtonReaction";
 import { ButtonAppeal } from "./ButtonAppeal";
 import { DescriptionCard } from "./DescriptionCard";
 
-import { ImageWithStatus } from "./ImageWithStatus";
+import { ImageWithStatus } from "@/shared/ImageWithStatus";
 
 export function CardProfile({
   onClickButtonLike,
@@ -33,7 +33,12 @@ export function CardProfile({
     >
       <div className={styles.card_content}>
         <ButtonAppeal onClick={() => onClickButtonAppeal?.()} />
-        <ImageWithStatus src={imgUrl} />
+        <ImageWithStatus
+          src={imgUrl}
+          alt="img_profile"
+          stylesContainerImg={styles.img_container}
+          stylesImg={styles.img}
+        />
         <div className={styles.info}>
           <DescriptionCard
             name={name}

@@ -2,11 +2,11 @@ import styles from "./CardSympathy.module.scss";
 
 import { Text } from "@telegram-apps/telegram-ui";
 
-import { type IPropsCardSympathy } from "../types/index.types";
+import { type IPropsCardSympathy } from "../types";
 import { useEffect, useState } from "react";
 import { themeParams, useSignal } from "@tma.js/sdk-react";
 import { supportHapticFeedback } from "@/shared/helpers";
-import { ImageWithStatus } from "./ImageWithStatus";
+import { ImageWithStatus } from "@/shared/ImageWithStatus";
 
 const useGetTheme = () => {
   const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
@@ -53,7 +53,12 @@ export function CardSympathy({
       } 
       ${active ? styles.card_sympathy_active : ""}`}
     >
-      <ImageWithStatus src={imgUrl} />
+      <ImageWithStatus
+        src={imgUrl}
+        alt="img_sympathy"
+        stylesContainerImg={styles.img_container}
+        stylesImg={styles.img}
+      />
       <div className={styles.title}>
         <Text className={styles.text} weight="2">
           <span className={styles.text_name}>{name}</span>

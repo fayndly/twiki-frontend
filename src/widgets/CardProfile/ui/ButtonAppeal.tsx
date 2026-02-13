@@ -1,5 +1,5 @@
 import styles from "./ButtonAppeal.module.scss";
-import type { PropsButtonAppeal } from "../types/index.types";
+import type { PropsButtonAppeal } from "../types";
 
 import { ShieldAlert } from "lucide-react";
 import { IconButton } from "@telegram-apps/telegram-ui";

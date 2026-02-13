@@ -1,5 +1,5 @@
 import styles from "./ButtonReaction.module.scss";
-import type { PropsButtonReaction } from "../types/index.types";
+import type { PropsButtonReaction } from "../types";
 
 import { IconButton } from "@telegram-apps/telegram-ui";
 
