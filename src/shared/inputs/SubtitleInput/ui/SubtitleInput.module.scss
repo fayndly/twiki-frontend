@@ -3,13 +3,13 @@
   font-size: 14px;
 
   &_error {
-    font-size: inherit;
+    font-size: inherit !important;
 
     color: $tg_destructive_text_color;
   }
 
   &_title {
-    font-size: inherit;
+    font-size: inherit !important;
 
     color: $tg_subtitle_text_color;
   }

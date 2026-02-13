@@ -4,12 +4,8 @@
   padding: 2px;
   box-sizing: border-box;
   border-radius: 15px;
-  // align-self: baseline;
-
   position: relative;
-
   transition: all 0.2s ease-in-out;
-
   cursor: pointer;
 
   &::before {
@@ -51,7 +47,7 @@
 }
 
 .text {
-  font-size: 12px;
+  font-size: 12px !important;
 
   width: 100%;
 
@@ -77,7 +73,6 @@
     margin-left: 4px;
     text-overflow: ellipsis;
     overflow: hidden;
-
     text-wrap: nowrap;
   }
 
