@@ -2,9 +2,9 @@ import styles from "./InputImage.module.scss";
 import { type IPropsInputFile } from "../types/index.types";
 
 import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
-import { ClearButton } from "@/shared/inputs/ClearButton";
 
-import { FileInput } from "@telegram-apps/telegram-ui";
+import { FileInput, IconButton } from "@telegram-apps/telegram-ui";
+import { X } from "lucide-react";
 
 export function InputImage({
   errors,
@@ -35,10 +35,14 @@ export function InputImage({
       >
         {photoUrlPreview && (
           <div className={styles.preview_wrapper}>
-            <ClearButton
+            <IconButton
               onClick={clearValue}
               className={styles.preview_clear}
-            />
+              mode="gray"
+              size="s"
+            >
+              <X strokeWidth={2.5} size={20} className={styles.preview_icon} />
+            </IconButton>
             <img
               className={styles.preview_photo}
               src={photoUrlPreview}

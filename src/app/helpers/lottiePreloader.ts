@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const cache = new Map<string, string>();
 const pending = new Map<string, Promise<string>>();
 
@@ -23,6 +25,23 @@ export function preloadLottie(url: string): Promise<string> {
   return promise;
 }
 
-export function getLottie(url: string) {
-  return cache.get(url);
+export function useLottie(url: string) {
+  const [src, setSrc] = useState<string | null>(() => cache.get(url) || null);
+
+  useEffect(() => {
+    if (src) return;
+
+    let active = true;
+
+    preloadLottie(url).then((objectUrl) => {
+      if (!active) return;
+      setSrc(objectUrl);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [url]);
+
+  return src;
 }

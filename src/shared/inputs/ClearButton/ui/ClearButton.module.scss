@@ -1,3 +1,9 @@
-.g_filled {
-  fill: $tg_text_color;
+.icon {
+  stroke: var(--tgui--secondary_hint_color);
+}
+
+.tappable {
+  padding: 0 !important;
+  border-radius: 50%;
+  position: relative;
 }

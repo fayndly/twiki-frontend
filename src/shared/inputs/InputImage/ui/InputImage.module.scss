@@ -24,7 +24,7 @@
 
   &_clear {
     position: absolute !important;
-    right: 2px;
+    right: 6px;
     top: 2px;
   }
 
@@ -48,5 +48,9 @@
     aspect-ratio: 3 / 4;
     overflow: hidden;
     object-fit: cover;
+  }
+
+  &_icon {
+    stroke: var(--tgui--secondary_hint_color);
   }
 }

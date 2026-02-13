@@ -1,9 +1,26 @@
 .dot_lottie_wrapper {
   width: 200px;
   height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dot_lottie {
   width: 200px;
   height: 200px;
+}
+
+.svg {
+  stroke: $tg_bg_color;
+  animation: strokeColorChange 1s infinite alternate;
+}
+
+@keyframes strokeColorChange {
+  0% {
+    stroke: $tg_bg_color;
+  }
+  100% {
+    stroke: $tg_hint_color;
+  }
 }
