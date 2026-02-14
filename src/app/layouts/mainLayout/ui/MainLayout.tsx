@@ -1,4 +1,5 @@
 import styles from "./MainLayout.module.scss";
+import type { PropsMainLayout } from "../types";
 
 import {
   useIsTgSettingsButtonSupporting,
@@ -8,12 +9,6 @@ import {
   useIsTgBackButtonSupporting,
   useIsVisibleBackButton,
 } from "@/shared/BackButton";
-
-import { type ReactNode } from "react";
-
-type PropsMainLayout = {
-  children: ReactNode;
-};
 
 export function MainLayout({ children }: PropsMainLayout) {
   const isTgSettingsButtonSupporting = useIsTgSettingsButtonSupporting();
