@@ -59,11 +59,21 @@ export async function init(options: {
 
     swipeBehavior.disableVertical();
 
-    if (!config.isCanTouchMove) {
-      document.addEventListener("touchmove", (e) => e.preventDefault(), {
-        passive: false,
-      });
-    }
+    document.body.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        const target = e.target;
+
+        if (target instanceof Element) {
+          if (!target.closest(".scrollable")) {
+            e.preventDefault();
+          }
+        } else {
+          e.preventDefault();
+        }
+      },
+      { passive: false },
+    );
   }
 
   initData.restore();

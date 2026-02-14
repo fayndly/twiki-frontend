@@ -40,7 +40,7 @@ function Content() {
 
   if (isSuccess && !isError) {
     return (
-      <section className={styles.section}>
+      <section className={`${styles.section} scrollable`}>
         {data &&
           data.map((card, index) => (
             <CardSympathy

@@ -8,7 +8,7 @@ import { pathsToPublicSrc } from "@/shared/config";
 export function PageProfileCreate() {
   return (
     <SectionWrapper hasMarginBottom={false}>
-      <section className={styles.section}>
+      <section className={`${styles.section} scrollable`}>
         <PlaceholderSticker
           header="Расскажите немного о себе"
           description="Это поможет создать вашу анкету"

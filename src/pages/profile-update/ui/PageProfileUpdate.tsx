@@ -8,7 +8,7 @@ import { pathsToPublicSrc } from "@/shared/config";
 export function PageProfileUpdate() {
   return (
     <SectionWrapper hasMarginBottom={false}>
-      <section className={styles.section}>
+      <section className={`${styles.section} scrollable`}>
         <PlaceholderSticker
           header="Обновите данные анкеты"
           description="Сделайте профиль актуальным и удобным для других"

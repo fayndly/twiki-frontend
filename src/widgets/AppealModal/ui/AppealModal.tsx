@@ -1,4 +1,4 @@
-import style from "./AppealModal.module.scss";
+import styles from "./AppealModal.module.scss";
 
 import { Modal } from "@telegram-apps/telegram-ui";
 import {
@@ -25,7 +25,7 @@ export function AppealModal() {
       }}
       header={<Modal.Header />}
     >
-      <div className={style.modal_content}>
+      <div className={`${styles.modal_content} scrollable`}>
         <PlaceholderSticker
           header="Пожаловаться на анкету"
           description="Пожалуйста, укажите причину жалобы. Мы рассмотрим её и примем меры, если анкета нарушает правила сервиса."
