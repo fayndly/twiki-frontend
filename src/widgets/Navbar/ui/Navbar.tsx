@@ -1,10 +1,11 @@
 import styles from "./NavBar.module.scss";
-import { type TabProps } from "../types";
+import type { PropsNavbar } from "../types";
 
-import { IconButton } from "@telegram-apps/telegram-ui";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { supportHapticFeedback } from "@/shared/helpers";
+import { Tab } from "./Tab";
+import { useLikesCards } from "@/app/store/useLikesCards";
 
 const tabs = [
   {
@@ -88,9 +89,11 @@ const tabs = [
   },
 ];
 
-export function Navbar({ show = true }: { show?: boolean }) {
+export function Navbar({ show = true }: PropsNavbar) {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const likesCards = useLikesCards(false);
 
   const clickHandler = (pathTo: string) => {
     supportHapticFeedback("soft");
@@ -106,22 +109,11 @@ export function Navbar({ show = true }: { show?: boolean }) {
             icon={Icon}
             isActive={location.pathname === pathTo}
             onClick={() => clickHandler(pathTo)}
+            hasBadge={name === "likes"}
+            badgeCount={name === "likes" ? likesCards.data?.length : 0}
           />
         ))}
       </div>
     </nav>
-  );
-}
-
-function Tab({ icon: Icon, isActive, onClick }: TabProps) {
-  return (
-    <IconButton
-      className={`${styles.tab} ${isActive ? styles.is_tab_active : ""}`}
-      onClick={onClick}
-      mode={isActive ? "gray" : "plain"}
-      size="l"
-    >
-      <Icon />
-    </IconButton>
   );
 }

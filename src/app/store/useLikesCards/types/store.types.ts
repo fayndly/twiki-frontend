@@ -1,20 +1,17 @@
-import type { PropsCardProfile } from "@/widgets/CardProfile";
+import type { PropsPostReaction } from "./api.types";
 
 import type { UseMutationOptions } from "@tanstack/react-query";
 
-export interface ICartProfile extends PropsCardProfile {
+import type { PropsCardProfile } from "@/widgets/CardProfile";
+
+export interface StoreItemCardProfile extends PropsCardProfile {
   userId: string;
   id: number;
   isRemoving: boolean;
 }
 
-export interface PropsPostReaction {
-  reaction: "like" | "dislike";
-  cardId: number;
-}
-
 type LikesCardsMutationContext = {
-  previousLikesCards?: ICartProfile[];
+  previousLikesCards?: StoreItemCardProfile[];
 };
 
 export type PropsLikesCardsMutationOptions = UseMutationOptions<

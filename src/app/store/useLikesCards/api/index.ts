@@ -6,6 +6,8 @@ import axios from "axios";
 
 export const getLikesCards = async () => {
   const { data } = await axios.get(`${apiConfig.baseUrl}/cards-likes`);
+  console.log(data);
+
   return data;
 };
 

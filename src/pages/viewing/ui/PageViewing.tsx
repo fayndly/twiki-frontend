@@ -8,7 +8,7 @@ import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useEffect } from "react";
 import { queryClient } from "@/app/store";
-import { useOpenAppealModal } from "@/widgets/AppealModal/store/useAppelModal";
+import { useOpenAppealModal } from "@/widgets/AppealModal";
 
 export function Content() {
   const {

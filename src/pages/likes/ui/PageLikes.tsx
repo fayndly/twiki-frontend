@@ -1,5 +1,3 @@
-import { useLikesCards } from "../model";
-import type { ICartProfile } from "../types";
 import styles from "./PageLikes.module.scss";
 
 import { SectionNoContent } from "@/shared/SectionNoContent";
@@ -9,16 +7,23 @@ import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useEffect, useState } from "react";
 import { queryClient } from "@/app/store";
+import {
+  useLikesCards,
+  type StoreItemCardProfile,
+} from "@/app/store/useLikesCards";
+import { useOpenAppealModal } from "@/widgets/AppealModal";
 
 function Content() {
   const { data, isPending, isError, isSuccess, refetch, likesCardsMutations } =
     useLikesCards();
 
-  const likeHandler = (card: ICartProfile) => {
+  const openAppealModal = useOpenAppealModal();
+
+  const likeHandler = (card: StoreItemCardProfile) => {
     likesCardsMutations.mutate({ reaction: "like", cardId: card.id });
   };
 
-  const dislikeHandler = (card: ICartProfile) => {
+  const dislikeHandler = (card: StoreItemCardProfile) => {
     likesCardsMutations.mutate({ reaction: "dislike", cardId: card.id });
   };
 
@@ -30,19 +35,11 @@ function Content() {
       data.every((item) => item.isLiked === true || item.isDisliked === true);
 
     if ((data && data.length === 0 && !isPending) || canRefetch) {
-      setTimeout(() => {
-        setNoDataShow(true);
-      }, 300);
+      setNoDataShow(true);
     } else {
       setNoDataShow(false);
     }
   }, [data]);
-
-  if (canNoDataShow) {
-    return (
-      <SectionNoContent text="Когда кто-то поставит вам лайк, вы увидите это здесь" />
-    );
-  }
 
   if (isPending) {
     return (
@@ -66,12 +63,15 @@ function Content() {
   if (isSuccess && !isError) {
     return (
       <section className={styles.section}>
+        {canNoDataShow && (
+          <SectionNoContent text="Когда кто-то поставит вам лайк, вы увидите это здесь" />
+        )}
         {data &&
           data.map((card) => (
             <CardProfile
               canRemove={() => {
                 if (card.isRemoving) {
-                  queryClient.setQueryData<ICartProfile[]>(
+                  queryClient.setQueryData<StoreItemCardProfile[]>(
                     ["likesCards"],
                     (old = []) => old.filter((c) => c.id !== card.id),
                   );
@@ -86,7 +86,7 @@ function Content() {
                 dislikeHandler(card);
               }}
               onClickButtonAppeal={() => {
-                // openAppealModal(card.id);
+                openAppealModal(card.id);
               }}
               key={card.id}
               imgUrl={card.imgUrl}

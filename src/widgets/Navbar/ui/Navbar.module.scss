@@ -26,15 +26,3 @@
 .hide {
   display: none;
 }
-
-.tab {
-  path {
-    fill: $tg_hint_color;
-  }
-}
-
-.is_tab_active {
-  path {
-    fill: $tg_accent_text_color;
-  }
-}
