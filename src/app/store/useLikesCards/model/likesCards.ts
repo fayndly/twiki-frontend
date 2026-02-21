@@ -8,6 +8,29 @@ import type {
   PropsPostReaction,
   PropsLikesCardsMutationOptions,
 } from "../types";
+import { getAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+
+const mutateSetStatuses = (
+  reaction: PropsPostReaction,
+  canDeleteAppeal: boolean = false,
+) => {
+  queryClient.setQueryData<StoreItemCardProfile[]>(["likesCards"], (old = []) =>
+    old.map((card) =>
+      card.id === reaction.cardId
+        ? {
+            ...card,
+            isRemoving:
+              reaction.reaction !== "appeal"
+                ? true
+                : reaction.reaction === "appeal" && canDeleteAppeal,
+            isLiked: reaction.reaction === "like",
+            isDisliked: reaction.reaction === "dislike",
+            isAppealed: reaction.reaction === "appeal" && canDeleteAppeal,
+          }
+        : card,
+    ),
+  );
+};
 
 export const likesCardsQueryOptions = (enabled: boolean) =>
   queryOptions<StoreItemCardProfile[]>({
@@ -27,28 +50,27 @@ export const likesCardsMutationOptions: PropsLikesCardsMutationOptions = {
       ["likesCards"],
     );
 
-    queryClient.setQueryData<StoreItemCardProfile[]>(
-      ["likesCards"],
-      (old = []) =>
-        old.map((card) =>
-          card.id === reaction.cardId
-            ? {
-                ...card,
-                isRemoving: true,
-                isLiked: reaction.reaction === "like",
-                isDisliked: reaction.reaction === "dislike",
-              }
-            : card,
-        ),
-    );
+    mutateSetStatuses(reaction);
 
     return { previousLikesCards };
   },
-  onSuccess: async (data: any) => {
+  onSuccess: async (data: any, reaction) => {
     console.log("onSuccess data: " + data);
+    if (reaction.reaction === "appeal") {
+      mutateSetStatuses(reaction, true);
+    }
   },
-  onError: (error, variables) => {
-    console.log(error);
-    console.log(variables);
+  onError: (_err, vars, _onMutateResult, context) => {
+    const addWarningSnackbar = getAddWarningSnackbar();
+    addWarningSnackbar(
+      `Не удалось отправить ${vars.reaction === "like" ? "лайк" : "дизлайк"}`,
+      `Пользователь ${vars.cardId} не получил ${
+        vars.reaction === "like" ? "лайк" : "дизлайк"
+      }`,
+      postReaction,
+      vars,
+    );
+
+    console.log(context);
   },
 };

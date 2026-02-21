@@ -79,6 +79,7 @@ function Content() {
               }}
               isLiked={card.isLiked}
               isDisliked={card.isDisliked}
+              isAppealed={card.isAppealed}
               onClickButtonLike={() => {
                 likeHandler(card);
               }}
@@ -86,7 +87,7 @@ function Content() {
                 dislikeHandler(card);
               }}
               onClickButtonAppeal={() => {
-                openAppealModal(card.id);
+                openAppealModal(card.id, "likesCards");
               }}
               key={card.id}
               imgUrl={card.imgUrl}

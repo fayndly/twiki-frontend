@@ -3,5 +3,6 @@ export {
   useCloseAppealModal,
   useCardIdAppealModal,
   useOpenAppealModal,
+  useFromAppealModal,
 } from "./store/useAppelModal";
 export type { CardId } from "./types";

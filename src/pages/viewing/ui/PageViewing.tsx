@@ -94,7 +94,7 @@ export function Content() {
                 dislikeHandler(card);
               }}
               onClickButtonAppeal={() => {
-                openAppealModal(card.id);
+                openAppealModal(card.id, "viewingCards");
               }}
               key={card.id}
               imgUrl={card.imgUrl}

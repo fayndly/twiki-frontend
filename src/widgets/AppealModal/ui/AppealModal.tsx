@@ -8,11 +8,13 @@ import {
 import { PlaceholderSticker } from "@/shared/Placeholder";
 import { pathsToPublicSrc } from "@/shared/config";
 import { FormAppeal } from "@/widgets/forms/FormAppeal";
-import { mainButton } from "@tma.js/sdk-react";
+import { useHideSubmitButton } from "@/shared/SubmitButton";
 
 export function AppealModal() {
   const IsOpen = useIsOpenAppealModal();
   const closeAppelModal = useCloseAppealModal();
+
+  const hideSubmitButton = useHideSubmitButton();
 
   return (
     <Modal
@@ -20,7 +22,7 @@ export function AppealModal() {
       onOpenChange={(open) => {
         if (!open) {
           closeAppelModal();
-          mainButton.hide();
+          hideSubmitButton();
         }
       }}
       header={<Modal.Header />}

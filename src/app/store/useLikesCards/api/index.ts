@@ -6,15 +6,22 @@ import axios from "axios";
 
 export const getLikesCards = async () => {
   const { data } = await axios.get(`${apiConfig.baseUrl}/cards-likes`);
-  console.log(data);
-
   return data;
 };
 
-export const postReaction = async ({ reaction, cardId }: PropsPostReaction) => {
-  const { data } = await axios.post(`${apiConfig.baseUrl}/reaction/likes`, {
-    cardId,
-    reaction,
-  });
+export const postReaction = async ({
+  reaction,
+  cardId,
+  appealData,
+}: PropsPostReaction) => {
+  console.log("post reaction");
+
+  const { data } = await axios.post(
+    `${apiConfig.baseUrl}/reaction/${reaction}`,
+    {
+      cardId,
+      appealData,
+    },
+  );
   return data;
 };

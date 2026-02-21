@@ -14,19 +14,32 @@ import {
 import {
   useCardIdAppealModal,
   useCloseAppealModal,
+  useFromAppealModal,
 } from "@/widgets/AppealModal";
 import { useViewingCards } from "@/pages/viewing/model";
+import { useLikesCards } from "@/app/store/useLikesCards";
 
 export function FormAppeal() {
   const { viewingCardsMutations } = useViewingCards();
+  const { likesCardsMutations } = useLikesCards(false);
   const cardIdAppelModal = useCardIdAppealModal();
+  const fromAppealModal = useFromAppealModal();
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      await submit(values, cardIdAppelModal, viewingCardsMutations.mutateAsync);
+      let mutateFn;
+      console.log(fromAppealModal);
+      if (fromAppealModal === "likesCards") {
+        mutateFn = likesCardsMutations.mutateAsync;
+      } else if (fromAppealModal === "viewingCards") {
+        mutateFn = viewingCardsMutations.mutateAsync;
+      } else {
+        return Promise.reject(new Error("fromAppealModal is null"));
+      }
+      await submit(values, cardIdAppelModal, mutateFn);
     },
   });
 
