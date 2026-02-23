@@ -1,8 +1,6 @@
-import { apiConfig } from "@/app/config";
-
-import axios from "axios";
+import { api } from "@/app/api";
 
 export const getSympathyCards = async () => {
-  const { data } = await axios.get(`${apiConfig.baseUrl}/cards-sympathy`);
+  const { data } = await api.get("/cards-sympathy");
   return data;
 };

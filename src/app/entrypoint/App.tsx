@@ -17,6 +17,7 @@ import { AppealModal } from "@/widgets/AppealModal";
 import { BackButton } from "@/shared/BackButton";
 import { SettingsButton } from "@/shared/SettingsButton";
 import { pathsToPublicSrc } from "@/shared/config";
+import { useSetInitDataRaw } from "../api/entrypoint.api";
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
 
@@ -34,6 +35,8 @@ export default function App() {
   useEffect(() => {
     Promise.all(stickerPaths.map(preloadLottie));
   }, []);
+
+  useSetInitDataRaw();
 
   return (
     <QueryClientProvider client={queryClient}>

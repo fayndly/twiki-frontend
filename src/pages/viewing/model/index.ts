@@ -1,15 +1,14 @@
-import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
-import { getViewingCards, postReaction } from "../api";
-
-import { queryClient } from "@/app/store";
-
+import { postReaction, getViewingCards } from "../api";
 import type {
   ICartProfile,
   PropsViewingCardsMutationOptions,
   PropsPostReaction,
 } from "../types";
 
+import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
+
 import { getAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+import { queryClient } from "@/app/store";
 
 const mutateSetStatuses = (
   reaction: PropsPostReaction,

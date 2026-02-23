@@ -1,11 +1,8 @@
+import { api } from "@/app/api";
 import type { PropsPostReaction } from "../types";
 
-import { apiConfig } from "@/app/config";
-
-import axios from "axios";
-
 export const getViewingCards = async () => {
-  const { data } = await axios.get(`${apiConfig.baseUrl}/cards-profile`);
+  const { data } = await api.get("/cards-profile");
   return data;
 };
 
@@ -14,14 +11,9 @@ export const postReaction = async ({
   cardId,
   appealData,
 }: PropsPostReaction) => {
-  console.log("post reaction");
-
-  const { data } = await axios.post(
-    `${apiConfig.baseUrl}/reaction/${reaction}`,
-    {
-      cardId,
-      appealData,
-    },
-  );
+  const { data } = await api.post(`/reaction/${reaction}`, {
+    cardId,
+    appealData,
+  });
   return data;
 };

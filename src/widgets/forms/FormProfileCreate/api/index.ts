@@ -1,20 +1,11 @@
-import { apiConfig } from "@/app/config";
-
+import { api } from "@/app/api";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { initData } from "@tma.js/sdk-react";
 
 export const postProfileCreate = async (values: any) => {
-  console.log(initData.user());
-
-  try {
-    return await axios.post(`${apiConfig.baseUrl}/profile/create`, {
-      ...values,
-      chatId: initData.user()?.id,
-    });
-  } catch (error) {
-    return error;
-  }
+  const { data } = await api.post("/profile/create", {
+    ...values,
+  });
+  return data;
 };
 
 const getCities = async (): Promise<any> => {

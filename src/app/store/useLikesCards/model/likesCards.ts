@@ -1,13 +1,13 @@
-import { queryOptions } from "@tanstack/react-query";
-import { getLikesCards, postReaction } from "../api";
-
-import { queryClient } from "@/app/store";
-
 import type {
   StoreItemCardProfile,
   PropsPostReaction,
   PropsLikesCardsMutationOptions,
 } from "../types";
+import { postReaction, getLikesCards } from "../api";
+
+import { queryOptions } from "@tanstack/react-query";
+
+import { queryClient } from "@/app/store";
 import { getAddWarningSnackbar } from "@/widgets/WarningSnackbar";
 
 const mutateSetStatuses = (
