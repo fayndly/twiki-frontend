@@ -11,7 +11,7 @@ export const validationSchema = Yup.object({
     .required("Это поле обязательное"),
   description: Yup.string().max(
     200,
-    "Описание должно содержать не более 200-та символов"
+    "Описание должно содержать не более 200-та символов",
   ),
   sex: Yup.mixed()
     .nullable()

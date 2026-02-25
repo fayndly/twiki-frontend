@@ -2,7 +2,7 @@ import { api } from "@/app/api";
 import type { PropsPostReaction } from "../types";
 
 export const getLikesCards = async () => {
-  const { data } = await api.get("/cards-likes");
+  const { data } = await api.get("/cards/likes");
   return data;
 };
 

@@ -1,3 +1,3 @@
 export const apiConfig = {
-  baseUrl: "https://twiki-api.ru.tuna.am",
+  baseUrl: "https://twiki-api.ru.tuna.am/api",
 };

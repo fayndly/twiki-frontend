@@ -5,7 +5,6 @@ import axios from "axios";
 
 export const useSetInitDataRaw = () => {
   const initDataRaw = useRawInitData();
-  console.log(initDataRaw);
 
   api.interceptors.request.use((config) => {
     config.headers.Authorization = `tma ${initDataRaw}`;
