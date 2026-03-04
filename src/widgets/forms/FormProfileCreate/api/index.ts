@@ -2,13 +2,13 @@ import { api } from "@/app/api";
 import { useEffect, useState } from "react";
 
 export const postProfileCreate = async (values: any) => {
-  const { data } = await api.post("/profile/create", {
+  const { data } = await api.post("/profile", {
     ...values,
   });
   return data;
 };
 
-const getCities = async (): Promise<any> => {
+const getCities = async () => {
   const { data } = await api.get("/cities");
   return data;
 };
