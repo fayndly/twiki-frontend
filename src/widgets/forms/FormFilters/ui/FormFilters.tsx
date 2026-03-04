@@ -1,6 +1,6 @@
 import styles from "./FormFilters.module.scss";
 import { initialValues, validationSchema, sexOptions } from "../config";
-import { postFiltersUpdate, useGetterData } from "../api";
+import { updateFilters, useGetterData } from "../api";
 
 import { useFormik } from "formik";
 
@@ -17,13 +17,13 @@ import { useNavigate } from "react-router-dom";
 
 export function FormFilters() {
   const navigate = useNavigate();
-  const { cities, profileData, isDataLoading } = useGetterData();
+  const { cities, filtersData, isDataLoading } = useGetterData();
 
   const formik = useFormik({
-    initialValues: profileData || initialValues,
+    initialValues: filtersData || initialValues,
     validationSchema: validationSchema,
     enableReinitialize: true,
-    onSubmit: postFiltersUpdate,
+    onSubmit: updateFilters,
   });
 
   useButtonSubmitForFormic(formik, true, isDataLoading);
