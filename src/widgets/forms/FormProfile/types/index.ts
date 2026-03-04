@@ -1,7 +1,7 @@
 import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types/index.types";
 
-interface ProfileInitialValues {
-  firstName: string;
+export interface ProfileInitialValues {
+  name: string;
   age: string | number;
   description: string;
   sex: "male" | "female";
@@ -11,7 +11,7 @@ interface ProfileInitialValues {
 
 export interface PropsFormProfile {
   initialValues: ProfileInitialValues;
-  handleSubmit: (values: any) => Promise<any>;
+  handleSubmit: (values: ProfileInitialValues) => void;
   cities: IPropsCell[];
   isDataLoading: boolean;
   validateNoChanges: boolean;

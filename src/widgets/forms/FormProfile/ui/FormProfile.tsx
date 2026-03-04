@@ -54,19 +54,17 @@ export function FormProfile({
         >
           <InputText
             onChange={() => {
-              setFieldTouched("firstName", true);
+              setFieldTouched("name", true);
             }}
-            errors={
-              errors.firstName && touched.firstName ? errors.firstName : ""
-            }
+            errors={errors.name && touched.name ? errors.name : ""}
             handleChange={handleChange}
-            value={values.firstName}
+            value={values.name}
             clickClear={() => {
-              setFieldValue("firstName", "");
+              setFieldValue("name", "");
             }}
             type="text"
-            id="firstName"
-            name="firstName"
+            id="name"
+            name="name"
             header="Имя*"
             placeholder="Введите имя"
             subtitle="Ваше имя"

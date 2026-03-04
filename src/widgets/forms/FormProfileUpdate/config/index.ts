@@ -1,8 +1,8 @@
 export const initialValues = {
-  firstName: "",
-  age: 0,
+  name: "",
+  age: 1,
   description: "",
-  sex: "male" as "male" | "female",
+  sex: "male",
   photo: undefined,
-  city: { value: "77", label: "Москва" },
+  city: "",
 };

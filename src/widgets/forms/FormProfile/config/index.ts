@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const validationSchema = Yup.object({
-  firstName: Yup.string()
+  name: Yup.string()
     .max(15, "Имя должно содержать не более 15-ти символов")
     .min(2, "Имя должно содержать не менее 2-х символов")
     .required("Это поле обязательное"),
