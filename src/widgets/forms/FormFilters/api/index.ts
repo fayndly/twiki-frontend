@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api } from "@/app/api";
 
 export const postFiltersUpdate = async (values: any): Promise<any> => {
   const isError = false;
@@ -11,27 +12,8 @@ export const postFiltersUpdate = async (values: any): Promise<any> => {
 };
 
 const getCities = async (): Promise<any> => {
-  const isError = false;
-  const cities = [
-    { value: "77", label: "Москва" },
-    { value: "78", label: "Санкт-Петербург" },
-    { value: "23", label: "Сочи" },
-    { value: "16", label: "Казань" },
-    { value: "66", label: "Екатеринбург" },
-    { value: "54", label: "Новосибирск" },
-    { value: "52", label: "Нижний Новгород" },
-    { value: "39", label: "Калининград" },
-    { value: "24", label: "Красноярск" },
-    { value: "72", label: "Тюмень" },
-    { value: "20", label: "Грозный" },
-  ];
-
-  await new Promise((res) => setTimeout(res, 2000));
-  if (isError) {
-    throw new Error("Ошибка");
-  } else {
-    return JSON.stringify(cities);
-  }
+  const { data } = await api.get("/cities");
+  return data;
 };
 
 const getProfile = async (): Promise<any> => {
@@ -68,7 +50,7 @@ export const useGetterData = () => {
         ]);
         if (!mounted) return;
 
-        setCities(JSON.parse(citiesResult));
+        setCities(citiesResult);
         setProfileData(JSON.parse(profileResult));
       } catch (e) {
         console.log(e);
