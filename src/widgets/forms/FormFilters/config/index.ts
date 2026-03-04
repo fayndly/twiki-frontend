@@ -2,20 +2,20 @@ import * as Yup from "yup";
 import type { FiltersInitialValues } from "../types";
 
 export const initialValues: FiltersInitialValues = {
-  firstAge: 0,
-  lastAge: 0,
+  ageMin: 1,
+  ageMax: 99,
   sex: "male",
   city: "",
 };
 
 export const validationSchema = Yup.object({
-  firstAge: Yup.number()
-    .max(Yup.ref("lastAge"), "Первый возраст не может быть больше последнего")
+  ageMin: Yup.number()
+    .max(Yup.ref("ageMax"), "Первый возраст не может быть больше последнего")
     .min(1, "Минимальный возраст 1 год")
     .required("Эти поля обязательны"),
-  lastAge: Yup.number()
+  ageMax: Yup.number()
     .max(99, "Максимальный возраст 99 лет")
-    .min(Yup.ref("firstAge"), "Последний возраст не может быть меньше первого")
+    .min(Yup.ref("ageMin"), "Последний возраст не может быть меньше первого")
     .required("Эти поля обязательны"),
   sex: Yup.mixed()
     .nullable()

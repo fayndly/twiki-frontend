@@ -1,8 +1,8 @@
 import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types/index.types";
 
 export interface FiltersInitialValues {
-  firstAge: string | number;
-  lastAge: string | number;
+  ageMin: number | string;
+  ageMax: number | string;
   sex: "male" | "female";
   city: string | IPropsCell;
 }

@@ -5,7 +5,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 export const citiesQueryOptions = (enabled: boolean) =>
   queryOptions<StoreItemCities[]>({
-    queryKey: ["likesCards"],
+    queryKey: ["cities"],
     queryFn: getCities,
     retry: false,
     staleTime: 5 * 60 * 1000,

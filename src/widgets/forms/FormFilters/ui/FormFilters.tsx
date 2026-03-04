@@ -1,6 +1,5 @@
 import styles from "./FormFilters.module.scss";
 import { initialValues, validationSchema, sexOptions } from "../config";
-import { updateFilters, useGetterData } from "../api";
 
 import { useFormik } from "formik";
 
@@ -15,21 +14,60 @@ import {
 } from "@/shared/SubmitButton";
 import { useNavigate } from "react-router-dom";
 import { useCities } from "@/app/store/useCities";
+import { useFilters } from "@/app/store/useFilters";
+import type { StoreItemCities } from "@/app/store/useCities/types";
+
+const getInitialValues = (
+  data:
+    | {
+        ageMin: number;
+        ageMax: number;
+        sex: "male" | "female";
+        city: string | StoreItemCities;
+      }
+    | undefined,
+  cities: StoreItemCities[] | undefined,
+) => {
+  if (data) {
+    if (cities) {
+      data.city = cities.find((value) => value.value === data.city) || "";
+    }
+    return data;
+  }
+  return initialValues;
+};
 
 export function FormFilters() {
   const { data: dataCities, isPending: isCitiesPending } = useCities();
+  const {
+    data: dataFilters,
+    isPending: isFiltersPending,
+    filtersMutations,
+  } = useFilters();
 
   const navigate = useNavigate();
-  const { dataFilters, isDataLoading } = useGetterData();
 
   const formik = useFormik({
-    initialValues: dataFilters || initialValues,
+    initialValues: getInitialValues(dataFilters, dataCities),
     validationSchema: validationSchema,
     enableReinitialize: true,
-    onSubmit: updateFilters,
+    onSubmit: async (values) => {
+      if (typeof values.city === "string") {
+        return;
+      }
+
+      await filtersMutations.mutateAsync({
+        age: {
+          min: +values.ageMin,
+          max: +values.ageMax,
+        },
+        sex: values.sex,
+        cityId: values.city.value,
+      });
+    },
   });
 
-  useButtonSubmitForFormic(formik, true, isDataLoading && isCitiesPending);
+  useButtonSubmitForFormic(formik, true, isFiltersPending && isCitiesPending);
 
   const {
     errors,
@@ -42,7 +80,7 @@ export function FormFilters() {
 
   return (
     <>
-      {isDataLoading && isCitiesPending ? (
+      {isFiltersPending && isCitiesPending ? (
         <SectionLoaderForm />
       ) : (
         <form
@@ -52,11 +90,11 @@ export function FormFilters() {
         >
           <InputRange
             setFieldTouched={setFieldTouched}
-            firstValue={values.firstAge}
-            lastValue={values.lastAge}
+            firstValue={values.ageMin}
+            lastValue={values.ageMax}
             handleChange={handleChange}
-            id={{ first: "firstAge", last: "lastAge" }}
-            name={{ first: "firstAge", last: "lastAge" }}
+            id={{ first: "ageMin", last: "ageMax" }}
+            name={{ first: "ageMin", last: "ageMax" }}
             header={{ first: "От*", last: "До*" }}
             placeholder={{
               first: "Введите возраст",
@@ -64,8 +102,8 @@ export function FormFilters() {
             }}
             subtitle="Максимальный и минимальный возраст"
             errors={{
-              first: errors.firstAge && touched.firstAge ? errors.firstAge : "",
-              last: errors.lastAge && touched.lastAge ? errors.lastAge : "",
+              first: errors.ageMin && touched.ageMin ? errors.ageMin : "",
+              last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
             }}
           />
           <InputSelect
