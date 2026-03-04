@@ -4,18 +4,21 @@ import { postProfileUpdate, useGetterData } from "../api";
 import { useNavigate } from "react-router-dom";
 
 import { FormProfile } from "@/widgets/forms/FormProfile";
+import { useCities } from "@/app/store/useCities";
 
 export function FormProfileUpdate() {
-  const { cities, profileData, isDataLoading } = useGetterData();
+  const { data: dataCities, isPending: isCitiesPending } = useCities();
+
+  const { dataProfile, isDataLoading } = useGetterData();
 
   const navigate = useNavigate();
 
   return (
     <FormProfile
-      initialValues={profileData || initialValues}
+      initialValues={dataProfile || initialValues}
       handleSubmit={postProfileUpdate}
-      cities={cities}
-      isDataLoading={isDataLoading}
+      cities={dataCities || []}
+      isDataLoading={isDataLoading && isCitiesPending}
       validateNoChanges={true}
       successActionFn={() => {
         navigate(-1);

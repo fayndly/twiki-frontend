@@ -8,19 +8,13 @@ export const postProfileUpdate = async (values: any) => {
   return data;
 };
 
-const getCities = async () => {
-  const { data } = await api.get("/cities");
-  return data;
-};
-
 const getProfile = async () => {
   const { data } = await api.get("/profile");
   return data;
 };
 
 export const useGetterData = () => {
-  const [cities, setCities] = useState([]);
-  const [profileData, setProfileData] = useState(null);
+  const [dataProfile, setDataProfile] = useState(null);
   const [isDataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
@@ -29,14 +23,10 @@ export const useGetterData = () => {
     const fetchAll = async () => {
       setDataLoading(true);
       try {
-        const [citiesResult, profileResult] = await Promise.all([
-          getCities(),
-          getProfile(),
-        ]);
+        const [profileResult] = await Promise.all([getProfile()]);
         if (!mounted) return;
 
-        setCities(citiesResult);
-        setProfileData(profileResult);
+        setDataProfile(profileResult);
       } catch (e) {
         console.log(e);
       } finally {
@@ -51,5 +41,5 @@ export const useGetterData = () => {
     };
   }, []);
 
-  return { cities, profileData, isDataLoading };
+  return { dataProfile, isDataLoading };
 };

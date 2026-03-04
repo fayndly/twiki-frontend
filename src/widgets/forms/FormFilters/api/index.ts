@@ -8,19 +8,13 @@ export const updateFilters = async (values: any) => {
   return data;
 };
 
-const getCities = async () => {
-  const { data } = await api.get("/cities");
-  return data;
-};
-
 const getFilters = async () => {
   const { data } = await api.get("/filters");
   return data;
 };
 
 export const useGetterData = () => {
-  const [cities, setCities] = useState([]);
-  const [filtersData, setFiltersData] = useState(null);
+  const [dataFilters, setDataFilters] = useState(null);
   const [isDataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
@@ -29,14 +23,10 @@ export const useGetterData = () => {
     const fetchAll = async () => {
       setDataLoading(true);
       try {
-        const [citiesResult, filtersResult] = await Promise.all([
-          getCities(),
-          getFilters(),
-        ]);
+        const [filtersResult] = await Promise.all([getFilters()]);
         if (!mounted) return;
 
-        setCities(citiesResult);
-        setFiltersData(filtersResult);
+        setDataFilters(filtersResult);
       } catch (e) {
         console.log(e);
       } finally {
@@ -51,5 +41,5 @@ export const useGetterData = () => {
     };
   }, []);
 
-  return { cities, filtersData, isDataLoading };
+  return { dataFilters, isDataLoading };
 };

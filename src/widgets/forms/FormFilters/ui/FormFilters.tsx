@@ -14,19 +14,22 @@ import {
   submitEventHandler,
 } from "@/shared/SubmitButton";
 import { useNavigate } from "react-router-dom";
+import { useCities } from "@/app/store/useCities";
 
 export function FormFilters() {
+  const { data: dataCities, isPending: isCitiesPending } = useCities();
+
   const navigate = useNavigate();
-  const { cities, filtersData, isDataLoading } = useGetterData();
+  const { dataFilters, isDataLoading } = useGetterData();
 
   const formik = useFormik({
-    initialValues: filtersData || initialValues,
+    initialValues: dataFilters || initialValues,
     validationSchema: validationSchema,
     enableReinitialize: true,
     onSubmit: updateFilters,
   });
 
-  useButtonSubmitForFormic(formik, true, isDataLoading);
+  useButtonSubmitForFormic(formik, true, isDataLoading && isCitiesPending);
 
   const {
     errors,
@@ -39,7 +42,7 @@ export function FormFilters() {
 
   return (
     <>
-      {isDataLoading ? (
+      {isDataLoading && isCitiesPending ? (
         <SectionLoaderForm />
       ) : (
         <form
@@ -97,7 +100,7 @@ export function FormFilters() {
             handleChangeClue={(value) => {
               setFieldValue("city", value);
             }}
-            options={cities}
+            options={dataCities || []}
           />
           <SubmitButton
             onSubmit={() => {
