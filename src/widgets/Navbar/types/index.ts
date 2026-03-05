@@ -1,3 +1,3 @@
 export interface PropsNavbar {
-  show?: boolean;
+  show: boolean;
 }

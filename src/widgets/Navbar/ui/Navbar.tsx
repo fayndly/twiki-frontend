@@ -103,7 +103,7 @@ const variants = {
   },
 };
 
-export function Navbar({ show = true }: PropsNavbar) {
+export function Navbar({ show }: PropsNavbar) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -118,10 +118,10 @@ export function Navbar({ show = true }: PropsNavbar) {
     <AnimatePresence mode="wait">
       {show && (
         <motion.nav
+          animate={show ? "visible" : "hidden"}
           className={`${styles.navbar} `}
           variants={variants}
           initial="hidden"
-          animate="visible"
           exit="hidden"
           transition={{ duration: 0.18, ease: "easeOut" }}
         >
@@ -141,22 +141,4 @@ export function Navbar({ show = true }: PropsNavbar) {
       )}
     </AnimatePresence>
   );
-
-  // return (
-
-  // <nav className={`${styles.navbar} ${!show ? styles.hide : ""}`}>
-  //   <div className={styles.tabs_wrapper}>
-  //     {tabs.map(({ name, pathTo, Icon }) => (
-  //       <Tab
-  //         key={name}
-  //         icon={Icon}
-  //         isActive={location.pathname === pathTo}
-  //         onClick={() => clickHandler(pathTo)}
-  //         hasBadge={name === "likes"}
-  //         badgeCount={name === "likes" ? likesCards.data?.length : 0}
-  //       />
-  //     ))}
-  //   </div>
-  // </nav>
-  // );
 }
