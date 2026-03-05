@@ -1,5 +1,5 @@
 export const initialValues = {
-  firstName: "",
+  name: "",
   age: 0,
   description: "",
   sex: "male" as "male" | "female",

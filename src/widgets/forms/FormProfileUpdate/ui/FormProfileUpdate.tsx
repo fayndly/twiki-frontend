@@ -21,14 +21,23 @@ const getInitialValues = (data: any, cities: StoreItemCities[] | undefined) => {
 };
 
 export function FormProfileUpdate() {
-  const { data: dataCities, isPending: isCitiesPending } = useCities();
+  const {
+    data: dataCities,
+    isPending: isCitiesPending,
+    isFetching: isCitiesFetching,
+  } = useCities();
   const {
     data: dataProfile,
     isPending: isProfilePending,
+    isFetching: isProfileFetching,
     profileMutations,
   } = useProfile();
 
   const navigate = useNavigate();
+
+  const isDataLoading =
+    (isCitiesPending && isCitiesFetching) ||
+    (isProfilePending && isProfileFetching);
 
   return (
     <FormProfile
@@ -52,7 +61,7 @@ export function FormProfileUpdate() {
         });
       }}
       cities={dataCities || []}
-      isDataLoading={isProfilePending && isCitiesPending}
+      isDataLoading={isDataLoading}
       validateNoChanges={true}
       successActionFn={() => {
         navigate(-1);

@@ -38,10 +38,15 @@ const getInitialValues = (
 };
 
 export function FormFilters() {
-  const { data: dataCities, isPending: isCitiesPending } = useCities();
+  const {
+    data: dataCities,
+    isPending: isCitiesPending,
+    isFetching: isCitiesFetching,
+  } = useCities();
   const {
     data: dataFilters,
     isPending: isFiltersPending,
+    isFetching: isFiltersFetching,
     filtersMutations,
   } = useFilters();
 
@@ -67,7 +72,11 @@ export function FormFilters() {
     },
   });
 
-  useButtonSubmitForFormic(formik, true, isFiltersPending && isCitiesPending);
+  const isDataLoading =
+    (isCitiesPending && isCitiesFetching) ||
+    (isFiltersPending && isFiltersFetching);
+
+  useButtonSubmitForFormic(formik, true, isDataLoading);
 
   const {
     errors,
@@ -80,7 +89,7 @@ export function FormFilters() {
 
   return (
     <>
-      {isFiltersPending && isCitiesPending ? (
+      {isDataLoading ? (
         <SectionLoaderForm />
       ) : (
         <form

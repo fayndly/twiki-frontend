@@ -6,7 +6,16 @@ export function useProfile(enabled: boolean = true) {
   const profileQuery = useQuery(profileQueryOptions(enabled));
   const profileMutations = useMutation(profileMutationQueryOptions);
 
-  const { data, isPending, isError, isSuccess, refetch } = profileQuery;
+  const { data, isPending, isError, isSuccess, refetch, isFetching } =
+    profileQuery;
 
-  return { data, isPending, isError, isSuccess, refetch, profileMutations };
+  return {
+    data,
+    isPending,
+    isError,
+    isSuccess,
+    refetch,
+    profileMutations,
+    isFetching,
+  };
 }

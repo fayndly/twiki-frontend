@@ -6,7 +6,16 @@ export function useFilters(enabled: boolean = true) {
   const filtersQuery = useQuery(filtersQueryOptions(enabled));
   const filtersMutations = useMutation(filtersMutationQueryOptions);
 
-  const { data, isPending, isError, isSuccess, refetch } = filtersQuery;
+  const { data, isPending, isError, isSuccess, refetch, isFetching } =
+    filtersQuery;
 
-  return { data, isPending, isError, isSuccess, refetch, filtersMutations };
+  return {
+    data,
+    isPending,
+    isError,
+    isSuccess,
+    refetch,
+    filtersMutations,
+    isFetching,
+  };
 }
