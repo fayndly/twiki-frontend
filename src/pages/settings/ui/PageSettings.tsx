@@ -46,7 +46,7 @@ export function PageSettings() {
               title="Фильтры"
               moveTitle="Изменить"
               onClick={() => {
-                setTimeout(() => navigate("/filters"), 200);
+                navigate("/filters");
               }}
             />
             <Divider className={styles.divider} />
@@ -54,7 +54,7 @@ export function PageSettings() {
               title="Анкета"
               moveTitle="Редактировать"
               onClick={() => {
-                setTimeout(() => navigate("/profile/update"), 200);
+                navigate("/profile/update");
               }}
             />
           </div>

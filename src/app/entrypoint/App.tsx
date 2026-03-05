@@ -36,6 +36,10 @@ export default function App() {
     Promise.all(stickerPaths.map(preloadLottie));
   }, []);
 
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+  }, []);
+
   useSetInitDataRaw();
 
   return (
