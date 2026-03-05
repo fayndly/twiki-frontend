@@ -2,6 +2,7 @@ import styles from "./FormFilters.module.scss";
 import { initialValues, validationSchema, sexOptions } from "../config";
 
 import { useFormik } from "formik";
+import { useEffect } from "react";
 
 import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
@@ -16,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useCities } from "@/app/store/useCities";
 import { useFilters } from "@/app/store/useFilters";
 import type { StoreItemCities } from "@/app/store/useCities/types";
+import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 
 const getInitialValues = (
   data:
@@ -42,18 +44,30 @@ export function FormFilters() {
     data: dataCities,
     isPending: isCitiesPending,
     isFetching: isCitiesFetching,
+    isError: isCitiesError,
+    refetch: refetchCities,
+    isSuccess: isCitiesSuccess,
   } = useCities();
   const {
     data: dataFilters,
     isPending: isFiltersPending,
     isFetching: isFiltersFetching,
+    isError: isFiltersError,
+    refetch: refetchFilters,
+    isSuccess: isFiltersSuccess,
     filtersMutations,
   } = useFilters();
 
   const navigate = useNavigate();
 
+  let initialValues = getInitialValues(dataFilters, dataCities);
+
+  useEffect(() => {
+    initialValues = getInitialValues(dataFilters, dataCities);
+  }, [isCitiesSuccess, isFiltersSuccess]);
+
   const formik = useFormik({
-    initialValues: getInitialValues(dataFilters, dataCities),
+    initialValues,
     validationSchema: validationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
@@ -76,7 +90,11 @@ export function FormFilters() {
     (isCitiesPending && isCitiesFetching) ||
     (isFiltersPending && isFiltersFetching);
 
-  useButtonSubmitForFormic(formik, true, isDataLoading);
+  useButtonSubmitForFormic(
+    formik,
+    true,
+    isDataLoading || isCitiesError || isFiltersError,
+  );
 
   const {
     errors,
@@ -87,77 +105,92 @@ export function FormFilters() {
     touched,
   } = formik;
 
+  if (isDataLoading) {
+    return <SectionLoaderForm />;
+  }
+
+  if (isCitiesError || isFiltersError) {
+    return (
+      <SectionErrorLoadFormData
+        onClick={async () => {
+          if (isCitiesError) {
+            await refetchCities();
+          }
+          if (isFiltersError) {
+            await refetchFilters();
+          }
+        }}
+        header="Ошибка загрузки данных"
+        description="Не удалось загрузить данные фильтров, повторите попытку нажав на кнопку ниже или попробуйте позже"
+      />
+    );
+  }
+
   return (
-    <>
-      {isDataLoading ? (
-        <SectionLoaderForm />
-      ) : (
-        <form
-          className={styles.form}
-          noValidate
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <InputRange
-            setFieldTouched={setFieldTouched}
-            firstValue={values.ageMin}
-            lastValue={values.ageMax}
-            handleChange={handleChange}
-            id={{ first: "ageMin", last: "ageMax" }}
-            name={{ first: "ageMin", last: "ageMax" }}
-            header={{ first: "От*", last: "До*" }}
-            placeholder={{
-              first: "Введите возраст",
-              last: "Введите возраст",
-            }}
-            subtitle="Максимальный и минимальный возраст"
-            errors={{
-              first: errors.ageMin && touched.ageMin ? errors.ageMin : "",
-              last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
-            }}
-          />
-          <InputSelect
-            onChange={() => {
-              setFieldTouched("sex", true);
-            }}
-            errors={errors.sex && touched.sex ? errors.sex : ""}
-            handleChange={handleChange}
-            value={values.sex}
-            id="sex"
-            name="sex"
-            header="Пол*"
-            subtitle="Пол собеседника"
-            options={sexOptions}
-          />
-          <InputSearchSelect
-            onChange={() => {
-              setFieldTouched("city", true);
-            }}
-            errors={errors.city && touched.city ? errors.city : ""}
-            handleChange={handleChange}
-            value={values.city}
-            clickClear={() => {
-              setFieldValue("city", "");
-            }}
-            type="text"
-            id="city"
-            name="city"
-            header="Город*"
-            placeholder="Введите название города"
-            subtitle="Выберите город из выпадающего списка"
-            handleChangeClue={(value) => {
-              setFieldValue("city", value);
-            }}
-            options={dataCities || []}
-          />
-          <SubmitButton
-            onSubmit={() => {
-              submitEventHandler(formik, () => {
-                navigate(-1);
-              });
-            }}
-          />
-        </form>
-      )}
-    </>
+    <form
+      className={styles.form}
+      noValidate
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <InputRange
+        setFieldTouched={setFieldTouched}
+        firstValue={values.ageMin}
+        lastValue={values.ageMax}
+        handleChange={handleChange}
+        id={{ first: "ageMin", last: "ageMax" }}
+        name={{ first: "ageMin", last: "ageMax" }}
+        header={{ first: "От*", last: "До*" }}
+        placeholder={{
+          first: "Введите возраст",
+          last: "Введите возраст",
+        }}
+        subtitle="Максимальный и минимальный возраст"
+        errors={{
+          first: errors.ageMin && touched.ageMin ? errors.ageMin : "",
+          last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
+        }}
+      />
+      <InputSelect
+        onChange={() => {
+          setFieldTouched("sex", true);
+        }}
+        errors={errors.sex && touched.sex ? errors.sex : ""}
+        handleChange={handleChange}
+        value={values.sex}
+        id="sex"
+        name="sex"
+        header="Пол*"
+        subtitle="Пол собеседника"
+        options={sexOptions}
+      />
+      <InputSearchSelect
+        onChange={() => {
+          setFieldTouched("city", true);
+        }}
+        errors={errors.city && touched.city ? errors.city : ""}
+        handleChange={handleChange}
+        value={values.city}
+        clickClear={() => {
+          setFieldValue("city", "");
+        }}
+        type="text"
+        id="city"
+        name="city"
+        header="Город*"
+        placeholder="Введите название города"
+        subtitle="Выберите город из выпадающего списка"
+        handleChangeClue={(value) => {
+          setFieldValue("city", value);
+        }}
+        options={dataCities || []}
+      />
+      <SubmitButton
+        onSubmit={() => {
+          submitEventHandler(formik, () => {
+            navigate(-1);
+          });
+        }}
+      />
+    </form>
   );
 }

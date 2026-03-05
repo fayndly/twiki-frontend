@@ -1,6 +1,7 @@
 import { initialValues } from "../config";
 
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 import { FormProfile } from "@/widgets/forms/FormProfile";
 import { useCities } from "@/app/store/useCities";
@@ -25,11 +26,17 @@ export function FormProfileUpdate() {
     data: dataCities,
     isPending: isCitiesPending,
     isFetching: isCitiesFetching,
+    isError: isCitiesError,
+    refetch: refetchCities,
+    isSuccess: isCitiesSuccess,
   } = useCities();
   const {
     data: dataProfile,
     isPending: isProfilePending,
     isFetching: isProfileFetching,
+    isError: isProfileError,
+    refetch: refetchProfile,
+    isSuccess: isProfileSuccess,
     profileMutations,
   } = useProfile();
 
@@ -39,9 +46,15 @@ export function FormProfileUpdate() {
     (isCitiesPending && isCitiesFetching) ||
     (isProfilePending && isProfileFetching);
 
+  let initialValues = getInitialValues(dataProfile, dataCities);
+
+  useEffect(() => {
+    initialValues = getInitialValues(dataProfile, dataCities);
+  }, [isCitiesSuccess, isProfileSuccess]);
+
   return (
     <FormProfile
-      initialValues={getInitialValues(dataProfile, dataCities)}
+      initialValues={initialValues}
       handleSubmit={async (values) => {
         if (typeof values.city === "string") {
           return;
@@ -66,6 +79,17 @@ export function FormProfileUpdate() {
       successActionFn={() => {
         navigate(-1);
       }}
+      citiesActions={{
+        isError: isCitiesError,
+        refetch: refetchCities,
+        isSuccess: isCitiesSuccess,
+      }}
+      profileActions={{
+        isError: isProfileError,
+        refetch: refetchProfile,
+        isSuccess: isProfileSuccess,
+      }}
+      showSubmitButton={isDataLoading || isCitiesError || isProfileError}
     />
   );
 }

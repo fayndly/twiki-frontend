@@ -9,6 +9,12 @@ export interface ProfileInitialValues {
   city: string | IPropsCell;
 }
 
+interface Action {
+  isError: boolean;
+  refetch: () => Promise<any>;
+  isSuccess: boolean;
+}
+
 export interface PropsFormProfile {
   initialValues: ProfileInitialValues;
   handleSubmit: (values: ProfileInitialValues) => void;
@@ -16,4 +22,7 @@ export interface PropsFormProfile {
   isDataLoading: boolean;
   validateNoChanges: boolean;
   successActionFn: () => void;
+  citiesActions: Action;
+  profileActions?: Action;
+  showSubmitButton: boolean;
 }

@@ -11,18 +11,29 @@ export function FormProfileCreate() {
     data: dataCities,
     isPending: isCitiesPending,
     isFetching: isCitiesFetching,
+    isError: isCitiesError,
+    refetch: refetchCities,
+    isSuccess: isCitiesSuccess,
   } = useCities();
+
+  const isDataLoading = isCitiesPending && isCitiesFetching;
 
   return (
     <FormProfile
       initialValues={initialValues}
       handleSubmit={postProfileCreate}
       cities={dataCities || []}
-      isDataLoading={isCitiesPending && isCitiesFetching}
+      isDataLoading={isDataLoading}
       validateNoChanges={false}
       successActionFn={() => {
         miniApp.close();
       }}
+      citiesActions={{
+        isError: isCitiesError,
+        refetch: refetchCities,
+        isSuccess: isCitiesSuccess,
+      }}
+      showSubmitButton={isDataLoading || isCitiesError}
     />
   );
 }
