@@ -18,6 +18,7 @@ import { BackButton } from "@/shared/BackButton";
 import { SettingsButton } from "@/shared/SettingsButton";
 import { pathsToPublicSrc } from "@/shared/config";
 import { useSetInitDataRaw } from "../api/entrypoint.api";
+import { AnimatePresence } from "framer-motion";
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
 

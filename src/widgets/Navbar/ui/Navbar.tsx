@@ -2,6 +2,7 @@ import styles from "./NavBar.module.scss";
 import type { PropsNavbar } from "../types";
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { supportHapticFeedback } from "@/shared/helpers";
 import { Tab } from "./Tab";
@@ -89,6 +90,19 @@ const tabs = [
   },
 ];
 
+const variants = {
+  hidden: {
+    y: 84,
+    opacity: 0,
+    scale: 0.98,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+  },
+};
+
 export function Navbar({ show = true }: PropsNavbar) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,19 +115,48 @@ export function Navbar({ show = true }: PropsNavbar) {
   };
 
   return (
-    <nav className={`${styles.navbar} ${!show ? styles.hide : ""}`}>
-      <div className={styles.tabs_wrapper}>
-        {tabs.map(({ name, pathTo, Icon }) => (
-          <Tab
-            key={name}
-            icon={Icon}
-            isActive={location.pathname === pathTo}
-            onClick={() => clickHandler(pathTo)}
-            hasBadge={name === "likes"}
-            badgeCount={name === "likes" ? likesCards.data?.length : 0}
-          />
-        ))}
-      </div>
-    </nav>
+    <AnimatePresence mode="wait">
+      {show && (
+        <motion.nav
+          className={`${styles.navbar} `}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          transition={{ duration: 0.18, ease: "easeOut" }}
+        >
+          <div className={styles.tabs_wrapper}>
+            {tabs.map(({ name, pathTo, Icon }) => (
+              <Tab
+                key={name}
+                icon={Icon}
+                isActive={location.pathname === pathTo}
+                onClick={() => clickHandler(pathTo)}
+                hasBadge={name === "likes"}
+                badgeCount={name === "likes" ? likesCards.data?.length : 0}
+              />
+            ))}
+          </div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
+
+  // return (
+
+  // <nav className={`${styles.navbar} ${!show ? styles.hide : ""}`}>
+  //   <div className={styles.tabs_wrapper}>
+  //     {tabs.map(({ name, pathTo, Icon }) => (
+  //       <Tab
+  //         key={name}
+  //         icon={Icon}
+  //         isActive={location.pathname === pathTo}
+  //         onClick={() => clickHandler(pathTo)}
+  //         hasBadge={name === "likes"}
+  //         badgeCount={name === "likes" ? likesCards.data?.length : 0}
+  //       />
+  //     ))}
+  //   </div>
+  // </nav>
+  // );
 }
