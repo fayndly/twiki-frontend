@@ -18,10 +18,11 @@ import { AppealModal } from "@/widgets/AppealModal";
 import { BackButton } from "@/shared/BackButton";
 import { SettingsButton } from "@/shared/SettingsButton";
 import { pathsToPublicSrc } from "@/shared/config";
+import { useGetPlatformForApp, useSetPlatform } from "@/shared/usePlatform";
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
 
-export default function App() {
+export default function App({ platform }: { platform: string }) {
   const location = useLocation();
   const scrollDirection = useScrollDirection();
 
@@ -43,9 +44,18 @@ export default function App() {
     window.history.scrollRestoration = "manual";
   }, []);
 
+  const setPlatform = useSetPlatform();
+  const platformForApp = useGetPlatformForApp();
+
+  setPlatform(platform);
+
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRoot className={styles.app_root} appearance={theme}>
+      <AppRoot
+        className={styles.app_root}
+        appearance={theme}
+        platform={platformForApp}
+      >
         <BackButton />
         <SettingsButton />
         <MainLayout>

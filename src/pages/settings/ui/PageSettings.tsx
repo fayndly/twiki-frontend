@@ -1,83 +1,98 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-
 import styles from "./PageSettings.module.scss";
+import type { PropsCustomCell } from "../types";
+
 import { useNavigate } from "react-router-dom";
 import {
   Cell,
   Divider,
   IconContainer,
-  Subheadline,
+  List,
+  Section,
   Text,
 } from "@telegram-apps/telegram-ui";
+import { ChevronRight, Funnel, UserRoundPen } from "lucide-react";
 
-import { type ICell } from "../types/index.types";
-
-const MoveIcon = ({ className }: { className: string }) => {
-  return (
-    <svg
-      className={className}
-      width="10"
-      height="17"
-      viewBox="0 0 10 17"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1.5 1.5L7.79289 7.79289C8.18342 8.18342 8.18342 8.81658 7.79289 9.20711L1.5 15.5"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-};
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
+import { useIsBase } from "@/shared/usePlatform";
 
 export function PageSettings() {
   const navigate = useNavigate();
+  const isBase = useIsBase();
 
   return (
     <SectionWrapper>
-      <section className={styles.section}>
-        <div className={styles.section_settings}>
-          <Subheadline className={styles.header} plain weight="3">
-            НАСТРОЙКИ
-          </Subheadline>
-          <div className={styles.wrapper_settings}>
-            <CustomCell
-              title="Фильтры"
-              moveTitle="Изменить"
-              onClick={() => {
-                navigate("/filters");
-              }}
-            />
-            <Divider className={styles.divider} />
-            <CustomCell
-              title="Анкета"
-              moveTitle="Редактировать"
-              onClick={() => {
-                navigate("/profile/update");
-              }}
-            />
-          </div>
-        </div>
-      </section>
+      <List className={styles.list}>
+        <Section
+          header="Настройки"
+          className={`${isBase ? styles.section_base : styles.section}`}
+        >
+          <CustomCell
+            title="Фильтры"
+            subtitle="Возраст, пол, город"
+            moveTitle="Изменить"
+            onClick={() => {
+              navigate("/filters");
+            }}
+            beforeIconConfig={{
+              colorIconContainer: "#007AFE",
+              Icon: <Funnel />,
+            }}
+          />
+          <Divider />
+          <CustomCell
+            title="Анкета"
+            subtitle="Имя, возраст, описание, пол, фото, город"
+            moveTitle="Редактировать"
+            onClick={() => {
+              navigate("/profile/update");
+            }}
+            beforeIconConfig={{
+              colorIconContainer: "#B45ED5",
+              Icon: <UserRoundPen />,
+            }}
+          />
+        </Section>
+      </List>
     </SectionWrapper>
   );
 }
 
-const CustomCell = ({ title, moveTitle, onClick }: ICell) => {
+const CustomCell = ({
+  title,
+  moveTitle,
+  subtitle,
+  onClick,
+  beforeIconConfig,
+}: PropsCustomCell) => {
+  const isBase = useIsBase();
+
   return (
     <Cell
+      className={`${isBase ? styles.cell_base : styles.cell}`}
+      interactiveAnimation="background"
       onClick={onClick}
-      className={styles.cell}
+      subtitle={isBase && subtitle}
       after={
-        <div className={styles.cell_move}>
-          <Text className={styles.cell_move_title} weight="3">
-            {moveTitle}
-          </Text>
-          <IconContainer>
-            <MoveIcon className={styles.cell_move_icon} />
-          </IconContainer>
-        </div>
+        !isBase && (
+          <div className={styles.move_container}>
+            <Text className={styles.move_title} weight="3">
+              {moveTitle}
+            </Text>
+            <IconContainer style={{ maxHeight: 20 }}>
+              <ChevronRight size={20} color="var(--tg-theme-hint-color)" />
+            </IconContainer>
+          </div>
+        )
+      }
+      before={
+        <IconContainer
+          className={styles.icon_container}
+          style={{
+            backgroundColor: beforeIconConfig.colorIconContainer,
+          }}
+        >
+          {beforeIconConfig.Icon}
+        </IconContainer>
       }
     >
       {title}

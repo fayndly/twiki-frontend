@@ -1,59 +1,73 @@
+// BASE
+.list {
+  padding: 0px !important;
+}
+
+.icon_container {
+  padding: 6px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  svg {
+    fill: white;
+    stroke: white;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// ANDROID
+.section_base {
+  & > div {
+    border-radius: 16px !important;
+  }
+  hr {
+    margin-left: 70px !important;
+  }
+}
+
+.cell_base {
+  padding-left: 18px !important;
+  gap: 16px !important;
+  div:nth-child(3) {
+    padding: 6px !important;
+  }
+}
+
+// IOS
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  hr {
+    margin-right: 16px !important;
+    margin-left: 60px !important;
+  }
 }
 
-.section_settings {
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  color: $tg_subtitle_text_color;
-  padding: 14px 24px;
-}
-
-.wrapper_settings {
-  border-radius: 40px;
-  overflow: hidden;
-  background-color: $tg_secondary_bg_color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.section {
+  & > div {
+    & > div {
+      border-radius: 26px !important;
+    }
+  }
 }
 
 .cell {
-  width: 100%;
-  box-sizing: border-box;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease-in-out;
-
-  &_title {
-    color: $tg_text_color;
-  }
-
-  &_move {
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
-
-    &_title {
-      color: $tg_subtitle_text_color;
-    }
-    &_icon {
-      stroke: $tg_subtitle_text_color;
-    }
-  }
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  padding-right: 8px !important;
 }
 
-.divider {
-  width: 90%;
+.move {
+  &_container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  &_title {
+    color: $tg_subtitle_text_color;
+  }
+  &_icon {
+    stroke: $tg_subtitle_text_color;
+  }
 }

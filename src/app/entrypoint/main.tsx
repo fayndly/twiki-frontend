@@ -24,7 +24,7 @@ try {
   }).then(() => {
     root.render(
       <HashRouter>
-        <App />
+        <App platform={platform} />
       </HashRouter>,
     );
   });
