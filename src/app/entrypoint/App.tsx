@@ -22,7 +22,7 @@ import { useGetPlatformForApp, useSetPlatform } from "@/shared/usePlatform";
 
 const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
 
-export default function App({ platform }: { platform: string }) {
+export default function App({ launchParams }: { launchParams: any }) {
   const location = useLocation();
   const scrollDirection = useScrollDirection();
 
@@ -47,7 +47,7 @@ export default function App({ platform }: { platform: string }) {
   const setPlatform = useSetPlatform();
   const platformForApp = useGetPlatformForApp();
 
-  setPlatform(platform);
+  setPlatform(launchParams.tgWebAppPlatform);
 
   return (
     <QueryClientProvider client={queryClient}>
