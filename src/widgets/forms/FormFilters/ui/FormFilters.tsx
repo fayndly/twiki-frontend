@@ -18,6 +18,7 @@ import { useCities } from "@/app/store/useCities";
 import { useFilters } from "@/app/store/useFilters";
 import type { StoreItemCities } from "@/app/store/useCities/types";
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
+import { SectionInput } from "@/shared/SectionInput";
 
 const getInitialValues = (
   data:
@@ -150,40 +151,49 @@ export function FormFilters() {
           last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
         }}
       />
-      <InputSelect
-        onChange={() => {
-          setFieldTouched("sex", true);
-        }}
-        errors={errors.sex && touched.sex ? errors.sex : ""}
-        handleChange={handleChange}
-        value={values.sex}
-        id="sex"
-        name="sex"
+      <SectionInput
+        errors={[errors.sex && touched.sex ? errors.sex : ""]}
+        subtitle="Выберите ваш пол"
         header="Пол*"
-        subtitle="Пол собеседника"
-        options={sexOptions}
-      />
-      <InputSearchSelect
-        onChange={() => {
-          setFieldTouched("city", true);
-        }}
-        errors={errors.city && touched.city ? errors.city : ""}
-        handleChange={handleChange}
-        value={values.city}
-        clickClear={() => {
-          setFieldValue("city", "");
-        }}
-        type="text"
-        id="city"
-        name="city"
-        header="Город*"
-        placeholder="Введите название города"
+      >
+        <InputSelect
+          onChange={() => {
+            setFieldTouched("sex", true);
+          }}
+          hasError={Boolean(errors.sex?.length)}
+          handleChange={handleChange}
+          value={values.sex}
+          id="sex"
+          name="sex"
+          options={sexOptions}
+        />
+      </SectionInput>
+
+      <SectionInput
+        errors={[errors.city && touched.city ? errors.city : ""]}
         subtitle="Выберите город из выпадающего списка"
-        handleChangeClue={(value) => {
-          setFieldValue("city", value);
-        }}
-        options={dataCities || []}
-      />
+        header="Город*"
+      >
+        <InputSearchSelect
+          onChange={() => {
+            setFieldTouched("city", true);
+          }}
+          hasErrors={Boolean(errors.city?.length)}
+          handleChange={handleChange}
+          value={values.city}
+          clickClear={() => {
+            setFieldValue("city", "");
+          }}
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Введите название города"
+          handleChangeClue={(value) => {
+            setFieldValue("city", value);
+          }}
+          options={dataCities || []}
+        />
+      </SectionInput>
       <SubmitButton
         onSubmit={() => {
           submitEventHandler(formik, () => {
