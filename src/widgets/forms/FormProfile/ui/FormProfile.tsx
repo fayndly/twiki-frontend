@@ -113,21 +113,24 @@ export function FormProfile({
           placeholder="Введите возраст"
         />
       </SectionInput>
-      <InputTextarea
+      <SectionInput
         errors={
           errors.description && touched.description ? errors.description : ""
         }
-        onChange={() => {
-          setFieldTouched("description", true);
-        }}
-        handleChange={handleChange}
-        value={values.description}
-        id="description"
-        name="description"
-        header="Описание"
-        placeholder="Введите описание"
         subtitle="Ваше описание"
-      />
+        header="Описание"
+      >
+        <InputTextarea
+          onChange={() => {
+            setFieldTouched("description", true);
+          }}
+          handleChange={handleChange}
+          value={values.description}
+          id="description"
+          name="description"
+          placeholder="Введите описание"
+        />
+      </SectionInput>
       <InputSelect
         onChange={() => {
           setFieldTouched("sex", true);

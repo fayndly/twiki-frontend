@@ -1,5 +1,5 @@
 import styles from "./InputText.module.scss";
-import { type IPropsInputText } from "../types/index.types";
+import type { PropsInputText } from "../types/index.types";
 
 import { Input } from "@telegram-apps/telegram-ui";
 
@@ -13,15 +13,14 @@ export function InputText({
   value,
   id,
   name,
-  header,
   placeholder,
   type,
   onChange,
-}: IPropsInputText) {
+}: PropsInputText) {
   const isBase = useIsBase();
   return (
     <Input
-      className={`${isBase ? styles.input_text_base : styles.input_text}`}
+      className={`${styles.input} ${!isBase && styles.input_text}`}
       id={id}
       name={name}
       type={type}
@@ -31,7 +30,6 @@ export function InputText({
         handleChange(e);
       }}
       value={value}
-      header={header}
       placeholder={placeholder}
       after={
         typeof value === "string" && value.length > 0 ? (

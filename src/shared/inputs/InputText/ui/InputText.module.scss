@@ -1,11 +1,10 @@
+// BASE
+.input {
+  box-shadow: none !important;
+}
+
 // IOS
 .input_text {
   padding-right: 11px;
   border-radius: 34px !important;
-  box-shadow: none !important;
-}
-
-// ANDROID
-.input_text_base {
-  box-shadow: none !important;
 }
