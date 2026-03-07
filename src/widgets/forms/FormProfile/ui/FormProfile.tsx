@@ -131,19 +131,23 @@ export function FormProfile({
           placeholder="Введите описание"
         />
       </SectionInput>
-      <InputSelect
-        onChange={() => {
-          setFieldTouched("sex", true);
-        }}
+      <SectionInput
         errors={errors.sex && touched.sex ? errors.sex : ""}
-        handleChange={handleChange}
-        value={values.sex}
-        id="sex"
-        name="sex"
-        header="Пол*"
         subtitle="Ваш пол"
-        options={sexOptions}
-      />
+        header="Пол*"
+      >
+        <InputSelect
+          onChange={() => {
+            setFieldTouched("sex", true);
+          }}
+          hasError={Boolean(errors.sex?.length)}
+          handleChange={handleChange}
+          value={values.sex}
+          id="sex"
+          name="sex"
+          options={sexOptions}
+        />
+      </SectionInput>
       <InputImage
         onChange={() => {
           setFieldTouched("photo", true);
