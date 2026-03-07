@@ -74,7 +74,7 @@ export function FormProfile({
       noValidate
       onSubmit={(e) => e.preventDefault()}
     >
-      <SectionInput
+      {/* <SectionInput
         errors={errors.name && touched.name ? errors.name : ""}
         subtitle="Ваше имя"
         header="Имя*"
@@ -94,8 +94,8 @@ export function FormProfile({
             setFieldValue("name", "");
           }}
         />
-      </SectionInput>
-      <SectionInput
+      </SectionInput> */}
+      {/* <SectionInput
         errors={errors.age && touched.age ? errors.age : ""}
         subtitle="Ваш возраст"
         header="Возраст*"
@@ -112,11 +112,60 @@ export function FormProfile({
           name="age"
           placeholder="Введите возраст"
         />
+      </SectionInput> */}
+      <SectionInput
+        errors={[
+          errors.name && touched.name ? errors.name : "",
+          errors.age && touched.age ? errors.age : "",
+          errors.sex && touched.sex ? errors.sex : "",
+        ]}
+        subtitle="Заполните поля имени, возраста и пола"
+        header="Имя, возраст, пол"
+        showHeader={true}
+      >
+        <InputText
+          onChange={() => {
+            setFieldTouched("name", true);
+          }}
+          hasError={Boolean(errors.name?.length)}
+          handleChange={handleChange}
+          value={values.name}
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Введите имя"
+          clickClear={() => {
+            setFieldValue("name", "");
+          }}
+        />
+        <InputText
+          onChange={() => {
+            setFieldTouched("age", true);
+          }}
+          hasError={Boolean(errors.age?.length)}
+          handleChange={handleChange}
+          value={values.age}
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Введите возраст"
+        />
+        <InputSelect
+          onChange={() => {
+            setFieldTouched("sex", true);
+          }}
+          hasError={Boolean(errors.sex?.length)}
+          handleChange={handleChange}
+          value={values.sex}
+          id="sex"
+          name="sex"
+          options={sexOptions}
+        />
       </SectionInput>
       <SectionInput
-        errors={
-          errors.description && touched.description ? errors.description : ""
-        }
+        errors={[
+          errors.description && touched.description ? errors.description : "",
+        ]}
         subtitle="Ваше описание"
         header="Описание"
       >
@@ -131,7 +180,7 @@ export function FormProfile({
           placeholder="Введите описание"
         />
       </SectionInput>
-      <SectionInput
+      {/* <SectionInput
         errors={errors.sex && touched.sex ? errors.sex : ""}
         subtitle="Ваш пол"
         header="Пол*"
@@ -147,7 +196,7 @@ export function FormProfile({
           name="sex"
           options={sexOptions}
         />
-      </SectionInput>
+      </SectionInput> */}
       <InputImage
         onChange={() => {
           setFieldTouched("photo", true);

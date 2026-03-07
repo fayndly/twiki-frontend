@@ -1,15 +1,18 @@
 // BASE
-.has_error {
-  footer {
-    span,
-    h6 {
-      color: $tg_destructive_text_color;
-    }
+.footer_errors {
+  span,
+  h6 {
+    color: $tg_destructive_text_color;
   }
+  white-space: pre-line;
 }
 
 // IOS
 .section {
+  hr {
+    border-color: $tg_hint_color;
+    margin: 0px 16px;
+  }
   & > div {
     & > div {
       border-radius: 34px !important;

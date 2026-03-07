@@ -1,6 +1,6 @@
 export interface PropsSectionInput {
   showSubtitle?: boolean;
-  errors?: string;
+  errors?: Array<string | undefined>;
   subtitle?: string;
   children: React.ReactNode;
   header?: string;
