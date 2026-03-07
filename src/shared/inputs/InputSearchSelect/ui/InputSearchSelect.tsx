@@ -1,33 +1,32 @@
 import { useState } from "react";
 
 import styles from "./InputSearchSelect.module.scss";
-import { type IPropsInputSearchSelect } from "../types/index.types";
+import type { PropsInputSearchSelect } from "../types";
 
 import { sortValuesByMatch } from "../helpers/sortList";
 import { Clue } from "../components/Clue/Clue";
 
 import { Input } from "@telegram-apps/telegram-ui";
 
-import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
 import { ClearButton } from "@/shared/inputs/ClearButton";
+import { useIsBase } from "@/shared/usePlatform";
 
 export function InputSearchSelect({
   handleChange,
   handleChangeClue,
   clickClear,
-  errors,
+  hasErrors,
   value,
   id,
   name,
-  header,
   placeholder,
-  subtitle,
   type,
   options,
   onChange,
-}: IPropsInputSearchSelect) {
+}: PropsInputSearchSelect) {
   const [clueValue, setClueValue] = useState("");
   const suggestions = sortValuesByMatch(options, clueValue);
+  const isBase = useIsBase();
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -39,21 +38,21 @@ export function InputSearchSelect({
   };
 
   return (
-    <div className={styles.input_clue}>
+    <>
       <Input
+        className={`${styles.input} ${!isBase && styles.input_search_select}`}
         onFocus={() => focusHandler("onFocus")}
         onBlur={() => focusHandler("onBlur")}
         id={id}
         name={name}
         type={type}
-        status={errors?.length ? "error" : undefined}
+        status={hasErrors ? "error" : undefined}
         onChange={(e) => {
           onChange?.();
           handleChange(e);
           setClueValue(e.target.value);
         }}
         value={typeof value === "object" ? value?.label : value}
-        header={header}
         placeholder={placeholder}
         after={
           typeof value === "object" ||
@@ -69,7 +68,6 @@ export function InputSearchSelect({
         suggestions={suggestions}
         handleChangeClue={handleChangeClue}
       />
-      <SubtitleInput errors={errors} subtitle={subtitle} />
-    </div>
+    </>
   );
 }

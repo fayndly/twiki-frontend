@@ -1,19 +1,27 @@
 // BASE
+.section {
+  & > div {
+    position: relative;
+  }
+}
+
 .footer_errors {
+  white-space: pre-line;
+
   span,
   h6 {
     color: $tg_destructive_text_color;
   }
-  white-space: pre-line;
 }
 
 // IOS
-.section {
+.section_ios {
   hr {
     border-color: $tg_hint_color;
     margin: 0px 16px;
   }
   & > div {
+    position: relative;
     & > div {
       border-radius: 34px !important;
     }

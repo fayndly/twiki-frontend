@@ -74,45 +74,6 @@ export function FormProfile({
       noValidate
       onSubmit={(e) => e.preventDefault()}
     >
-      {/* <SectionInput
-        errors={errors.name && touched.name ? errors.name : ""}
-        subtitle="Ваше имя"
-        header="Имя*"
-      >
-        <InputText
-          onChange={() => {
-            setFieldTouched("name", true);
-          }}
-          hasError={Boolean(errors.name?.length)}
-          handleChange={handleChange}
-          value={values.name}
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Введите имя"
-          clickClear={() => {
-            setFieldValue("name", "");
-          }}
-        />
-      </SectionInput> */}
-      {/* <SectionInput
-        errors={errors.age && touched.age ? errors.age : ""}
-        subtitle="Ваш возраст"
-        header="Возраст*"
-      >
-        <InputText
-          onChange={() => {
-            setFieldTouched("age", true);
-          }}
-          hasError={Boolean(errors.age?.length)}
-          handleChange={handleChange}
-          value={values.age}
-          type="number"
-          id="age"
-          name="age"
-          placeholder="Введите возраст"
-        />
-      </SectionInput> */}
       <SectionInput
         errors={[
           errors.name && touched.name ? errors.name : "",
@@ -180,23 +141,6 @@ export function FormProfile({
           placeholder="Введите описание"
         />
       </SectionInput>
-      {/* <SectionInput
-        errors={errors.sex && touched.sex ? errors.sex : ""}
-        subtitle="Ваш пол"
-        header="Пол*"
-      >
-        <InputSelect
-          onChange={() => {
-            setFieldTouched("sex", true);
-          }}
-          hasError={Boolean(errors.sex?.length)}
-          handleChange={handleChange}
-          value={values.sex}
-          id="sex"
-          name="sex"
-          options={sexOptions}
-        />
-      </SectionInput> */}
       <InputImage
         onChange={() => {
           setFieldTouched("photo", true);
@@ -215,27 +159,31 @@ export function FormProfile({
           setFieldValue("photo", undefined);
         }}
       />
-      <InputSearchSelect
-        onChange={() => {
-          setFieldTouched("city", true);
-        }}
-        errors={errors.city && touched.city ? errors.city : ""}
-        handleChange={handleChange}
-        value={values.city}
-        clickClear={() => {
-          setFieldValue("city", "");
-        }}
-        type="text"
-        id="city"
-        name="city"
-        header="Город*"
-        placeholder="Введите название города"
+      <SectionInput
+        errors={[errors.city && touched.city ? errors.city : ""]}
         subtitle="Выберите город из выпадающего списка"
-        handleChangeClue={(value) => {
-          setFieldValue("city", value);
-        }}
-        options={cities}
-      />
+        header="Город*"
+      >
+        <InputSearchSelect
+          onChange={() => {
+            setFieldTouched("city", true);
+          }}
+          hasErrors={Boolean(errors.city?.length)}
+          handleChange={handleChange}
+          value={values.city}
+          clickClear={() => {
+            setFieldValue("city", "");
+          }}
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Введите название города"
+          handleChangeClue={(value) => {
+            setFieldValue("city", value);
+          }}
+          options={cities}
+        />
+      </SectionInput>
       <SubmitButton
         onSubmit={() => {
           submitEventHandler(formik, successActionFn);

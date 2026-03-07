@@ -1,4 +1,4 @@
-import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types/index.types";
+import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types";
 
 export interface FiltersInitialValues {
   ageMin: number | string;

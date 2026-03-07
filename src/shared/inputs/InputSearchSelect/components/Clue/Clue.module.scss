@@ -1,47 +1,35 @@
+// BASE
 .clue {
-  &_active {
-    display: flex !important;
-  }
+  position: absolute;
+  width: 100%;
 
-  &_wrapper {
-    display: none;
-    position: absolute;
-    bottom: 93px;
-    left: 16px;
-    overflow-y: hidden;
-    transition: height 0.3s;
-    width: calc(100% - 32px);
-    background-color: $tg_secondary_bg_color !important;
-    border-radius: 14px;
-    border: 2px solid var(--tgui--outline);
-    padding: 0px !important;
-    box-sizing: border-box;
-  }
-
-  &_no_matches {
+  & > div {
     width: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    box-sizing: border-box;
-    padding: 16px !important;
-  }
-
-  &_ul {
-    width: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    box-sizing: border-box;
-  }
-
-  &_li {
-    width: 100%;
-    box-sizing: border-box;
-
-    div {
-      padding: 0px !important;
-      span {
-        padding: 16px;
-      }
+    & > div {
+      border: 2px solid var(--tgui--outline);
     }
   }
+}
+
+// IOS
+.clue_wrapper {
+  & > div {
+    & > div {
+      border-radius: 34px !important; // ios
+    }
+  }
+
+  bottom: 56px;
+}
+
+// ANDROID
+.clue_wrapper_base {
+  & > div {
+    border-radius: 24px !important;
+    & > div {
+      border-radius: 24px !important;
+    }
+  }
+
+  bottom: 102px;
 }

@@ -1,32 +1,29 @@
-import type { IPropsClue } from "../../types/index.types";
-import { Cell, Text } from "@telegram-apps/telegram-ui";
+import type { PropsClue } from "../../types";
+import { Cell, Section } from "@telegram-apps/telegram-ui";
 
 import styles from "./Clue.module.scss";
+import { useIsBase } from "@/shared/usePlatform";
 
-export function Clue({ isFocused, suggestions, handleChangeClue }: IPropsClue) {
+export function Clue({ isFocused, suggestions, handleChangeClue }: PropsClue) {
+  const isBase = useIsBase();
+
   return (
-    <div
-      className={`${styles.clue_wrapper} ${
-        isFocused ? styles.clue_active : ""
-      }`}
-    >
-      <ul className={styles.clue_ul}>
+    isFocused && (
+      <Section
+        className={`${styles.clue}  ${isBase ? styles.clue_wrapper_base : styles.clue_wrapper}`}
+      >
         {suggestions.length > 0 ? (
           suggestions.map((value) => {
             return (
-              <li key={value.value} className={styles.clue_li}>
-                <Cell onClick={() => handleChangeClue(value)}>
-                  {value.label}
-                </Cell>
-              </li>
+              <Cell key={value.value} onClick={() => handleChangeClue(value)}>
+                {value.label}
+              </Cell>
             );
           })
         ) : (
-          <div className={styles.clue_no_matches}>
-            <Text>Нет совпадений</Text>
-          </div>
+          <Cell>Нет совпадений</Cell>
         )}
-      </ul>
-    </div>
+      </Section>
+    )
   );
 }

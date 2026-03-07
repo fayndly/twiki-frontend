@@ -51,7 +51,7 @@ export function SectionInput({
       footer={showSubtitle && footerText}
       // footer={"text"}
       header={(isBase || showHeader) && header}
-      className={`${isBase ? styles.section_base : styles.section}`}
+      className={`${styles.section} ${isBase ? styles.section_base : styles.section_ios}`}
     >
       {children}
     </Section>

@@ -1,10 +1,10 @@
-import type { IPropsCell } from "../types/index.types";
+import type { PropsCell } from "../types";
 
 const normalize = (str: string) => {
   return str.toLowerCase().replace(/ё/g, "е").trim();
 };
 
-const matchScore = (value: IPropsCell, query: string): number => {
+const matchScore = (value: PropsCell, query: string): number => {
   const c = normalize(value.label);
   const q = normalize(query);
 
@@ -22,9 +22,9 @@ const matchScore = (value: IPropsCell, query: string): number => {
 };
 
 export const sortValuesByMatch = (
-  values: IPropsCell[],
-  query: string
-): IPropsCell[] => {
+  values: PropsCell[],
+  query: string,
+): PropsCell[] => {
   return values
     .map((value) => ({
       value: value.value,
