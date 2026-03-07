@@ -48,6 +48,7 @@ export default function App({ launchParams }: { launchParams: any }) {
   const platformForApp = useGetPlatformForApp();
 
   setPlatform(launchParams.tgWebAppPlatform);
+  // setPlatform("android");
 
   return (
     <QueryClientProvider client={queryClient}>

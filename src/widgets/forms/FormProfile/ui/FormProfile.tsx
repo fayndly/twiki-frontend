@@ -16,6 +16,7 @@ import {
   submitEventHandler,
 } from "@/shared/SubmitButton";
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
+import { SectionInput } from "@/shared/SectionInput";
 
 export function FormProfile({
   initialValues,
@@ -73,37 +74,45 @@ export function FormProfile({
       noValidate
       onSubmit={(e) => e.preventDefault()}
     >
-      <InputText
-        onChange={() => {
-          setFieldTouched("name", true);
-        }}
+      <SectionInput
         errors={errors.name && touched.name ? errors.name : ""}
-        handleChange={handleChange}
-        value={values.name}
-        clickClear={() => {
-          setFieldValue("name", "");
-        }}
-        type="text"
-        id="name"
-        name="name"
-        header="Имя*"
-        placeholder="Введите имя"
         subtitle="Ваше имя"
-      />
-      <InputText
+        header="Имя*"
+      >
+        <InputText
+          onChange={() => {
+            setFieldTouched("name", true);
+          }}
+          hasError={Boolean(errors.name?.length)}
+          handleChange={handleChange}
+          value={values.name}
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Введите имя"
+          clickClear={() => {
+            setFieldValue("name", "");
+          }}
+        />
+      </SectionInput>
+      <SectionInput
         errors={errors.age && touched.age ? errors.age : ""}
-        onChange={() => {
-          setFieldTouched("age", true);
-        }}
-        handleChange={handleChange}
-        value={values.age}
-        type="number"
-        id="age"
-        name="age"
-        header="Возраст*"
-        placeholder="Введите возраст"
         subtitle="Ваш возраст"
-      />
+        header="Возраст*"
+      >
+        <InputText
+          onChange={() => {
+            setFieldTouched("age", true);
+          }}
+          hasError={Boolean(errors.age?.length)}
+          handleChange={handleChange}
+          value={values.age}
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Введите возраст"
+        />
+      </SectionInput>
       <InputTextarea
         errors={
           errors.description && touched.description ? errors.description : ""

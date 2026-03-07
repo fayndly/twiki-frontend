@@ -1,0 +1,38 @@
+// BASE
+.has_error {
+  footer {
+    span,
+    h6 {
+      color: $tg_destructive_text_color;
+    }
+  }
+}
+
+// IOS
+.section {
+  & > div {
+    & > div {
+      border-radius: 34px !important;
+    }
+  }
+}
+
+// ANDROID
+.section_base {
+  & > div {
+    border-radius: 16px !important;
+    & > header {
+      padding: 14px 24px 4px 16px !important;
+    }
+    & > div {
+      & > div {
+        border-radius: 16px !important;
+        background: transparent;
+        padding: 4px 2px !important;
+        & > h6 {
+          display: none;
+        }
+      }
+    }
+  }
+}

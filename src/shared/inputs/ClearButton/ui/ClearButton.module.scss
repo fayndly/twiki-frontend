@@ -1,9 +1,5 @@
-.icon {
-  stroke: var(--tgui--secondary_hint_color);
-}
-
-.tappable {
-  padding: 0 !important;
-  border-radius: 50%;
-  position: relative;
+.icon_button {
+  padding: 2px !important;
+  background: var(--tgui--secondary_hint_color) !important;
+  color: var(--tgui--section_bg_color) !important;
 }
