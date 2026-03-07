@@ -1,24 +1,22 @@
 import styles from "./InputImage.module.scss";
-import { type IPropsInputFile } from "../types/index.types";
+import type { PropsInputFile } from "../types/index.types";
 
-import { SubtitleInput } from "@/shared/inputs/SubtitleInput";
+import { FileInput } from "@telegram-apps/telegram-ui";
 
-import { FileInput, IconButton } from "@telegram-apps/telegram-ui";
-import { X } from "lucide-react";
+import { ClearButton } from "@/shared/inputs/ClearButton";
 
 export function InputImage({
-  errors,
+  hasErrors,
   handleChange,
   label,
   id,
   name,
-  subtitle,
   photoPreview,
   onChange,
   clearValue,
-}: IPropsInputFile) {
+}: PropsInputFile) {
   let photoUrlPreview = undefined;
-  if (!errors && photoPreview) {
+  if (!hasErrors && photoPreview) {
     if (typeof photoPreview === "string") {
       photoUrlPreview = photoPreview;
     } else {
@@ -27,41 +25,34 @@ export function InputImage({
   }
 
   return (
-    <div className={styles.input_file}>
-      <div
-        className={`${styles.preview_container} ${
-          photoUrlPreview && styles.preview_container_active
-        }`}
-      >
-        {photoUrlPreview && (
-          <div className={styles.preview_wrapper}>
-            <IconButton
-              onClick={clearValue}
-              className={styles.preview_clear}
-              mode="gray"
-              size="s"
-            >
-              <X strokeWidth={2.5} size={20} className={styles.preview_icon} />
-            </IconButton>
-            <img
-              className={styles.preview_photo}
-              src={photoUrlPreview}
-              alt="uploaded-file"
-            />
+    <div
+      className={`${styles.preview_container} ${
+        photoUrlPreview && styles.preview_container_active
+      }`}
+    >
+      {photoUrlPreview && (
+        <div className={styles.preview_wrapper}>
+          <div className={styles.button_clear_wrapper}>
+            <ClearButton onClick={clearValue} />
           </div>
-        )}
-        <FileInput
-          id={id}
-          name={name}
-          type="file"
-          label={label}
-          onChange={(e) => {
-            onChange?.();
-            handleChange(e);
-          }}
-        />
-      </div>
-      <SubtitleInput errors={errors} subtitle={subtitle} />
+          <img
+            className={styles.preview_photo}
+            src={photoUrlPreview}
+            alt="uploaded-file"
+          />
+        </div>
+      )}
+      <FileInput
+        className={styles.input}
+        id={id}
+        name={name}
+        type="file"
+        label={label}
+        onChange={(e) => {
+          onChange?.();
+          handleChange(e);
+        }}
+      />
     </div>
   );
 }

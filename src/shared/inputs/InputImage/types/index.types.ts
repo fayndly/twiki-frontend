@@ -1,7 +1,6 @@
-import { type FormikHandlers } from "formik";
-import { type IPropsInputSubtitle } from "@/shared/inputs/SubtitleInput";
+import type { FormikHandlers } from "formik";
 
-export interface IPropsInputFile extends IPropsInputSubtitle {
+export interface PropsInputFile {
   handleChange: FormikHandlers["handleChange"];
   label: string;
   id: string;
@@ -9,4 +8,5 @@ export interface IPropsInputFile extends IPropsInputSubtitle {
   photoPreview: Blob | MediaSource | undefined | string;
   onChange: () => void;
   clearValue: () => void;
+  hasErrors?: boolean;
 }

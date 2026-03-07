@@ -141,24 +141,29 @@ export function FormProfile({
           placeholder="Введите описание"
         />
       </SectionInput>
-      <InputImage
-        onChange={() => {
-          setFieldTouched("photo", true);
-        }}
-        errors={errors.photo && touched.photo ? errors.photo : ""}
-        handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          const file = e.currentTarget.files?.[0];
-          setFieldValue("photo", file);
-        }}
-        id="photo"
-        name="photo"
-        label="Выбрать фото"
+      <SectionInput
+        errors={[errors.photo && touched.photo ? errors.photo : ""]}
         subtitle="Ваше фото"
-        photoPreview={values.photo}
-        clearValue={() => {
-          setFieldValue("photo", undefined);
-        }}
-      />
+        header="Фото*"
+      >
+        <InputImage
+          onChange={() => {
+            setFieldTouched("photo", true);
+          }}
+          hasErrors={Boolean(errors.photo?.length)}
+          handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.currentTarget.files?.[0];
+            setFieldValue("photo", file);
+          }}
+          id="photo"
+          name="photo"
+          label="Выбрать фото"
+          photoPreview={values.photo}
+          clearValue={() => {
+            setFieldValue("photo", undefined);
+          }}
+        />
+      </SectionInput>
       <SectionInput
         errors={[errors.city && touched.city ? errors.city : ""]}
         subtitle="Выберите город из выпадающего списка"

@@ -1,18 +1,12 @@
-.input_file {
-  div {
-    padding: 0px 4px;
-    background-color: transparent;
+.input {
+  box-shadow: none !important;
+  padding: 4px 0px;
+}
 
-    label {
-      border-radius: 30px;
-      background-color: $tg_secondary_bg_color;
-    }
-
-    h6 {
-      top: -10px !important;
-      left: 16px !important;
-    }
-  }
+.button_clear_wrapper {
+  position: absolute !important;
+  right: 4px;
+  top: 4px;
 }
 
 .preview {
@@ -22,12 +16,6 @@
     position: relative;
   }
 
-  &_clear {
-    position: absolute !important;
-    right: 6px;
-    top: 2px;
-  }
-
   &_container {
     width: 100%;
     display: flex;
@@ -35,7 +23,7 @@
     gap: 16px;
     background-color: $tg_secondary_bg_color !important;
     box-sizing: border-box;
-    border-radius: 30px;
+    border-radius: 34px !important; // ios
 
     &_active {
       padding: 12px 12px 0px 12px !important;
