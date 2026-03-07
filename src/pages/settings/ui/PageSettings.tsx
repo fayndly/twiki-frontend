@@ -6,7 +6,6 @@ import {
   Cell,
   Divider,
   IconContainer,
-  List,
   Section,
   Text,
 } from "@telegram-apps/telegram-ui";
@@ -14,6 +13,7 @@ import { ChevronRight, Funnel, UserRoundPen } from "lucide-react";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useIsBase } from "@/shared/usePlatform";
+import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 
 export function PageSettings() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function PageSettings() {
 
   return (
     <SectionWrapper>
-      <List className={styles.list}>
+      <ListSectionsWrapper>
         <Section
           header="Настройки"
           className={`${isBase ? styles.section_base : styles.section}`}
@@ -52,7 +52,7 @@ export function PageSettings() {
             }}
           />
         </Section>
-      </List>
+      </ListSectionsWrapper>
     </SectionWrapper>
   );
 }

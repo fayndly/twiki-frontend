@@ -26,6 +26,7 @@ export function AppealModal() {
         }
       }}
       header={<Modal.Header />}
+      className={styles.modal}
     >
       <div className={`${styles.modal_content} scrollable`}>
         <PlaceholderSticker

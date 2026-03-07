@@ -1,4 +1,3 @@
-import styles from "./FormAppeal.module.scss";
 import { initialValues, validationSchema, typeOptions } from "../config";
 import { submit } from "../api";
 
@@ -18,6 +17,8 @@ import {
 } from "@/widgets/AppealModal";
 import { useViewingCards } from "@/pages/viewing/model";
 import { useLikesCards } from "@/app/store/useLikesCards";
+import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
+import { SectionInput } from "@/shared/SectionInput";
 
 export function FormAppeal() {
   const { viewingCardsMutations } = useViewingCards();
@@ -31,7 +32,6 @@ export function FormAppeal() {
     enableReinitialize: true,
     onSubmit: async (values) => {
       let mutateFn;
-      console.log(fromAppealModal);
       if (fromAppealModal === "likesCards") {
         mutateFn = likesCardsMutations.mutateAsync;
       } else if (fromAppealModal === "viewingCards") {
@@ -50,39 +50,44 @@ export function FormAppeal() {
   const { errors, values, handleChange, setFieldTouched, touched } = formik;
 
   return (
-    <form
-      className={styles.form}
-      noValidate
-      onSubmit={(e) => e.preventDefault()}
-    >
-      <InputSelect
-        onChange={() => {
-          setFieldTouched("type", true);
-        }}
-        errors={errors.type && touched.type ? errors.type : ""}
-        handleChange={handleChange}
-        value={values.type}
-        id="type"
-        name="type"
-        header="Тип*"
-        subtitle="Тип жалобы"
-        options={typeOptions}
-      />
-      <InputTextarea
-        errors={
-          errors.description && touched.description ? errors.description : ""
-        }
-        onChange={() => {
-          setFieldTouched("description", true);
-        }}
-        handleChange={handleChange}
-        value={values.description}
-        id="description"
-        name="description"
-        header="Описание"
-        placeholder="Введите описание"
-        subtitle="Подробнее опишите нарушение"
-      />
+    <form noValidate onSubmit={(e) => e.preventDefault()}>
+      <ListSectionsWrapper>
+        <SectionInput
+          errors={[errors.type && touched.type ? errors.type : ""]}
+          subtitle="Пожалуйся сучило"
+          header="Причина жалобы"
+        >
+          <InputSelect
+            onChange={() => {
+              setFieldTouched("type", true);
+            }}
+            hasError={Boolean(errors.type?.length)}
+            handleChange={handleChange}
+            value={values.type}
+            id="type"
+            name="type"
+            options={typeOptions}
+          />
+        </SectionInput>
+        <SectionInput
+          errors={[
+            errors.description && touched.description ? errors.description : "",
+          ]}
+          subtitle="Подробнее опишите нарушение"
+          header="Описание"
+        >
+          <InputTextarea
+            onChange={() => {
+              setFieldTouched("description", true);
+            }}
+            handleChange={handleChange}
+            value={values.description}
+            id="description"
+            name="description"
+            placeholder="Введите описание"
+          />
+        </SectionInput>
+      </ListSectionsWrapper>
       <SubmitButton
         type="html"
         onSubmit={() => {

@@ -1,8 +1,8 @@
-import styles from "./FormFilters.module.scss";
 import { initialValues, validationSchema, sexOptions } from "../config";
 
 import { useFormik } from "formik";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { InputSelect } from "@/shared/inputs/InputSelect";
 import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
@@ -13,12 +13,12 @@ import {
   useButtonSubmitForFormic,
   submitEventHandler,
 } from "@/shared/SubmitButton";
-import { useNavigate } from "react-router-dom";
 import { useCities } from "@/app/store/useCities";
 import { useFilters } from "@/app/store/useFilters";
 import type { StoreItemCities } from "@/app/store/useCities/types";
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 import { SectionInput } from "@/shared/SectionInput";
+import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 
 const getInitialValues = (
   data:
@@ -128,72 +128,70 @@ export function FormFilters() {
   }
 
   return (
-    <form
-      className={styles.form}
-      noValidate
-      onSubmit={(e) => e.preventDefault()}
-    >
-      <InputRange
-        setFieldTouched={setFieldTouched}
-        firstValue={values.ageMin}
-        lastValue={values.ageMax}
-        handleChange={handleChange}
-        id={{ first: "ageMin", last: "ageMax" }}
-        name={{ first: "ageMin", last: "ageMax" }}
-        header="Возраст собеседника"
-        placeholder={{
-          first: "Возраст от",
-          last: "Возраст до",
-        }}
-        subtitle="Максимальный и минимальный возраст"
-        errors={{
-          first: errors.ageMin && touched.ageMin ? errors.ageMin : "",
-          last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
-        }}
-      />
-      <SectionInput
-        errors={[errors.sex && touched.sex ? errors.sex : ""]}
-        subtitle="Выберите пол собеседника"
-        header="Пол*"
-      >
-        <InputSelect
-          onChange={() => {
-            setFieldTouched("sex", true);
-          }}
-          hasError={Boolean(errors.sex?.length)}
+    <form noValidate onSubmit={(e) => e.preventDefault()}>
+      <ListSectionsWrapper>
+        <InputRange
+          setFieldTouched={setFieldTouched}
+          firstValue={values.ageMin}
+          lastValue={values.ageMax}
           handleChange={handleChange}
-          value={values.sex}
-          id="sex"
-          name="sex"
-          options={sexOptions}
+          id={{ first: "ageMin", last: "ageMax" }}
+          name={{ first: "ageMin", last: "ageMax" }}
+          header="Возраст собеседника"
+          placeholder={{
+            first: "От",
+            last: "До",
+          }}
+          subtitle="Укажите возрастной диапазон для показа анкет."
+          errors={{
+            first: errors.ageMin && touched.ageMin ? errors.ageMin : "",
+            last: errors.ageMax && touched.ageMax ? errors.ageMax : "",
+          }}
         />
-      </SectionInput>
+        <SectionInput
+          errors={[errors.sex && touched.sex ? errors.sex : ""]}
+          subtitle="Выберите пол людей, которых хотите видеть."
+          header="Пол*"
+        >
+          <InputSelect
+            onChange={() => {
+              setFieldTouched("sex", true);
+            }}
+            hasError={Boolean(errors.sex?.length)}
+            handleChange={handleChange}
+            value={values.sex}
+            id="sex"
+            name="sex"
+            options={sexOptions}
+          />
+        </SectionInput>
 
-      <SectionInput
-        errors={[errors.city && touched.city ? errors.city : ""]}
-        subtitle="Выберите город собеседника из выпадающего списка"
-        header="Город*"
-      >
-        <InputSearchSelect
-          onChange={() => {
-            setFieldTouched("city", true);
-          }}
-          hasErrors={Boolean(errors.city?.length)}
-          handleChange={handleChange}
-          value={values.city}
-          clickClear={() => {
-            setFieldValue("city", "");
-          }}
-          type="text"
-          id="city"
-          name="city"
-          placeholder="Введите название города"
-          handleChangeClue={(value) => {
-            setFieldValue("city", value);
-          }}
-          options={dataCities || []}
-        />
-      </SectionInput>
+        <SectionInput
+          errors={[errors.city && touched.city ? errors.city : ""]}
+          subtitle="Мы покажем анкеты из выбранного города. Выберите из выпадающего списка."
+          header="Город*"
+        >
+          <InputSearchSelect
+            onChange={() => {
+              setFieldTouched("city", true);
+            }}
+            hasErrors={Boolean(errors.city?.length)}
+            handleChange={handleChange}
+            value={values.city}
+            clickClear={() => {
+              setFieldValue("city", "");
+            }}
+            type="text"
+            id="city"
+            name="city"
+            placeholder="Введите название города"
+            handleChangeClue={(value) => {
+              setFieldValue("city", value);
+            }}
+            options={dataCities || []}
+          />
+        </SectionInput>
+      </ListSectionsWrapper>
       <SubmitButton
         onSubmit={() => {
           submitEventHandler(formik, () => {

@@ -1,4 +1,3 @@
-import styles from "./FormProfile.module.scss";
 import { validationSchema, sexOptions } from "../config";
 import type { PropsFormProfile } from "../types";
 
@@ -17,6 +16,7 @@ import {
 } from "@/shared/SubmitButton";
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 import { SectionInput } from "@/shared/SectionInput";
+import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 
 export function FormProfile({
   initialValues,
@@ -69,126 +69,124 @@ export function FormProfile({
   }
 
   return (
-    <form
-      className={styles.form}
-      noValidate
-      onSubmit={(e) => e.preventDefault()}
-    >
-      <SectionInput
-        errors={[
-          errors.name && touched.name ? errors.name : "",
-          errors.age && touched.age ? errors.age : "",
-          errors.sex && touched.sex ? errors.sex : "",
-        ]}
-        subtitle="Заполните поля имени, возраста и пола"
-        header="Имя, возраст, пол"
-        showHeader={true}
-      >
-        <InputText
-          onChange={() => {
-            setFieldTouched("name", true);
-          }}
-          hasError={Boolean(errors.name?.length)}
-          handleChange={handleChange}
-          value={values.name}
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Введите имя"
-          clickClear={() => {
-            setFieldValue("name", "");
-          }}
-        />
-        <InputText
-          onChange={() => {
-            setFieldTouched("age", true);
-          }}
-          hasError={Boolean(errors.age?.length)}
-          handleChange={handleChange}
-          value={values.age}
-          type="number"
-          id="age"
-          name="age"
-          placeholder="Введите возраст"
-        />
-        <InputSelect
-          onChange={() => {
-            setFieldTouched("sex", true);
-          }}
-          hasError={Boolean(errors.sex?.length)}
-          handleChange={handleChange}
-          value={values.sex}
-          id="sex"
-          name="sex"
-          options={sexOptions}
-        />
-      </SectionInput>
-      <SectionInput
-        errors={[
-          errors.description && touched.description ? errors.description : "",
-        ]}
-        subtitle="Ваше описание"
-        header="Описание"
-      >
-        <InputTextarea
-          onChange={() => {
-            setFieldTouched("description", true);
-          }}
-          handleChange={handleChange}
-          value={values.description}
-          id="description"
-          name="description"
-          placeholder="Введите описание"
-        />
-      </SectionInput>
-      <SectionInput
-        errors={[errors.photo && touched.photo ? errors.photo : ""]}
-        subtitle="Ваше фото"
-        header="Фото*"
-      >
-        <InputImage
-          onChange={() => {
-            setFieldTouched("photo", true);
-          }}
-          hasErrors={Boolean(errors.photo?.length)}
-          handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const file = e.currentTarget.files?.[0];
-            setFieldValue("photo", file);
-          }}
-          id="photo"
-          name="photo"
-          label="Выбрать фото"
-          photoPreview={values.photo}
-          clearValue={() => {
-            setFieldValue("photo", undefined);
-          }}
-        />
-      </SectionInput>
-      <SectionInput
-        errors={[errors.city && touched.city ? errors.city : ""]}
-        subtitle="Выберите город из выпадающего списка"
-        header="Город*"
-      >
-        <InputSearchSelect
-          onChange={() => {
-            setFieldTouched("city", true);
-          }}
-          hasErrors={Boolean(errors.city?.length)}
-          handleChange={handleChange}
-          value={values.city}
-          clickClear={() => {
-            setFieldValue("city", "");
-          }}
-          type="text"
-          id="city"
-          name="city"
-          placeholder="Введите название города"
-          handleChangeClue={(value) => {
-            setFieldValue("city", value);
-          }}
-          options={cities}
-        />
-      </SectionInput>
+    <form noValidate onSubmit={(e) => e.preventDefault()}>
+      <ListSectionsWrapper>
+        <SectionInput
+          errors={[
+            errors.name && touched.name ? errors.name : "",
+            errors.age && touched.age ? errors.age : "",
+            errors.sex && touched.sex ? errors.sex : "",
+          ]}
+          subtitle="Основная информация о вас."
+          header="Имя, возраст, пол"
+          showHeader={true}
+        >
+          <InputText
+            onChange={() => {
+              setFieldTouched("name", true);
+            }}
+            hasError={Boolean(errors.name?.length)}
+            handleChange={handleChange}
+            value={values.name}
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Введите имя"
+            clickClear={() => {
+              setFieldValue("name", "");
+            }}
+          />
+          <InputText
+            onChange={() => {
+              setFieldTouched("age", true);
+            }}
+            hasError={Boolean(errors.age?.length)}
+            handleChange={handleChange}
+            value={values.age}
+            type="number"
+            id="age"
+            name="age"
+            placeholder="Введите возраст"
+          />
+          <InputSelect
+            onChange={() => {
+              setFieldTouched("sex", true);
+            }}
+            hasError={Boolean(errors.sex?.length)}
+            handleChange={handleChange}
+            value={values.sex}
+            id="sex"
+            name="sex"
+            options={sexOptions}
+          />
+        </SectionInput>
+        <SectionInput
+          errors={[
+            errors.description && touched.description ? errors.description : "",
+          ]}
+          subtitle="Расскажите немного о себе и своих интересах. Это поможет другим лучше узнать вас."
+          header="Описание"
+        >
+          <InputTextarea
+            onChange={() => {
+              setFieldTouched("description", true);
+            }}
+            handleChange={handleChange}
+            value={values.description}
+            id="description"
+            name="description"
+            placeholder="Введите описание"
+          />
+        </SectionInput>
+        <SectionInput
+          errors={[errors.photo && touched.photo ? errors.photo : ""]}
+          subtitle="Хорошее фото повышает шанс на знакомство. Выберите одну из лучших."
+          header="Фото*"
+        >
+          <InputImage
+            onChange={() => {
+              setFieldTouched("photo", true);
+            }}
+            hasErrors={Boolean(errors.photo?.length)}
+            handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const file = e.currentTarget.files?.[0];
+              setFieldValue("photo", file);
+            }}
+            id="photo"
+            name="photo"
+            label="Выбрать фото"
+            photoPreview={values.photo}
+            clearValue={() => {
+              setFieldValue("photo", undefined);
+            }}
+          />
+        </SectionInput>
+        <SectionInput
+          errors={[errors.city && touched.city ? errors.city : ""]}
+          subtitle="Укажите ваш город, чтобы находить знакомства рядом. Выберите из выпадающего списка."
+          header="Город*"
+        >
+          <InputSearchSelect
+            onChange={() => {
+              setFieldTouched("city", true);
+            }}
+            hasErrors={Boolean(errors.city?.length)}
+            handleChange={handleChange}
+            value={values.city}
+            clickClear={() => {
+              setFieldValue("city", "");
+            }}
+            type="text"
+            id="city"
+            name="city"
+            placeholder="Введите название города"
+            handleChangeClue={(value) => {
+              setFieldValue("city", value);
+            }}
+            options={cities}
+          />
+        </SectionInput>
+      </ListSectionsWrapper>
       <SubmitButton
         onSubmit={() => {
           submitEventHandler(formik, successActionFn);
