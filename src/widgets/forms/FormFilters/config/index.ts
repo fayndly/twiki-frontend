@@ -10,12 +10,18 @@ export const initialValues: FiltersInitialValues = {
 
 export const validationSchema = Yup.object({
   ageMin: Yup.number()
-    .max(Yup.ref("ageMax"), "Первый возраст не может быть больше последнего")
+    .max(
+      Yup.ref("ageMax"),
+      "Минимальных возраст не может быть больше максимального",
+    )
     .min(1, "Минимальный возраст 1 год")
     .required("Эти поля обязательны"),
   ageMax: Yup.number()
     .max(99, "Максимальный возраст 99 лет")
-    .min(Yup.ref("ageMin"), "Последний возраст не может быть меньше первого")
+    .min(
+      Yup.ref("ageMin"),
+      "Максимальный возраст не может быть меньше минимального",
+    )
     .required("Эти поля обязательны"),
   sex: Yup.mixed()
     .nullable()

@@ -140,10 +140,10 @@ export function FormFilters() {
         handleChange={handleChange}
         id={{ first: "ageMin", last: "ageMax" }}
         name={{ first: "ageMin", last: "ageMax" }}
-        header={{ first: "От*", last: "До*" }}
+        header="Возраст собеседника"
         placeholder={{
-          first: "Введите возраст",
-          last: "Введите возраст",
+          first: "Возраст от",
+          last: "Возраст до",
         }}
         subtitle="Максимальный и минимальный возраст"
         errors={{
@@ -153,7 +153,7 @@ export function FormFilters() {
       />
       <SectionInput
         errors={[errors.sex && touched.sex ? errors.sex : ""]}
-        subtitle="Выберите ваш пол"
+        subtitle="Выберите пол собеседника"
         header="Пол*"
       >
         <InputSelect
@@ -171,7 +171,7 @@ export function FormFilters() {
 
       <SectionInput
         errors={[errors.city && touched.city ? errors.city : ""]}
-        subtitle="Выберите город из выпадающего списка"
+        subtitle="Выберите город собеседника из выпадающего списка"
         header="Город*"
       >
         <InputSearchSelect
