@@ -1,23 +1,11 @@
 import styles from "./CardSympathy.module.scss";
 
-import { Text } from "@telegram-apps/telegram-ui";
+import { Caption } from "@telegram-apps/telegram-ui";
 
-import { type IPropsCardSympathy } from "../types";
-import { useEffect, useState } from "react";
-import { themeParams, useSignal } from "@tma.js/sdk-react";
+import type { PropsCardSympathy } from "../types";
+import { useState } from "react";
 import { supportHapticFeedback } from "@/shared/helpers";
 import { ImageWithStatus } from "@/shared/ImageWithStatus";
-
-const useGetTheme = () => {
-  const [theme, setTheme] = useState<undefined | "dark" | "light">(undefined);
-  const isDark = useSignal(themeParams.isDark);
-
-  useEffect(() => {
-    isDark ? setTheme("dark") : setTheme("light");
-  }, [isDark]);
-
-  return theme;
-};
 
 export function CardSympathy({
   onClick,
@@ -25,7 +13,7 @@ export function CardSympathy({
   name,
   age,
   city,
-}: IPropsCardSympathy) {
+}: PropsCardSympathy) {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
@@ -40,18 +28,10 @@ export function CardSympathy({
     }, 200);
   };
 
-  const theme = useGetTheme();
-
   return (
     <div
       onClick={handleClick}
-      className={`${styles.card_sympathy} 
-      ${
-        theme === "light"
-          ? styles.card_sympathy_light
-          : styles.card_sympathy_dark
-      } 
-      ${active ? styles.card_sympathy_active : ""}`}
+      className={`${styles.card_sympathy} ${active ? styles.card_sympathy_active : ""}`}
     >
       <ImageWithStatus
         src={imgUrl}
@@ -59,13 +39,22 @@ export function CardSympathy({
         stylesContainerImg={styles.img_container}
         stylesImg={styles.img}
       />
-      <div className={styles.title}>
-        <Text className={styles.text} weight="2">
-          <span className={styles.text_name}>{name}</span>
-          <span>,</span>
-          <span className={styles.text_age}>{age}</span>
-          <span className={styles.text_city}>{city}</span>
-        </Text>
+      <div className={styles.info_container}>
+        <div className={styles.info}>
+          <div className={styles.row}>
+            <Caption className={styles.info_name} weight="2">
+              {name}
+            </Caption>
+            <Caption className={styles.info_age} weight="2">
+              {", " + age}
+            </Caption>
+          </div>
+          <div className={styles.row}>
+            <Caption className={styles.info_city} weight="3">
+              {city}
+            </Caption>
+          </div>
+        </div>
       </div>
     </div>
   );

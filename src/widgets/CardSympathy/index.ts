@@ -1,2 +1,2 @@
 export { CardSympathy } from "./ui/CardSympathy.tsx";
-export type { IPropsCardSympathy } from "./types";
+export type { PropsCardSympathy } from "./types";
