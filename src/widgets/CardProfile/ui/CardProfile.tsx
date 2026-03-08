@@ -2,7 +2,7 @@ import styles from "./CardProfile.module.scss";
 import type { PropsCardProfile } from "../types";
 import { ButtonReaction } from "./ButtonReaction";
 import { ButtonAppeal } from "./ButtonAppeal";
-import { DescriptionCard } from "./DescriptionCard";
+import { InfoCard } from "./InfoCard";
 
 import { ImageWithStatus } from "@/shared/ImageWithStatus";
 
@@ -39,8 +39,8 @@ export function CardProfile({
           stylesContainerImg={styles.img_container}
           stylesImg={styles.img}
         />
-        <div className={styles.info}>
-          <DescriptionCard
+        <div className={styles.info_container}>
+          <InfoCard
             name={name}
             age={age}
             city={city}
