@@ -1,7 +1,6 @@
-import styles from "./App.module.scss";
 import { AppRoutes } from "../routes";
 import { preloadLottie } from "../helpers";
-import { useGetTheme, useReverbBgColor } from "../helpers";
+import { useReverbBgColor } from "../helpers";
 import { useSetInitDataRaw } from "../api/entrypoint.api";
 
 import { AppRoot } from "@telegram-apps/telegram-ui";
@@ -28,8 +27,7 @@ export default function App({ launchParams }: { launchParams: any }) {
 
   const location = useLocation();
 
-  const theme = useGetTheme();
-  useReverbBgColor(theme, location);
+  useReverbBgColor();
 
   useSetInitDataRaw();
 
@@ -55,11 +53,7 @@ export default function App({ launchParams }: { launchParams: any }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRoot
-        className={styles.app_root}
-        appearance={theme}
-        platform={platformForApp ?? "base"}
-      >
+      <AppRoot platform={platformForApp ?? "base"}>
         <BackButton />
         <SettingsButton />
         <MainLayout>
