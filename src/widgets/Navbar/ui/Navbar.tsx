@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { supportHapticFeedback } from "@/shared/helpers";
 import { Tab } from "./Tab";
 import { useLikesCards } from "@/app/store/useLikesCards";
+import { useScrollDirection } from "../model/useScrollDirection";
 
 const tabs = [
   {
@@ -114,11 +115,14 @@ export function Navbar({ show }: PropsNavbar) {
     navigate(pathTo);
   };
 
+  const scrollDirection = useScrollDirection();
+  const isVisible = show && scrollDirection;
+
   return (
     <AnimatePresence mode="wait">
-      {show && (
+      {isVisible && (
         <motion.nav
-          animate={show ? "visible" : "hidden"}
+          animate={isVisible ? "visible" : "hidden"}
           className={`${styles.navbar} `}
           variants={variants}
           initial="hidden"

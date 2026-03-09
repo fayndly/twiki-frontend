@@ -7,12 +7,12 @@ import { useSetInitDataRaw } from "../api/entrypoint.api";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import "@telegram-apps/telegram-ui/dist/styles.css";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 
 import { MainLayout } from "@/app/layouts/MainLayout";
 import { queryClient } from "@/app/store";
-import { Navbar, useScrollDirection } from "@/widgets/Navbar";
+import { Navbar } from "@/widgets/Navbar";
 import { WarningSnackbarContainer } from "@/widgets/WarningSnackbar";
 import { AppealModal } from "@/widgets/AppealModal";
 import { BackButton } from "@/shared/BackButton";
@@ -20,21 +20,25 @@ import { SettingsButton } from "@/shared/SettingsButton";
 import { pathsToPublicSrc } from "@/shared/config";
 import { useGetPlatformForApp, useSetPlatform } from "@/shared/usePlatform";
 
-const pagesWithNavbar = ["/viewing", "/likes", "/sympathy"];
+const pagesWithNavbar = new Set(["/viewing", "/likes", "/sympathy"]);
 
 export default function App({ launchParams }: { launchParams: any }) {
+  const setPlatform = useSetPlatform();
+  const platformForApp = useGetPlatformForApp();
+
   const location = useLocation();
-  const scrollDirection = useScrollDirection();
 
   const theme = useGetTheme();
   useReverbBgColor(theme, location);
 
   useSetInitDataRaw();
 
-  const isNavbarShow =
-    pagesWithNavbar.includes(location.pathname) && scrollDirection;
+  const isNavbarPage = pagesWithNavbar.has(location.pathname);
 
-  const stickerPaths = Object.values(pathsToPublicSrc.stickers);
+  const stickerPaths = useMemo(
+    () => Object.values(pathsToPublicSrc.stickers),
+    [],
+  );
 
   useEffect(() => {
     Promise.all(stickerPaths.map(preloadLottie));
@@ -44,18 +48,17 @@ export default function App({ launchParams }: { launchParams: any }) {
     window.history.scrollRestoration = "manual";
   }, []);
 
-  const setPlatform = useSetPlatform();
-  const platformForApp = useGetPlatformForApp();
-
-  setPlatform(launchParams.tgWebAppPlatform);
-  // setPlatform("android");
+  useEffect(() => {
+    setPlatform(launchParams.tgWebAppPlatform);
+    // setPlatform("android");
+  }, [launchParams.tgWebAppPlatform]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <AppRoot
         className={styles.app_root}
         appearance={theme}
-        platform={platformForApp}
+        platform={platformForApp ?? "base"}
       >
         <BackButton />
         <SettingsButton />
@@ -64,7 +67,7 @@ export default function App({ launchParams }: { launchParams: any }) {
         </MainLayout>
         <AppealModal />
         <WarningSnackbarContainer />
-        <Navbar show={isNavbarShow} />
+        <Navbar show={isNavbarPage} />
       </AppRoot>
     </QueryClientProvider>
   );

@@ -59,4 +59,4 @@ export const useGetPlatform = () => usePlatform((state) => state.platform);
 export const useGetPlatformForApp = () =>
   usePlatform((state) => state.platformForApp);
 export const useIsBase = () => usePlatform((state) => state.isBase);
-export const useSetPlatform = () => usePlatform.getState().set;
+export const useSetPlatform = () => usePlatform((state) => state.set);
