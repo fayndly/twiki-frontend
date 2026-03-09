@@ -4,7 +4,7 @@ import { Badge, IconButton } from "@telegram-apps/telegram-ui";
 import type { PropsTab } from "../types";
 
 export function Tab({
-  icon: Icon,
+  children,
   isActive,
   onClick,
   hasBadge = false,
@@ -23,7 +23,7 @@ export function Tab({
         mode={isActive ? "gray" : "plain"}
         size="l"
       >
-        <Icon />
+        {children}
       </IconButton>
     </div>
   );

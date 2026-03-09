@@ -1,4 +1,4 @@
-import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types";
+import type { PropsCell } from "@/shared/inputs/InputSearchSelect";
 
 export interface ProfileInitialValues {
   name: string;
@@ -6,7 +6,7 @@ export interface ProfileInitialValues {
   description: string;
   sex: "male" | "female";
   photo: undefined | File | string;
-  city: string | IPropsCell;
+  city: string | PropsCell;
 }
 
 interface Action {
@@ -18,7 +18,7 @@ interface Action {
 export interface PropsFormProfile {
   initialValues: ProfileInitialValues;
   handleSubmit: (values: ProfileInitialValues) => void;
-  cities: IPropsCell[];
+  cities: PropsCell[];
   isDataLoading: boolean;
   validateNoChanges: boolean;
   successActionFn: () => void;

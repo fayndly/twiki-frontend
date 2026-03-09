@@ -47,16 +47,19 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #fff;
+    line-height: 16px !important;
   }
   &_age {
     flex-shrink: 0;
     color: #fff;
+    line-height: 16px !important;
   }
   &_city {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: rgba(255, 255, 255, 0.75);
+    line-height: 16px !important;
   }
 }
 

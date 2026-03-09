@@ -129,12 +129,13 @@ export function Navbar({ show }: PropsNavbar) {
             {tabs.map(({ name, pathTo, Icon }) => (
               <Tab
                 key={name}
-                icon={Icon}
                 isActive={location.pathname === pathTo}
                 onClick={() => clickHandler(pathTo)}
                 hasBadge={name === "likes"}
                 badgeCount={name === "likes" ? likesCards.data?.length : 0}
-              />
+              >
+                <Icon />
+              </Tab>
             ))}
           </div>
         </motion.nav>

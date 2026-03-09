@@ -4,12 +4,11 @@ import type { PropsCustomCell } from "../types";
 import { useNavigate } from "react-router-dom";
 import {
   Cell,
-  Divider,
   IconContainer,
+  Navigation,
   Section,
-  Text,
 } from "@telegram-apps/telegram-ui";
-import { ChevronRight, Funnel, UserRoundPen } from "lucide-react";
+import { Funnel, UserRoundPen } from "lucide-react";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useIsBase } from "@/shared/usePlatform";
@@ -38,7 +37,6 @@ export function PageSettings() {
               Icon: <Funnel />,
             }}
           />
-          <Divider />
           <CustomCell
             title="Анкета"
             subtitle="Имя, возраст, описание, пол, фото, город"
@@ -72,18 +70,7 @@ const CustomCell = ({
       interactiveAnimation="background"
       onClick={onClick}
       subtitle={isBase && subtitle}
-      after={
-        !isBase && (
-          <div className={styles.move_container}>
-            <Text className={styles.move_title} weight="3">
-              {moveTitle}
-            </Text>
-            <IconContainer style={{ maxHeight: 20 }}>
-              <ChevronRight size={20} color="var(--tg-theme-hint-color)" />
-            </IconContainer>
-          </div>
-        )
-      }
+      after={!isBase && <Navigation>{moveTitle}</Navigation>}
       before={
         <IconContainer
           className={styles.icon_container}

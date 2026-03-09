@@ -4,6 +4,10 @@
   & > div {
     position: relative;
   }
+
+  hr {
+    border-color: $tg_hint_color;
+  }
 }
 
 .footer_errors {
@@ -18,7 +22,6 @@
 // IOS
 .section_ios {
   hr {
-    border-color: $tg_hint_color;
     margin: 0px 16px;
   }
   & > div {
@@ -31,6 +34,9 @@
 
 // ANDROID
 .section_base {
+  hr {
+    margin-left: 18px;
+  }
   & > div {
     border-radius: 16px !important;
     & > header {

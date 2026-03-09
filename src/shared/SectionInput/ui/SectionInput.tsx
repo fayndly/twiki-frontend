@@ -1,7 +1,9 @@
-import { Section } from "@telegram-apps/telegram-ui";
-import type { PropsSectionInput } from "../types";
-import { useIsBase } from "@/shared/usePlatform";
 import styles from "./SectionInput.module.scss";
+import type { PropsSectionInput } from "../types";
+
+import { Section } from "@telegram-apps/telegram-ui";
+
+import { useIsBase } from "@/shared/usePlatform";
 
 const Subtitle = ({ text }: { text?: string }) => {
   if (!text) {
@@ -49,7 +51,6 @@ export function SectionInput({
   return (
     <Section
       footer={showSubtitle && footerText}
-      // footer={"text"}
       header={(isBase || showHeader) && header}
       className={`${styles.section} ${isBase ? styles.section_base : styles.section_ios}`}
     >

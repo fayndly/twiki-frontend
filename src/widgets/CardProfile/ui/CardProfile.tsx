@@ -21,7 +21,7 @@ export function CardProfile({
   canRemove,
 }: PropsCardProfile) {
   return (
-    <div
+    <article
       className={`${styles.card_profile} ${isLiked && styles.swipe_right} ${
         isDisliked && styles.swipe_left
       } ${isAppealed && styles.swipe_bottom}`}
@@ -55,6 +55,6 @@ export function CardProfile({
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

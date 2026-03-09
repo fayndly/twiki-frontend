@@ -29,7 +29,7 @@ export function CardSympathy({
   };
 
   return (
-    <div
+    <article
       onClick={handleClick}
       className={`${styles.card_sympathy} ${active ? styles.card_sympathy_active : ""}`}
     >
@@ -50,12 +50,12 @@ export function CardSympathy({
             </Caption>
           </div>
           <div className={styles.row}>
-            <Caption className={styles.info_city} weight="3">
+            <Caption className={styles.info_city} weight="2">
               {city}
             </Caption>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

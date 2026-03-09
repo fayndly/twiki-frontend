@@ -1,4 +1,4 @@
-import type { IPropsCell } from "@/shared/inputs/InputSearchSelect/types";
+import type { PropsCell } from "@/shared/inputs/InputSearchSelect";
 
 export interface ValuesUpdateProfile {
   name: string;
@@ -6,7 +6,7 @@ export interface ValuesUpdateProfile {
   description: string;
   sex: "male" | "female";
   photo: string | File;
-  cityId: string | IPropsCell;
+  cityId: string | PropsCell;
 }
 
 export interface ProfileDto {
