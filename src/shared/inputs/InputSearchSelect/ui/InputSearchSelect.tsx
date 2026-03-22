@@ -1,11 +1,9 @@
-import { useState } from "react";
-
 import styles from "./InputSearchSelect.module.scss";
 import type { PropsInputSearchSelect } from "../types";
-
 import { sortValuesByMatch } from "../helpers/sortList";
 import { Clue } from "../components/Clue/Clue";
 
+import { useState } from "react";
 import { Input } from "@telegram-apps/telegram-ui";
 
 import { ClearButton } from "@/shared/inputs/ClearButton";
@@ -64,7 +62,7 @@ export function InputSearchSelect({
         }
       />
       <Clue
-        isFocused={isFocused}
+        isVisible={isFocused}
         suggestions={suggestions}
         handleChangeClue={handleChangeClue}
       />

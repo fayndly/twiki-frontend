@@ -1,4 +1,5 @@
 import { initialValues, validationSchema, sexOptions } from "../config";
+import type { FiltersInitialValues } from "../types";
 
 import { useFormik } from "formik";
 import { useEffect } from "react";
@@ -21,18 +22,11 @@ import { SectionInput } from "@/shared/SectionInput";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 
 const getInitialValues = (
-  data:
-    | {
-        ageMin: number;
-        ageMax: number;
-        sex: "male" | "female";
-        city: string | StoreItemCities;
-      }
-    | undefined,
+  data: FiltersInitialValues | undefined,
   cities: StoreItemCities[] | undefined,
 ) => {
   if (data) {
-    if (cities) {
+    if (cities && typeof data.city === "string") {
       data.city = cities.find((value) => value.value === data.city) || "";
     }
     return data;

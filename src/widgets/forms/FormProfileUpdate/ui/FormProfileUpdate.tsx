@@ -7,12 +7,14 @@ import { FormProfile } from "@/widgets/forms/FormProfile";
 import { useCities } from "@/app/store/useCities";
 import { useProfile } from "@/app/store/useProfile/model";
 import type { StoreItemCities } from "@/app/store/useCities/types";
+import type { ProfileInitialValues } from "@/widgets/forms/FormProfile";
 
-const getInitialValues = (data: any, cities: StoreItemCities[] | undefined) => {
+const getInitialValues = (
+  data: ProfileInitialValues | undefined,
+  cities: StoreItemCities[] | undefined,
+) => {
   if (data) {
-    if (cities) {
-      console.log(data.city);
-
+    if (cities && typeof data.city === "string") {
       data.city = cities.find((value) => value.value === data.city) || "";
     }
 

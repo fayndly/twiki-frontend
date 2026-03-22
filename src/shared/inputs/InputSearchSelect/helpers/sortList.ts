@@ -30,6 +30,7 @@ export const sortValuesByMatch = (
       value: value.value,
       label: value.label,
       score: matchScore(value, query),
+      subtitle: value.subtitle,
     }))
     .filter((item) => item.score >= 0)
     .sort((a, b) => b.score - a.score)

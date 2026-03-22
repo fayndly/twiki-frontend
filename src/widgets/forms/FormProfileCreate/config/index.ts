@@ -1,8 +1,10 @@
-export const initialValues = {
+import type { ProfileInitialValues } from "@/widgets/forms/FormProfile";
+
+export const initialValues: ProfileInitialValues = {
   name: "",
-  age: 0,
+  age: "",
   description: "",
-  sex: "male" as "male" | "female",
+  sex: "male",
   photo: undefined,
-  city: { value: "77", label: "Москва" },
+  city: "",
 };

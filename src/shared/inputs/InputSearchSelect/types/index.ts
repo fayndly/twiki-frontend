@@ -17,10 +17,11 @@ export interface PropsInputSearchSelect {
 export interface PropsCell {
   value: string;
   label: string;
+  subtitle?: string;
 }
 
 export interface PropsClue {
   suggestions: PropsCell[];
-  isFocused: boolean;
   handleChangeClue: (value: PropsCell) => void;
+  isVisible: boolean;
 }
