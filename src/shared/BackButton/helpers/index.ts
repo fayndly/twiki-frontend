@@ -1,18 +1,18 @@
 import { backButton } from "@tma.js/sdk-react";
 import { useEffect } from "react";
-import type { NavigateFunction, Location } from "react-router-dom";
+import type { Location } from "react-router-dom";
 import { backButtonPaths } from "../config";
 import { useHideBackButton, useShowBackButton } from "../store";
 import { supportHapticFeedback } from "@/shared/helpers";
 
-export const onPressBackButtonHandler = (navigate: NavigateFunction) => {
+export const onPressBackButtonHandler = async (fn: () => Promise<void>) => {
   supportHapticFeedback("light");
-  navigate(-1);
+  fn?.();
 };
 
-export const useTgBackButtonOnPressHandler = (navigate: NavigateFunction) => {
+export const useTgBackButtonOnPressHandler = (fn: () => Promise<void>) => {
   const handler = () => {
-    onPressBackButtonHandler(navigate);
+    onPressBackButtonHandler(fn);
   };
   useEffect(() => {
     backButton.onClick(handler);

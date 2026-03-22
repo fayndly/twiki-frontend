@@ -4,7 +4,6 @@ type RetryFunction<TArgs extends any[] = any[], TResult = any> = (
   ...args: TArgs
 ) => Promise<TResult>;
 
-// Аргументы, с которыми нужно повторно вызвать retryFunction
 type RetryArgs = any[];
 
 interface Actions {

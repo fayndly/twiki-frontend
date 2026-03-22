@@ -17,6 +17,9 @@ import {
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 import { SectionInput } from "@/shared/SectionInput";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSetFormDirty } from "@/app/store/useDirtyForms";
 
 export function FormProfile({
   initialValues,
@@ -29,6 +32,10 @@ export function FormProfile({
   profileActions,
   showSubmitButton,
 }: PropsFormProfile) {
+  const location = useLocation();
+
+  const setFormDirty = useSetFormDirty();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -45,7 +52,17 @@ export function FormProfile({
     setFieldValue,
     setFieldTouched,
     touched,
+    dirty,
   } = formik;
+
+  useEffect(() => {
+    if (location.pathname === "/profile/create") {
+      setFormDirty("profileCreate", dirty);
+    }
+    if (location.pathname === "/profile/update") {
+      setFormDirty("profileUpdate", dirty);
+    }
+  }, [dirty]);
 
   if (isDataLoading) {
     return <SectionLoaderForm />;

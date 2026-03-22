@@ -2,6 +2,10 @@ import { AppRoutes } from "../routes";
 import { preloadLottie } from "../helpers";
 import { useReverbBgColor } from "../helpers";
 import { useSetInitDataRaw } from "../api/entrypoint.api";
+import {
+  useIsFormFiltersDirty,
+  useIsFormProfileUpdateDirty,
+} from "../store/useDirtyForms";
 
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
@@ -24,6 +28,9 @@ const pagesWithNavbar = new Set(["/viewing", "/likes", "/sympathy"]);
 export default function App({ launchParams }: { launchParams: any }) {
   const setPlatform = useSetPlatform();
   const platformForApp = useGetPlatformForApp();
+
+  const isFormFiltersDirty = useIsFormFiltersDirty();
+  const isFormProfileUpdateDirty = useIsFormProfileUpdateDirty();
 
   const location = useLocation();
 
@@ -54,7 +61,10 @@ export default function App({ launchParams }: { launchParams: any }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AppRoot platform={platformForApp ?? "base"}>
-        <BackButton />
+        <BackButton
+          isFormFiltersDirty={isFormFiltersDirty}
+          isFormProfileUpdateDirty={isFormProfileUpdateDirty}
+        />
         <SettingsButton />
         <MainLayout>
           <AppRoutes />

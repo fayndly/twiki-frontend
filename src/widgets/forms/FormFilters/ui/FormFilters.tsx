@@ -21,6 +21,7 @@ import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 import { SectionInput } from "@/shared/SectionInput";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 import { useViewingCards } from "@/app/store/useViewingCards";
+import { useSetFormDirty } from "@/app/store/useDirtyForms";
 
 const getInitialValues = (
   data: FiltersInitialValues | undefined,
@@ -53,6 +54,8 @@ export function FormFilters() {
     isSuccess: isFiltersSuccess,
     filtersMutations,
   } = useFilters();
+
+  const setFormDirty = useSetFormDirty();
 
   const { refetch: viewingCardsRefetch } = useViewingCards();
 
@@ -102,7 +105,12 @@ export function FormFilters() {
     setFieldValue,
     setFieldTouched,
     touched,
+    dirty,
   } = formik;
+
+  useEffect(() => {
+    setFormDirty("filters", dirty);
+  }, [dirty]);
 
   if (isDataLoading) {
     return <SectionLoaderForm />;
