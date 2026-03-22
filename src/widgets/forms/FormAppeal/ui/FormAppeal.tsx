@@ -15,7 +15,7 @@ import {
   useCloseAppealModal,
   useFromAppealModal,
 } from "@/widgets/AppealModal";
-import { useViewingCards } from "@/pages/viewing/model";
+import { useViewingCards } from "@/app/store/useViewingCards";
 import { useLikesCards } from "@/app/store/useLikesCards";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 import { SectionInput } from "@/shared/SectionInput";

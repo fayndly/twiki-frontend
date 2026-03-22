@@ -3,7 +3,7 @@ import type { UseMutationOptions } from "@tanstack/react-query";
 
 export type reactions = "like" | "dislike" | "appeal";
 
-export interface ICartProfile extends PropsCardProfile {
+export interface CartProfile extends PropsCardProfile {
   userId: string;
   id: number;
   isRemoving: boolean;
@@ -19,7 +19,7 @@ export interface PropsPostReaction {
 }
 
 type ViewingCardsMutationContext = {
-  previousViewingCards?: ICartProfile[];
+  previousViewingCards?: CartProfile[];
 };
 
 export type PropsViewingCardsMutationOptions = UseMutationOptions<

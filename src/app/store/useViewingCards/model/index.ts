@@ -1,6 +1,6 @@
 import { postReaction, getViewingCards } from "../api";
 import type {
-  ICartProfile,
+  CartProfile,
   PropsViewingCardsMutationOptions,
   PropsPostReaction,
 } from "../types";
@@ -14,7 +14,7 @@ const mutateSetStatuses = (
   reaction: PropsPostReaction,
   canDeleteAppeal: boolean = false,
 ) => {
-  queryClient.setQueryData<ICartProfile[]>(["viewingCards"], (old = []) =>
+  queryClient.setQueryData<CartProfile[]>(["viewingCards"], (old = []) =>
     old.map((card) =>
       card.id === reaction.cardId
         ? {
@@ -33,7 +33,7 @@ const mutateSetStatuses = (
 };
 
 const viewingCardsQueryOptions = () =>
-  queryOptions<ICartProfile[]>({
+  queryOptions<CartProfile[]>({
     queryKey: ["viewingCards"],
     queryFn: getViewingCards,
     retry: false,
@@ -45,7 +45,7 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
   onMutate: async (reaction) => {
     await queryClient.cancelQueries({ queryKey: ["viewingCards"] });
 
-    const previousViewingCards = queryClient.getQueryData<ICartProfile[]>([
+    const previousViewingCards = queryClient.getQueryData<CartProfile[]>([
       "viewingCards",
     ]);
 

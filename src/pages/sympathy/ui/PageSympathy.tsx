@@ -1,15 +1,12 @@
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-
 import styles from "./PageSympathy.module.scss";
-
-import { CardSympathy } from "@/widgets/CardSympathy";
 
 import { openTelegramLink } from "@tma.js/sdk-react";
 
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
+import { useSympathyCards } from "@/app/store/useSympathyCards";
+import { CardSympathy } from "@/widgets/CardSympathy";
 import { SectionNoContent } from "@/shared/SectionNoContent";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
-
-import { useSympathyCards } from "../model";
 import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
 
 function Content() {

@@ -1,14 +1,14 @@
 import styles from "./PageViewing.module.scss";
-import { useViewingCards } from "../model";
-import type { ICartProfile } from "../types";
 
+import { useEffect } from "react";
+
+import { useViewingCards, type CartProfile } from "@/app/store/useViewingCards";
+import { SectionWrapper } from "@/app/layouts/SectionWrapper";
+import { queryClient } from "@/app/store";
+import { CardProfile } from "@/widgets/CardProfile";
+import { useOpenAppealModal } from "@/widgets/AppealModal";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
-import { CardProfile } from "@/widgets/CardProfile";
-import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-import { useEffect } from "react";
-import { queryClient } from "@/app/store";
-import { useOpenAppealModal } from "@/widgets/AppealModal";
 
 export function Content() {
   const {
@@ -21,11 +21,11 @@ export function Content() {
     viewingCardsMutations,
   } = useViewingCards();
 
-  const likeHandler = (card: ICartProfile) => {
+  const likeHandler = (card: CartProfile) => {
     viewingCardsMutations.mutate({ reaction: "like", cardId: card.id });
   };
 
-  const dislikeHandler = (card: ICartProfile) => {
+  const dislikeHandler = (card: CartProfile) => {
     viewingCardsMutations.mutate({ reaction: "dislike", cardId: card.id });
   };
 
@@ -78,7 +78,7 @@ export function Content() {
             <CardProfile
               canRemove={() => {
                 if (card.isRemoving) {
-                  queryClient.setQueryData<ICartProfile[]>(
+                  queryClient.setQueryData<CartProfile[]>(
                     ["viewingCards"],
                     (old = []) => old.filter((c) => c.id !== card.id),
                   );

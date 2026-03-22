@@ -20,6 +20,7 @@ import type { StoreItemCities } from "@/app/store/useCities/types";
 import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
 import { SectionInput } from "@/shared/SectionInput";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
+import { useViewingCards } from "@/app/store/useViewingCards";
 
 const getInitialValues = (
   data: FiltersInitialValues | undefined,
@@ -53,6 +54,8 @@ export function FormFilters() {
     filtersMutations,
   } = useFilters();
 
+  const { refetch: viewingCardsRefetch } = useViewingCards();
+
   const navigate = useNavigate();
 
   let initialValues = getInitialValues(dataFilters, dataCities);
@@ -78,6 +81,7 @@ export function FormFilters() {
         sex: values.sex,
         cityId: values.city.value,
       });
+      await viewingCardsRefetch();
     },
   });
 
