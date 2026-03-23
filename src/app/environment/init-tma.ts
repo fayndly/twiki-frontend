@@ -13,6 +13,7 @@ import {
   settingsButton,
   backButton,
   mainButton,
+  closingBehavior,
 } from "@tma.js/sdk-react";
 
 import { config } from "./config";
@@ -77,6 +78,11 @@ export async function init(options: {
   }
 
   initData.restore();
+
+  if (closingBehavior.mount.isAvailable()) {
+    closingBehavior.mount();
+    closingBehavior.enableConfirmation();
+  }
 
   if (mainButton.mount.isAvailable()) {
     mainButton.mount();
