@@ -84,7 +84,7 @@ export function FormFilters() {
         sex: values.sex,
         cityId: values.city.value,
       });
-      await viewingCardsRefetch();
+      viewingCardsRefetch();
     },
   });
 

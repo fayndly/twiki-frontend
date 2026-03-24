@@ -20,7 +20,13 @@ const getInitialValues = (
 
     return data;
   }
-  return initialValues;
+  return {
+    ...initialValues,
+    changes: {
+      age: false,
+      city: false,
+    },
+  };
 };
 
 export function FormProfileUpdate() {
@@ -73,6 +79,7 @@ export function FormProfileUpdate() {
           sex: values.sex,
           photo: values.photo,
           cityId: values.city.value,
+          changes: values.changes,
         });
       }}
       cities={dataCities || []}

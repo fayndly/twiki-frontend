@@ -7,6 +7,9 @@ import {
 export const submitEventHandler = async <T>(
   formik: FormikProps<T>,
   successFn: () => void,
+  fnActionPreloading?: () => Promise<any>,
+  fnRefetchFilters?: () => Promise<any>,
+  fnRefetchViewingCards?: () => Promise<any>,
 ) => {
   const setStatusSubmitButton = useSetStatusSubmitButton();
   const hideSubmitButton = useHideSubmitButton();
@@ -14,6 +17,8 @@ export const submitEventHandler = async <T>(
   const { isSubmitting, isValid, submitForm, validateForm } = formik;
 
   const canStatusButtonBeValidate = isValid && !isSubmitting;
+
+  const changes = await fnActionPreloading?.();
 
   setStatusSubmitButton("loading");
 
@@ -26,6 +31,11 @@ export const submitEventHandler = async <T>(
 
   try {
     await submitForm();
+
+    if (changes?.age || changes?.city) {
+      fnRefetchFilters?.();
+      fnRefetchViewingCards?.();
+    }
 
     setStatusSubmitButton("success");
 

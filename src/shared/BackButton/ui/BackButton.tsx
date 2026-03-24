@@ -24,8 +24,6 @@ const navigationHandler = async (
   isFormFiltersDirty?: boolean,
   isFormProfileUpdateDirty?: boolean,
 ) => {
-  console.log(location.pathname);
-  console.log(isFormFiltersDirty);
   if (
     (location.pathname === "/filters" && isFormFiltersDirty) ||
     (location.pathname === "/profile/update" && isFormProfileUpdateDirty)

@@ -7,4 +7,8 @@ export const initialValues: ProfileInitialValues = {
   sex: "male",
   photo: undefined,
   city: "",
+  changes: {
+    age: false,
+    city: false,
+  },
 };

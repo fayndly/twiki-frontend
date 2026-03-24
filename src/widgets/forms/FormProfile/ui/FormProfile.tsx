@@ -20,6 +20,9 @@ import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSetFormDirty } from "@/app/store/useDirtyForms";
+import { fnActionPreloading } from "../helpers";
+import { useFilters } from "@/app/store/useFilters";
+import { useViewingCards } from "@/app/store/useViewingCards";
 
 export function FormProfile({
   initialValues,
@@ -33,6 +36,9 @@ export function FormProfile({
   showSubmitButton,
 }: PropsFormProfile) {
   const location = useLocation();
+
+  const { refetch: refetchFilters } = useFilters();
+  const { refetch: refetchViewingCards } = useViewingCards();
 
   const setFormDirty = useSetFormDirty();
 
@@ -206,7 +212,13 @@ export function FormProfile({
       </ListSectionsWrapper>
       <SubmitButton
         onSubmit={() => {
-          submitEventHandler(formik, successActionFn);
+          submitEventHandler(
+            formik,
+            successActionFn,
+            async () => await fnActionPreloading(formik, location.pathname),
+            refetchFilters,
+            refetchViewingCards,
+          );
         }}
       />
     </form>

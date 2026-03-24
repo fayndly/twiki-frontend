@@ -7,6 +7,10 @@ export interface ProfileInitialValues {
   sex: "male" | "female";
   photo: undefined | File | string;
   city: string | PropsCell;
+  changes?: {
+    age?: boolean;
+    city?: boolean;
+  };
 }
 
 interface Action {

@@ -7,6 +7,10 @@ export interface ValuesUpdateProfile {
   sex: "male" | "female";
   photo: string | File;
   cityId: string | PropsCell;
+  changes?: {
+    age?: boolean;
+    city?: boolean;
+  };
 }
 
 export interface ProfileDto {
