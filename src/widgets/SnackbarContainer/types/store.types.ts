@@ -13,7 +13,7 @@ interface Actions {
     header: string,
     description: string,
     type: SnackbarItem["type"],
-    retryFunction: RetryFunction<any, any>,
+    retryFunction?: RetryFunction<any, any>,
     ...args: RetryArgs
   ) => void;
   delete: (id: number) => void;
