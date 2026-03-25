@@ -1,5 +1,6 @@
 import type { PropsCardProfile } from "@/widgets/CardProfile";
 import type { UseMutationOptions } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 
 export type reactions = "like" | "dislike" | "appeal";
 
@@ -24,7 +25,7 @@ type ViewingCardsMutationContext = {
 
 export type PropsViewingCardsMutationOptions = UseMutationOptions<
   any,
-  Error,
+  AxiosError<{ message: string }>,
   PropsPostReaction,
   ViewingCardsMutationContext
 >;

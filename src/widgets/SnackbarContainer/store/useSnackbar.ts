@@ -1,18 +1,14 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import type {
-  InitialState,
-  UseWarningSnackbar,
-  WarningSnackbarState,
-} from "../types";
+import type { InitialState, UseSnackbar, SnackbarState } from "../types";
 
 const initialState: InitialState = {
   isOpen: false,
   container: [],
 };
 
-const warningSnackbar: UseWarningSnackbar = (set) => ({
+const snackbar: UseSnackbar = (set) => ({
   ...initialState,
   open: () => set(() => ({ isOpen: true }), false, "open"),
   close: () => set(() => ({ isOpen: false }), false, "close"),
@@ -26,15 +22,16 @@ const warningSnackbar: UseWarningSnackbar = (set) => ({
       false,
       "delete",
     ),
-  add: (header, description, retryFunction, ...args) =>
+  add: (header, description, type, retryFunction, ...args) =>
     set(
       (state) => {
         const id = Date.now();
 
         state.container.push({
-          id: id,
+          id,
           header,
           description,
+          type,
           retryFunction,
           args,
         });
@@ -44,14 +41,10 @@ const warningSnackbar: UseWarningSnackbar = (set) => ({
     ),
 });
 
-const useWarningSnackbarStore = create<WarningSnackbarState>()(
-  immer(devtools(warningSnackbar)),
-);
-export const useContainerWarningSnackbar = () =>
-  useWarningSnackbarStore((state) => state.container);
-export const getAddWarningSnackbar = () =>
-  useWarningSnackbarStore.getState().add;
-export const useAddWarningSnackbar = () =>
-  useWarningSnackbarStore.getState().add;
-export const useDeleteWarningSnackbar = () =>
-  useWarningSnackbarStore.getState().delete;
+const useSnackbarStore = create<SnackbarState>()(immer(devtools(snackbar)));
+
+export const useContainerSnackbar = () =>
+  useSnackbarStore((state) => state.container);
+export const getAddSnackbar = () => useSnackbarStore.getState().add;
+export const useAddSnackbar = () => useSnackbarStore.getState().add;
+export const useDeleteSnackbar = () => useSnackbarStore.getState().delete;

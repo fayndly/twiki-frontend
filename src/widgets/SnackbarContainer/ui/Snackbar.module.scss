@@ -4,9 +4,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px 10px 10px;
+  padding: 10px;
   gap: 12px;
-  border-radius: 10px;
+
+  &_base {
+    border-radius: 10px;
+  }
+
+  &_ios {
+    border-radius: 14px;
+  }
 }
 .title_container {
   display: flex;
@@ -19,4 +26,10 @@
   color: #ffffff;
   font-size: 13px !important;
   line-height: 20px !important;
+}
+
+.info_container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }

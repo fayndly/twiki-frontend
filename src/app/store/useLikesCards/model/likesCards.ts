@@ -8,7 +8,7 @@ import { postReaction, getLikesCards } from "../api";
 import { queryOptions } from "@tanstack/react-query";
 
 import { queryClient } from "@/app/store";
-import { getAddWarningSnackbar } from "@/widgets/WarningSnackbar";
+import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 
 const mutateSetStatuses = (
   reaction: PropsPostReaction,
@@ -60,17 +60,31 @@ export const likesCardsMutationOptions: PropsLikesCardsMutationOptions = {
       mutateSetStatuses(reaction, true);
     }
   },
-  onError: (_err, vars, _onMutateResult, context) => {
-    const addWarningSnackbar = getAddWarningSnackbar();
-    addWarningSnackbar(
-      `Не удалось отправить ${vars.reaction === "like" ? "лайк" : "дизлайк"}`,
-      `Пользователь ${vars.cardId} не получил ${
-        vars.reaction === "like" ? "лайк" : "дизлайк"
-      }`,
-      postReaction,
-      vars,
-    );
+  onError: (err, vars, _onMutateResult, _context) => {
+    const addSnackbar = getAddSnackbar();
 
-    console.log(context);
+    const reactionsTranslate = {
+      like: "лайк",
+      dislike: "дизлайк",
+      appeal: "жалобу",
+    };
+
+    let header = `${err.name} [${err.status}]`;
+    let description = err.message;
+    let type = "clientError" as "clientError" | "serverError";
+
+    if (err.status) {
+      if (err.status >= 400 && err.status < 500) {
+        header = `Не удалось отправить ${reactionsTranslate[vars.reaction]}`;
+        description = err.response?.data?.message || "";
+        type = "clientError";
+      } else if (err.status >= 500) {
+        header = `Не удалось отправить ${reactionsTranslate[vars.reaction]}`;
+        description = err.response?.data?.message || "";
+        type = "serverError";
+      }
+    }
+
+    addSnackbar(header, description, type, postReaction, vars);
   },
 };

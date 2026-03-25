@@ -12,16 +12,18 @@ interface Actions {
   add: (
     header: string,
     description: string,
+    type: SnackbarItem["type"],
     retryFunction: RetryFunction<any, any>,
     ...args: RetryArgs
   ) => void;
   delete: (id: number) => void;
 }
 
-interface SnackbarItem {
+export interface SnackbarItem {
   id: number;
   header: string;
   description: string;
+  type: "serverError" | "clientError";
   retryFunction?: RetryFunction<any, any>;
   args?: RetryArgs;
 }
@@ -31,9 +33,9 @@ export interface InitialState {
   container: SnackbarItem[];
 }
 
-export interface WarningSnackbarState extends Actions, InitialState {}
+export interface SnackbarState extends Actions, InitialState {}
 
-export type UseWarningSnackbar = StateCreator<
-  WarningSnackbarState,
+export type UseSnackbar = StateCreator<
+  SnackbarState,
   [["zustand/immer", never], ["zustand/devtools", never]]
 >;

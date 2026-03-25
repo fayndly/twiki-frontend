@@ -4,4 +4,5 @@ export interface PropsSnackbar {
   description: string;
   header: string;
   onClose: () => void;
+  action?: any;
 }

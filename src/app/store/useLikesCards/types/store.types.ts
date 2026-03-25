@@ -3,6 +3,7 @@ import type { PropsPostReaction } from "./api.types";
 import type { UseMutationOptions } from "@tanstack/react-query";
 
 import type { PropsCardProfile } from "@/widgets/CardProfile";
+import type { AxiosError } from "axios";
 
 export interface StoreItemCardProfile extends PropsCardProfile {
   userId: string;
@@ -16,7 +17,7 @@ type LikesCardsMutationContext = {
 
 export type PropsLikesCardsMutationOptions = UseMutationOptions<
   any,
-  Error,
+  AxiosError<{ message: string }>,
   PropsPostReaction,
   LikesCardsMutationContext
 >;

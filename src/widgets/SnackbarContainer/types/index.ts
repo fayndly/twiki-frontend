@@ -1,7 +1,8 @@
 export type {
   InitialState,
-  WarningSnackbarState,
-  UseWarningSnackbar,
+  SnackbarState,
+  UseSnackbar,
+  SnackbarItem,
 } from "./store.types";
 
 export type { PropsSnackbar } from "./snackbar.types";
