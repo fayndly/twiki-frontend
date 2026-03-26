@@ -1,65 +1,12 @@
 import styles from "./SnackbarContainer.module.scss";
-import type { SnackbarItem } from "../types";
 import { useDeleteSnackbar, useContainerSnackbar } from "../store/useSnackbar";
-import { Snackbar } from "./Snackbar";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { X, CloudAlert, Ban } from "lucide-react";
-import { IconButton } from "@telegram-apps/telegram-ui";
-
-const SnackbarError = ({ item }: { item: SnackbarItem }) => {
-  const deleteWarningSnackbar = useDeleteSnackbar();
-
-  return (
-    <Snackbar
-      onClose={() => {
-        deleteWarningSnackbar(item.id);
-      }}
-      before={
-        item.type === "clientError" ? (
-          <Ban size={28} color="var(--tgui--destructive_text_color)" />
-        ) : (
-          <CloudAlert size={28} color="var(--tgui--destructive_text_color)" />
-        )
-      }
-      after={
-        <IconButton
-          mode="plain"
-          size="s"
-          onClick={() => {
-            console.log("click");
-
-            deleteWarningSnackbar(item.id);
-          }}
-        >
-          <X />
-        </IconButton>
-      }
-      header={item.header}
-      description={item.description}
-      // action={
-      //   <Button
-      //     mode="plain"
-      //     size="s"
-      //     style={{
-      //       width: "minContent",
-      //     }}
-      //     onClick={async () => {
-      //       if (item.retryFunction) {
-      //         await item.retryFunction(...(item.args ?? []));
-      //       }
-      //       deleteWarningSnackbar(item.id);
-      //     }}
-      //   >
-      //     Повторить
-      //   </Button>
-      // }
-    />
-  );
-};
+import { SnackbarError, SnackbarConfirm } from "./Snackbar";
 
 export function SnackbarContainer() {
   const snackbarContainer = useContainerSnackbar();
+  const deleteSnackbar = useDeleteSnackbar();
 
   return (
     <div className={styles.snackbar_container}>
@@ -72,7 +19,10 @@ export function SnackbarContainer() {
             exit={{ opacity: 0 }}
           >
             {(item.type === "serverError" || item.type === "clientError") && (
-              <SnackbarError item={item} />
+              <SnackbarError item={item} fnDeleteSnackbar={deleteSnackbar} />
+            )}
+            {item.type === "confirm" && (
+              <SnackbarConfirm item={item} fnDeleteSnackbar={deleteSnackbar} />
             )}
           </motion.div>
         ))}

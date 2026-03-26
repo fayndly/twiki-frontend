@@ -23,7 +23,7 @@ export interface SnackbarItem {
   id: number;
   header: string;
   description: string;
-  type: "serverError" | "clientError";
+  type: "serverError" | "clientError" | "confirm";
   retryFunction?: RetryFunction<any, any>;
   args?: RetryArgs;
 }

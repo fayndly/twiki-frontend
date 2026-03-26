@@ -21,7 +21,14 @@ export const profileQueryOptions = (enabled: boolean) =>
 export const profileMutationQueryOptions: PropsProfileMutationOptions = {
   mutationFn: updateProfile,
   onSuccess: async (data: any) => {
+    const addSnackbar = getAddSnackbar();
+
     queryClient.setQueryData(["profile"], data);
+    addSnackbar(
+      "Анкета успешно обновлена",
+      "Теперь другие пользователи увидят новые данные вашей анкеты.",
+      "confirm",
+    );
   },
   onError: (err, _vars, _onMutateResult, _context) => {
     const addSnackbar = getAddSnackbar();

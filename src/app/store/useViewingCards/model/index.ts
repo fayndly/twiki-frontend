@@ -57,6 +57,13 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
     console.log("onSuccess data: " + data);
     if (reaction.reaction === "appeal") {
       mutateSetStatuses(reaction, true);
+      const addSnackbar = getAddSnackbar();
+
+      addSnackbar(
+        "Жалоба отправлена",
+        "Спасибо за обращение. Мы проверим эту анкету.",
+        "confirm",
+      );
     }
   },
   onError: (err, vars, _onMutateResult, _context) => {

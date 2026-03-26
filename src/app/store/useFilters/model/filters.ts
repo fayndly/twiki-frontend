@@ -23,7 +23,14 @@ export const filtersQueryOptions = (enabled: boolean) =>
 export const filtersMutationQueryOptions: PropsLikesCardsMutationOptions = {
   mutationFn: updateFilters,
   onSuccess: async (data: any) => {
+    const addSnackbar = getAddSnackbar();
+
     queryClient.setQueryData(["filters"], data);
+    addSnackbar(
+      "Фильтры успешно обновлены",
+      "Теперь мы показываем анкеты по новым параметрам.",
+      "confirm",
+    );
   },
   onError: (err, _vars, _onMutateResult, _context) => {
     const addSnackbar = getAddSnackbar();

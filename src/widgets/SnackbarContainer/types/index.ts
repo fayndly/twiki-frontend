@@ -5,4 +5,4 @@ export type {
   SnackbarItem,
 } from "./store.types";
 
-export type { PropsSnackbar } from "./snackbar.types";
+export type { PropsSnackbar, PropsCustomSnackbar } from "./snackbar.types";
