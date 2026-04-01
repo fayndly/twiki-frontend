@@ -9,6 +9,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { queryClient } from "@/app/store";
 import { getAddSnackbar } from "@/widgets/SnackbarContainer";
+import type { AxiosErrorDto } from "@/app/api";
 
 const mutateSetStatuses = (
   reaction: PropsPostReaction,
@@ -33,7 +34,7 @@ const mutateSetStatuses = (
 };
 
 export const likesCardsQueryOptions = (enabled: boolean) =>
-  queryOptions<StoreItemCardProfile[]>({
+  queryOptions<StoreItemCardProfile[], AxiosErrorDto>({
     queryKey: ["likesCards"],
     queryFn: getLikesCards,
     retry: false,
@@ -54,13 +55,20 @@ export const likesCardsMutationOptions: PropsLikesCardsMutationOptions = {
 
     return { previousLikesCards };
   },
-  onSuccess: async (data: any, reaction) => {
+  onSuccess: async (data, reaction) => {
     console.log("onSuccess data: " + data);
     if (reaction.reaction === "appeal") {
       mutateSetStatuses(reaction, true);
+      const addSnackbar = getAddSnackbar();
+
+      addSnackbar(
+        "Жалоба отправлена",
+        "Спасибо за обращение. Мы проверим эту анкету.",
+        "confirm",
+      );
     }
   },
-  onError: (err, vars, _onMutateResult, _context) => {
+  onError: (err, vars) => {
     const addSnackbar = getAddSnackbar();
 
     const reactionsTranslate = {

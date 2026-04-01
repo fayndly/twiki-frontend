@@ -9,6 +9,7 @@ import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
 
 import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 import { queryClient } from "@/app/store";
+import type { AxiosErrorDto } from "@/app/api";
 
 const mutateSetStatuses = (
   reaction: PropsPostReaction,
@@ -33,7 +34,7 @@ const mutateSetStatuses = (
 };
 
 const viewingCardsQueryOptions = () =>
-  queryOptions<CartProfile[]>({
+  queryOptions<CartProfile[], AxiosErrorDto>({
     queryKey: ["viewingCards"],
     queryFn: getViewingCards,
     retry: false,
@@ -53,7 +54,7 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
 
     return { previousViewingCards };
   },
-  onSuccess: async (data: any, reaction) => {
+  onSuccess: async (data, reaction) => {
     console.log("onSuccess data: " + data);
     if (reaction.reaction === "appeal") {
       mutateSetStatuses(reaction, true);
@@ -66,7 +67,7 @@ const viewingCardsMutationOptions: PropsViewingCardsMutationOptions = {
       );
     }
   },
-  onError: (err, vars, _onMutateResult, _context) => {
+  onError: (err, vars) => {
     const addSnackbar = getAddSnackbar();
 
     const reactionsTranslate = {
@@ -99,7 +100,7 @@ export function useViewingCards() {
   const viewingCardsQuery = useQuery(viewingCardsQueryOptions());
   const viewingCardsMutations = useMutation(viewingCardsMutationOptions);
 
-  const { data, isPending, isError, isSuccess, refetch, isFetching } =
+  const { data, isPending, isError, isSuccess, refetch, isFetching, error } =
     viewingCardsQuery;
 
   return {
@@ -110,5 +111,6 @@ export function useViewingCards() {
     refetch,
     isFetching,
     viewingCardsMutations,
+    error,
   };
 }

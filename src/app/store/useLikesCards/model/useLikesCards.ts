@@ -9,7 +9,8 @@ export function useLikesCards(enabled: boolean = true) {
   const likesCardsQuery = useQuery(likesCardsQueryOptions(enabled));
   const likesCardsMutations = useMutation(likesCardsMutationOptions);
 
-  const { data, isPending, isError, isSuccess, refetch } = likesCardsQuery;
+  const { data, isPending, isError, isSuccess, refetch, error } =
+    likesCardsQuery;
 
-  return { data, isPending, isError, isSuccess, refetch, likesCardsMutations };
+  return { data, isPending, isError, isSuccess, refetch, likesCardsMutations, error  };
 }

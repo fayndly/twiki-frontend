@@ -5,16 +5,16 @@ import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
 import { CardProfile } from "@/widgets/CardProfile";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
-import { useEffect, useState } from "react";
 import { queryClient } from "@/app/store";
 import {
   useLikesCards,
   type StoreItemCardProfile,
 } from "@/app/store/useLikesCards";
 import { useOpenAppealModal } from "@/widgets/AppealModal";
+import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 
 function Content() {
-  const { data, isPending, isError, isSuccess, refetch, likesCardsMutations } =
+  const { data, isPending, isError, isSuccess, refetch, likesCardsMutations, error: err } =
     useLikesCards();
 
   const openAppealModal = useOpenAppealModal();
@@ -27,19 +27,11 @@ function Content() {
     likesCardsMutations.mutate({ reaction: "dislike", cardId: card.id });
   };
 
-  const [canNoDataShow, setNoDataShow] = useState(false);
+  const canRefetch =
+    data &&
+    data.every((item) => item.isLiked === true || item.isDisliked === true);
 
-  useEffect(() => {
-    const canRefetch =
-      data &&
-      data.every((item) => item.isLiked === true || item.isDisliked === true);
-
-    if ((data && data.length === 0 && !isPending) || canRefetch) {
-      setNoDataShow(true);
-    } else {
-      setNoDataShow(false);
-    }
-  }, [data]);
+  const canNoDataShow = (data && data.length === 0 && !isPending) || canRefetch;
 
   if (isPending) {
     return (
@@ -51,6 +43,27 @@ function Content() {
   }
 
   if (isError) {
+    if (err) {
+      const addSnackbar = getAddSnackbar();
+            
+      let header = `${err.name} [${err.status}]`;
+      let description = err.message;
+      let type = "clientError" as "clientError" | "serverError";
+  
+      if (err.status) {
+        if (err.status >= 400 && err.status < 500) {
+          header = `Не удалось загрузить анкеты лайков`;
+          description = err.response?.data?.message || "";
+          type = "clientError";
+        } else if (err.status >= 500) {
+          header = `Не удалось загрузить анкеты лайков`;
+          description = err.response?.data?.message || "";
+          type = "serverError";
+        }
+      }
+
+      addSnackbar(header, description, type);
+    }
     return (
       <SectionErrorLoadCards
         onClick={refetch}
@@ -63,7 +76,7 @@ function Content() {
   if (isSuccess && !isError) {
     return (
       <section className={styles.section}>
-        {canNoDataShow && (
+        {canNoDataShow && !isPending && (
           <SectionNoContent text="Когда кто-то поставит вам лайк, вы увидите это здесь" />
         )}
         {data &&
