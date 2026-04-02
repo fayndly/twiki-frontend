@@ -1,0 +1,9 @@
+.modal {
+  background-color: $tg_secondary_bg_color !important;
+  &_content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0px 16px;
+  }
+}

@@ -1,0 +1,29 @@
+.img_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skeleton {
+  width: 100%;
+  height: 100%;
+
+  &::after {
+    background-color: $tg_hint_color !important;
+  }
+
+  &::before {
+    background: transparent !important;
+  }
+}
+
+.icon_error {
+  stroke: $tg_hint_color;
+}

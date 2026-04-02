@@ -1,1 +1,14 @@
+html {
+  overscroll-behavior-x: none;
+}
 
+#root {
+  overflow-x: clip;
+}
+
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

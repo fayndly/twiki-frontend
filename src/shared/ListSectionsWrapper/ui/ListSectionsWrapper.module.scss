@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+  padding-bottom: 16px !important;
+}
+
+.list_wrapper {
+  gap: 22px;
+}
+
+.list_wrapper_base {
+  gap: 10px;
+}

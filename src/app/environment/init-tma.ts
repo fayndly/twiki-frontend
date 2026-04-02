@@ -10,6 +10,10 @@ import {
   emitEvent,
   miniApp,
   swipeBehavior,
+  settingsButton,
+  backButton,
+  mainButton,
+  closingBehavior,
 } from "@tma.js/sdk-react";
 
 import { config } from "./config";
@@ -56,14 +60,41 @@ export async function init(options: {
 
     swipeBehavior.disableVertical();
 
-    if (!config.isCanTouchMove) {
-      document.addEventListener("touchmove", (e) => e.preventDefault(), {
-        passive: false,
-      });
-    }
+    document.body.addEventListener(
+      "touchmove",
+      (e: TouchEvent) => {
+        const target = e.target;
+
+        if (target instanceof Element) {
+          if (!target.closest(".scrollable")) {
+            e.preventDefault();
+          }
+        } else {
+          e.preventDefault();
+        }
+      },
+      { passive: false },
+    );
   }
 
   initData.restore();
+
+  if (closingBehavior.mount.isAvailable()) {
+    closingBehavior.mount();
+    closingBehavior.enableConfirmation();
+  }
+
+  if (mainButton.mount.isAvailable()) {
+    mainButton.mount();
+  }
+
+  if (settingsButton.mount.isAvailable()) {
+    settingsButton.mount();
+  }
+
+  if (backButton.mount.isAvailable()) {
+    backButton.mount();
+  }
 
   if (miniApp.mount.isAvailable()) {
     themeParams.mount();

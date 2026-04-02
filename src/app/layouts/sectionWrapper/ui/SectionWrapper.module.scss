@@ -1,0 +1,21 @@
+.section_wrapper {
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+$height_gap: 8px;
+$height_paddings_wrapper: calc(8px * 2);
+$height_paddings_button: calc(8px * 2);
+$height_icon: 36px;
+
+.has_margin_bottom {
+  margin-bottom: calc(
+    $height_gap + $height_paddings_wrapper + $height_paddings_button +
+      $height_icon
+  );
+}

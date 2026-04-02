@@ -1,23 +1,22 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import path from 'node:path'
+import path from "node:path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-    }
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/app/styles/index" as *;`
-      }
-    }
+        additionalData: `@use "@/app/styles/index" as *;`,
+      },
+    },
   },
-  base: "/twiki/",
   server: {
     host: true,
     allowedHosts: true,
