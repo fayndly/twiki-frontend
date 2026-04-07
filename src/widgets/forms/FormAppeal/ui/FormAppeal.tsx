@@ -1,4 +1,4 @@
-import { initialValues, validationSchema, typeOptions } from "../config";
+import { initialValues, validationSchema, optionsType } from "../config";
 import { submit } from "../api";
 
 import { useFormik } from "formik";
@@ -54,7 +54,7 @@ export function FormAppeal() {
       <ListSectionsWrapper>
         <SectionInput
           errors={[errors.type && touched.type ? errors.type : ""]}
-          subtitle="Пожалуйся сучило"
+          subtitle="Укажите причину жалобы, чтобы мы могли проверить анкету"
           header="Причина жалобы"
         >
           <InputSelect
@@ -66,7 +66,7 @@ export function FormAppeal() {
             value={values.type}
             id="type"
             name="type"
-            options={typeOptions}
+            options={optionsType}
           />
         </SectionInput>
         <SectionInput
@@ -84,7 +84,7 @@ export function FormAppeal() {
             value={values.description}
             id="description"
             name="description"
-            placeholder="Введите описание"
+            placeholder="Введите подробное описание жалобы"
           />
         </SectionInput>
       </ListSectionsWrapper>

@@ -1,1 +1,4 @@
-export type { AppealInitialValues } from "./store.types";
+export interface AppealInitialValues {
+  type: string;
+  description: string;
+}

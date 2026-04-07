@@ -4,6 +4,7 @@ import styles from "./InputTextarea.module.scss";
 import { Textarea } from "@telegram-apps/telegram-ui";
 
 import { useIsBase } from "@/shared/usePlatform";
+import { useEnterFocus } from "@/app/helpers";
 
 export function InputTextarea({
   hasError,
@@ -15,8 +16,11 @@ export function InputTextarea({
   onChange,
 }: PropsInputTextarea) {
   const isBase = useIsBase();
+  const handleEnterFocus = useEnterFocus();
+
   return (
     <Textarea
+      onKeyDown={handleEnterFocus}
       className={`${styles.textarea} ${!isBase && styles.input_textarea}`}
       id={id}
       name={name}

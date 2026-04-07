@@ -4,7 +4,7 @@ export const initialValues: ProfileInitialValues = {
   name: "",
   age: "",
   description: "",
-  sex: "male",
+  sex: "",
   photo: undefined,
   city: "",
   changes: {

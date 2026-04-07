@@ -4,7 +4,7 @@ export interface ProfileInitialValues {
   name: string;
   age: string | number;
   description: string;
-  sex: "male" | "female";
+  sex: "male" | "female" | "";
   photo: undefined | File | string;
   city: string | PropsCell;
   changes?: {

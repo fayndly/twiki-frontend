@@ -72,6 +72,10 @@ export const validationSchema = Yup.object({
 
 export const sexOptions = [
   {
+    value: "",
+    label: "Выберите пол",
+  },
+  {
     value: "male",
     label: "Мужской",
   },

@@ -5,6 +5,7 @@ import { Input } from "@telegram-apps/telegram-ui";
 
 import { ClearButton } from "@/shared/inputs/ClearButton";
 import { useIsBase } from "@/shared/usePlatform";
+import { useEnterFocus } from "@/app/helpers";
 
 export function InputText({
   hasError,
@@ -18,8 +19,11 @@ export function InputText({
   onChange,
 }: PropsInputText) {
   const isBase = useIsBase();
+  const handleEnterFocus = useEnterFocus();
+
   return (
     <Input
+      onKeyDown={handleEnterFocus}
       className={`${styles.input} ${!isBase && styles.input_text}`}
       id={id}
       name={name}

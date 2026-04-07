@@ -8,6 +8,7 @@ import { Input } from "@telegram-apps/telegram-ui";
 
 import { ClearButton } from "@/shared/inputs/ClearButton";
 import { useIsBase } from "@/shared/usePlatform";
+import { useEnterFocus } from "@/app/helpers";
 
 export function InputSearchSelect({
   handleChange,
@@ -26,6 +27,8 @@ export function InputSearchSelect({
   const suggestions = sortValuesByMatch(options, clueValue);
   const isBase = useIsBase();
 
+  const handleEnterFocus = useEnterFocus();
+
   const [isFocused, setIsFocused] = useState(false);
 
   const focusHandler = (event: "onFocus" | "onBlur") => {
@@ -38,6 +41,7 @@ export function InputSearchSelect({
   return (
     <>
       <Input
+        onKeyDown={handleEnterFocus}
         className={`${styles.input} ${!isBase && styles.input_search_select}`}
         onFocus={() => focusHandler("onFocus")}
         onBlur={() => focusHandler("onBlur")}

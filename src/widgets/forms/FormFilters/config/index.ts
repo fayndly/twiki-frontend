@@ -4,7 +4,7 @@ import type { FiltersInitialValues } from "../types";
 export const initialValues: FiltersInitialValues = {
   ageMin: 1,
   ageMax: 99,
-  sex: "male",
+  sex: "",
   city: "",
 };
 
@@ -52,6 +52,10 @@ export const validationSchema = Yup.object({
 });
 
 export const sexOptions = [
+  {
+    value: "",
+    label: "Выберите пол",
+  },
   {
     value: "male",
     label: "Мужской",

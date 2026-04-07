@@ -76,6 +76,10 @@ export function FormFilters() {
         return;
       }
 
+      if (values.sex === "") {
+        return;
+      }
+
       await filtersMutations.mutateAsync({
         age: {
           min: +values.ageMin,

@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 export function ClearButton({ onClick }: { onClick?: () => void }) {
   return (
     <IconButton
+      type="button"
       className={styles.icon_button}
       mode="gray"
       size="s"

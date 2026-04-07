@@ -1,7 +1,11 @@
 import * as Yup from "yup";
 import type { AppealInitialValues } from "../types";
 
-export const typeOptions = [
+export const optionsType = [
+  {
+    value: "",
+    label: "Выберите причину жалобы",
+  },
   {
     value: "11",
     label: "Чужое фото",
@@ -25,8 +29,7 @@ export const typeOptions = [
 ];
 
 export const initialValues: AppealInitialValues = {
-  type: typeOptions[0].value,
-  // type: "10",
+  type: optionsType[0].value,
   description: "",
 };
 
@@ -35,8 +38,6 @@ export const validationSchema = Yup.object({
     .nullable()
     .test("type", function (value) {
       const { createError } = this;
-
-      // console.log(value);
 
       if (typeof value === "string") {
         if (!["11", "12", "13", "14", "15"].includes(value)) {

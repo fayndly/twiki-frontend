@@ -143,6 +143,7 @@ export function FormProfile({
             options={sexOptions}
           />
         </SectionInput>
+
         <SectionInput
           errors={[
             errors.description && touched.description ? errors.description : "",

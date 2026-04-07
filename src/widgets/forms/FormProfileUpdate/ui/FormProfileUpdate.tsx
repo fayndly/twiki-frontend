@@ -72,6 +72,10 @@ export function FormProfileUpdate() {
           return;
         }
 
+        if (!values.sex) {
+          return;
+        }
+
         await profileMutations.mutateAsync({
           name: values.name,
           age: +values.age,

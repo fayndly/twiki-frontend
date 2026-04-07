@@ -4,6 +4,12 @@
   background: none !important;
 }
 
+.select_placeholder {
+  select {
+    color: $tg_hint_color !important;
+  }
+}
+
 // IOS
 .input_select {
   padding-right: 11px;
