@@ -6,4 +6,17 @@
 
     padding: 0px 16px;
   }
+
+  &_header::before {
+    display: none;
+  }
+
+  &_header_mobile::before {
+    display: flex;
+    background: $tg_hint_color !important;
+  }
+
+  &_close {
+    cursor: pointer;
+  }
 }
