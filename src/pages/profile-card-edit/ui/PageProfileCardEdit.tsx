@@ -1,11 +1,11 @@
-import styles from "./PageProfileUpdate.module.scss";
+import styles from "./PageProfileCardEdit.module.scss";
 import { PlaceholderSticker } from "@/shared/Placeholder";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { FormProfileUpdate } from "@/widgets/forms/FormProfileUpdate";
 import { pathsToPublicSrc } from "@/shared/config";
 
-export function PageProfileUpdate() {
+export function PageProfileCardEdit() {
   return (
     <SectionWrapper hasMarginBottom={false}>
       <section className={`${styles.section} scrollable`}>

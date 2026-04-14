@@ -1,4 +1,4 @@
-import styles from "./PageViewing.module.scss";
+import styles from "./PageProfileCardsView.module.scss";
 
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
 import { SectionErrorLoadCards } from "@/shared/SectionErrorLoadCards";
 import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 
-export function Content() {
+function Content() {
   const {
     data,
     isPending,
@@ -20,7 +20,7 @@ export function Content() {
     refetch,
     isFetching,
     viewingCardsMutations,
-    error: err
+    error: err,
   } = useViewingCards();
 
   const likeHandler = (card: CartProfile) => {
@@ -64,26 +64,26 @@ export function Content() {
 
   if (isError) {
     if (err) {
-    const addSnackbar = getAddSnackbar();
-    
-        let header = `${err.name} [${err.status}]`;
-        let description = err.message;
-        let type = "clientError" as "clientError" | "serverError";
-    
-        if (err.status) {
-          if (err.status >= 400 && err.status < 500) {
-            header = `Не удалось загрузить анкеты`;
-            description = err.response?.data?.message || "";
-            type = "clientError";
-          } else if (err.status >= 500) {
-            header = `Не удалось загрузить анкеты`;
-            description = err.response?.data?.message || "";
-            type = "serverError";
-          }
-        }
+      const addSnackbar = getAddSnackbar();
 
-        addSnackbar(header, description, type);
+      let header = `${err.name} [${err.status}]`;
+      let description = err.message;
+      let type = "clientError" as "clientError" | "serverError";
+
+      if (err.status) {
+        if (err.status >= 400 && err.status < 500) {
+          header = `Не удалось загрузить анкеты`;
+          description = err.response?.data?.message || "";
+          type = "clientError";
+        } else if (err.status >= 500) {
+          header = `Не удалось загрузить анкеты`;
+          description = err.response?.data?.message || "";
+          type = "serverError";
+        }
       }
+
+      addSnackbar(header, description, type);
+    }
     return (
       <SectionErrorLoadCards
         onClick={refetch}
@@ -132,7 +132,7 @@ export function Content() {
   }
 }
 
-export function PageViewing() {
+export function PageProfileCardsView() {
   return (
     <SectionWrapper>
       <Content />

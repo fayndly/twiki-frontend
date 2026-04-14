@@ -13,6 +13,7 @@ import { Funnel, UserRoundPen } from "lucide-react";
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { useIsBase } from "@/shared/usePlatform";
 import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
+import { paths } from "@/app/routes";
 
 export function PageSettings() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export function PageSettings() {
             subtitle="Возраст, пол, город"
             moveTitle="Изменить"
             onClick={() => {
-              navigate("/filters");
+              navigate(paths.pageFiltersEdit);
             }}
             beforeIconConfig={{
               colorIconContainer: "#007AFE",
@@ -42,7 +43,7 @@ export function PageSettings() {
             subtitle="Имя, возраст, описание, пол, фото, город"
             moveTitle="Редактировать"
             onClick={() => {
-              navigate("/profile/update");
+              navigate(paths.pageProfileCardEdit);
             }}
             beforeIconConfig={{
               colorIconContainer: "#B45ED5",

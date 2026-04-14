@@ -1,4 +1,4 @@
-import styles from "./PageLikes.module.scss";
+import styles from "./PageLikesProfileCardsView.module.scss";
 
 import { SectionNoContent } from "@/shared/SectionNoContent";
 import { SectionLoaderCarts } from "@/shared/SectionLoaderCarts";
@@ -14,8 +14,15 @@ import { useOpenAppealModal } from "@/widgets/AppealModal";
 import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 
 function Content() {
-  const { data, isPending, isError, isSuccess, refetch, likesCardsMutations, error: err } =
-    useLikesCards();
+  const {
+    data,
+    isPending,
+    isError,
+    isSuccess,
+    refetch,
+    likesCardsMutations,
+    error: err,
+  } = useLikesCards();
 
   const openAppealModal = useOpenAppealModal();
 
@@ -45,11 +52,11 @@ function Content() {
   if (isError) {
     if (err) {
       const addSnackbar = getAddSnackbar();
-            
+
       let header = `${err.name} [${err.status}]`;
       let description = err.message;
       let type = "clientError" as "clientError" | "serverError";
-  
+
       if (err.status) {
         if (err.status >= 400 && err.status < 500) {
           header = `Не удалось загрузить анкеты лайков`;
@@ -115,7 +122,7 @@ function Content() {
   }
 }
 
-export function PageLikes() {
+export function PageLikesProfileCardsView() {
   return (
     <SectionWrapper>
       <Content />

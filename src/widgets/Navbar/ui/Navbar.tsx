@@ -8,11 +8,12 @@ import { supportHapticFeedback } from "@/shared/helpers";
 import { Tab } from "./Tab";
 import { useLikesCards } from "@/app/store/useLikesCards";
 import { useScrollDirection } from "../model/useScrollDirection";
+import { paths } from "@/app/routes";
 
 const tabs = [
   {
     name: "sympathy",
-    pathTo: "/sympathy",
+    pathTo: paths.pageSympathyProfileCardsView,
     Icon() {
       return (
         <svg
@@ -44,7 +45,7 @@ const tabs = [
   },
   {
     name: "likes",
-    pathTo: "/likes",
+    pathTo: paths.pageLikesProfileCardsView,
     Icon() {
       return (
         <svg
@@ -65,7 +66,7 @@ const tabs = [
   },
   {
     name: "viewing",
-    pathTo: "/viewing",
+    pathTo: paths.pageProfileCardsView,
     Icon() {
       return (
         <svg

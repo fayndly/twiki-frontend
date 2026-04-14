@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { miniApp, themeParams, useSignal } from "@tma.js/sdk-react";
 
+import { paths } from "@/app/routes";
+
 const pagesReverbBg = [
-  "/settings",
-  "/profile/update",
-  "/profile/create",
-  "/filters",
+  paths.pageSettings,
+  paths.pageProfileCardEdit,
+  paths.pageProfileCardCreate,
+  paths.pageFiltersEdit,
 ];
 
 export const useReverbBgColor = () => {

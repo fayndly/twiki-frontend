@@ -1,4 +1,4 @@
-import { AppRoutes } from "../routes";
+import { AppRoutes, paths } from "../routes";
 import { preloadLottie } from "../helpers";
 import { useReverbBgColor } from "../helpers";
 import { useSetInitDataRaw } from "../api/entrypoint.api";
@@ -23,7 +23,11 @@ import { SettingsButton } from "@/shared/SettingsButton";
 import { pathsToPublicSrc } from "@/shared/config";
 import { useGetPlatformForApp, useSetPlatform } from "@/shared/usePlatform";
 
-const pagesWithNavbar = new Set(["/viewing", "/likes", "/sympathy"]);
+const pagesWithNavbar = new Set([
+  paths.pageProfileCardsView,
+  paths.pageLikesProfileCardsView,
+  paths.pageSympathyProfileCardsView,
+]);
 
 export default function App({ launchParams }: { launchParams: any }) {
   const setPlatform = useSetPlatform();

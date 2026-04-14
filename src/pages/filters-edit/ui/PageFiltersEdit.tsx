@@ -1,11 +1,11 @@
-import styles from "./PageFilters.module.scss";
-import { PlaceholderSticker } from "@/shared/Placeholder";
+import styles from "./PageFiltersEdit.module.scss";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
 import { FormFilters } from "@/widgets/forms/FormFilters";
 import { pathsToPublicSrc } from "@/shared/config";
+import { PlaceholderSticker } from "@/shared/Placeholder";
 
-export function PageFilters() {
+export function PageFiltersEdit() {
   return (
     <SectionWrapper hasMarginBottom={false}>
       <section className={`${styles.section} scrollable`}>

@@ -1,3 +1,4 @@
+import { paths } from "@/app/routes";
 import styles from "./PageNotFound.module.scss";
 
 import { SectionWrapper } from "@/app/layouts/SectionWrapper";
@@ -18,26 +19,15 @@ export function PageNotFound() {
           description="Возможно, ссылка устарела или была введена неверно"
           pathToSticker={pathsToPublicSrc.stickers.notFound}
           actions={
-            <>
-              <Button
-                onClick={() => {
-                  navigate("/viewing");
-                }}
-                mode="filled"
-                size="l"
-              >
-                На главную
-              </Button>
-              <Button
-                onClick={() => {
-                  navigate("/profile/create");
-                }}
-                mode="filled"
-                size="s"
-              >
-                Создать профиль
-              </Button>
-            </>
+            <Button
+              onClick={() => {
+                navigate(paths.pageProfileCardsView);
+              }}
+              mode="filled"
+              size="l"
+            >
+              К просмотру анкет
+            </Button>
           }
         />
       </section>
