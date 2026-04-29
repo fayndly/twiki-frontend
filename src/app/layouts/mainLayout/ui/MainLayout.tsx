@@ -4,11 +4,11 @@ import type { PropsMainLayout } from "../types";
 import {
   useIsTgButtonSettingsSupporting,
   useIsVisibleButtonSettings,
-} from "@/shared/ui/buttons/ButtonSettings";
+} from "@/widgets/ButtonSettings";
 import {
   useIsTgButtonBackSupporting,
   useIsVisibleButtonBack,
-} from "@/shared/ui/buttons/ButtonBack";
+} from "@/widgets/ButtonBack";
 
 export function MainLayout({ children }: PropsMainLayout) {
   const isTgButtonSettingsSupporting = useIsTgButtonSettingsSupporting();

@@ -8,6 +8,11 @@
   hr {
     border-color: $tg_hint_color;
   }
+
+  span,
+  h6 {
+    color: var(--tg-theme-hint-color) !important;
+  }
 }
 
 .footer_errors {

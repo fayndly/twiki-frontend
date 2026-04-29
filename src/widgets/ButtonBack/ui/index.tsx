@@ -5,6 +5,7 @@ import {
   useCheckButtonBack,
 } from "../model";
 import {
+  navigationHandler,
   onPressButtonBackHandler,
   useTgButtonBackOnPressHandler,
   useVisibleButtonBackHook,
@@ -14,42 +15,6 @@ import type { PropsButtonBack } from "../types";
 import { Button } from "@telegram-apps/telegram-ui";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import type { NavigateFunction, Location } from "react-router-dom";
-import { popup } from "@tma.js/sdk";
-
-import { paths } from "@/app/routes";
-
-const navigationHandler = async (
-  location: Location,
-  navigate: NavigateFunction,
-  isFormFiltersDirty?: boolean,
-  isFormProfileUpdateDirty?: boolean,
-) => {
-  console.log(
-    location.pathname === paths.pageProfileCardEdit && isFormProfileUpdateDirty,
-  );
-
-  if (
-    (location.pathname === paths.pageFiltersEdit && isFormFiltersDirty) ||
-    (location.pathname === paths.pageProfileCardEdit &&
-      isFormProfileUpdateDirty)
-  ) {
-    const promise = popup.show({
-      title: "Выйти без сохранения?",
-      message: "Если уйти сейчас, изменения в анкете будут потеряны.",
-      buttons: [
-        { id: "stay", type: "default", text: "Остаться" },
-        { id: "exit", type: "destructive", text: "Выйти" },
-      ],
-    });
-    const buttonId = await promise;
-    if (buttonId === "exit") {
-      navigate(-1);
-    }
-  } else {
-    navigate(-1);
-  }
-};
 
 export function ButtonBack({
   isFormFiltersDirty,

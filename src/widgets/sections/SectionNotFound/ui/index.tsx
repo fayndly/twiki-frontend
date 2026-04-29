@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { paths } from "@/app/routes";
 import { pathsToPublicSrc } from "@/app/config";
 import { PlaceholderSticker } from "@/shared/ui/Placeholder";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export function SectionNotFound() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export function SectionNotFound() {
         actions={
           <Button
             onClick={() => {
+              supportHapticFeedback("medium");
               navigate(paths.pageProfileCardsView);
             }}
             mode="filled"

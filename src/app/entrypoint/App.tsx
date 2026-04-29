@@ -21,8 +21,8 @@ import { Navbar } from "@/widgets/Navbar";
 import { SnackbarContainer } from "@/widgets/SnackbarContainer";
 import { ModalAppeal } from "@/features/appeal-profile";
 
-import { ButtonBack } from "@/shared/ui/buttons/ButtonBack";
-import { ButtonSettings } from "@/shared/ui/buttons/ButtonSettings";
+import { ButtonBack } from "@/widgets/ButtonBack";
+import { ButtonSettings } from "@/widgets/ButtonSettings";
 
 const pagesWithNavbar = new Set([
   paths.pageProfileCardsView,

@@ -5,6 +5,7 @@ import { pathsToStickers } from "../config";
 import { Button, Placeholder, Spinner } from "@telegram-apps/telegram-ui";
 
 import { PlaceholderSticker } from "@/shared/ui/Placeholder";
+import { supportHapticFeedback } from "@/shared/helpers";
 
 export function SectionFeedbackLoading({
   type,
@@ -28,7 +29,14 @@ export function SectionFeedbackLoading({
           description={description}
           action={
             type === "errorLoadingFormData" && (
-              <Button onClick={onClickButtonReload} mode="filled" size="l">
+              <Button
+                onClick={() => {
+                  supportHapticFeedback("medium");
+                  onClickButtonReload?.();
+                }}
+                mode="filled"
+                size="l"
+              >
                 Попробовать снова
               </Button>
             )
@@ -50,7 +58,14 @@ export function SectionFeedbackLoading({
           pathToSticker={urlToSticker}
           actions={
             type === "errorLoadingCards" && (
-              <Button onClick={onClickButtonReload} mode="filled" size="l">
+              <Button
+                onClick={() => {
+                  supportHapticFeedback("medium");
+                  onClickButtonReload?.();
+                }}
+                mode="filled"
+                size="l"
+              >
                 Попробовать снова
               </Button>
             )
