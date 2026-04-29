@@ -1,10 +1,11 @@
-import type { PropsCell } from "@/shared/inputs/InputSearchSelect";
+import type { Sex } from "@/shared/types";
+import type { PropsCell } from "@/shared/ui/inputs/InputSearchSelect";
 
 export interface ProfileInitialValues {
   name: string;
   age: string | number;
   description: string;
-  sex: "male" | "female" | "";
+  sex: Sex;
   photo: undefined | File | string;
   city: string | PropsCell;
   changes?: {

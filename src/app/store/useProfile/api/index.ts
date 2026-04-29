@@ -1,14 +1,14 @@
 import { api } from "@/app/api";
-import type { ValuesUpdateProfile, ProfileDto } from "../types";
+import type { ValuesUpdateProfile, DTOProfile } from "../types";
 
-export const getProfile = async (): Promise<ProfileDto> => {
+export const getProfile = async (): Promise<DTOProfile> => {
   const { data } = await api.get("/profile");
   return data;
 };
 
 export const updateProfile = async (
   values: ValuesUpdateProfile,
-): Promise<ProfileDto> => {
+): Promise<DTOProfile> => {
   const { data } = await api.put(`/profile`, {
     ...values,
   });

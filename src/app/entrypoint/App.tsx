@@ -1,27 +1,28 @@
-import { AppRoutes, paths } from "../routes";
-import { preloadLottie } from "../helpers";
-import { useReverbBgColor } from "../helpers";
-import { useSetInitDataRaw } from "../api/entrypoint.api";
-import {
-  useIsFormFiltersDirty,
-  useIsFormProfileUpdateDirty,
-} from "../store/useDirtyForms";
-
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { useLocation } from "react-router-dom";
 import "@telegram-apps/telegram-ui/dist/styles.css";
 import { useEffect, useMemo } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 
-import { MainLayout } from "@/app/layouts/MainLayout";
 import { queryClient } from "@/app/store";
+import { pathsToPublicSrc } from "@/app/config";
+import { MainLayout } from "@/app/layouts/MainLayout";
+import { AppRoutes, paths } from "@/app/routes";
+import { preloadLottie, useReverbBgColor } from "@/app/helpers";
+import { useSetInitDataRaw } from "@/app/api";
+import {
+  useIsFormFiltersDirty,
+  useIsFormProfileUpdateDirty,
+} from "@/app/store/useDirtyForms";
+import type { PropsApp } from "@/app/types";
+import { useGetPlatformForApp, useSetPlatform } from "@/app/store";
+
 import { Navbar } from "@/widgets/Navbar";
 import { SnackbarContainer } from "@/widgets/SnackbarContainer";
-import { AppealModal } from "@/widgets/AppealModal";
-import { BackButton } from "@/shared/BackButton";
-import { SettingsButton } from "@/shared/SettingsButton";
-import { pathsToPublicSrc } from "@/shared/config";
-import { useGetPlatformForApp, useSetPlatform } from "@/shared/usePlatform";
+import { ModalAppeal } from "@/features/appeal-profile";
+
+import { ButtonBack } from "@/shared/ui/buttons/ButtonBack";
+import { ButtonSettings } from "@/shared/ui/buttons/ButtonSettings";
 
 const pagesWithNavbar = new Set([
   paths.pageProfileCardsView,
@@ -29,7 +30,7 @@ const pagesWithNavbar = new Set([
   paths.pageSympathyProfileCardsView,
 ]);
 
-export default function App({ launchParams }: { launchParams: any }) {
+export default function App({ launchParams }: PropsApp) {
   const setPlatform = useSetPlatform();
   const platformForApp = useGetPlatformForApp();
 
@@ -65,15 +66,15 @@ export default function App({ launchParams }: { launchParams: any }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AppRoot platform={platformForApp ?? "base"}>
-        <BackButton
+        <ButtonBack
           isFormFiltersDirty={isFormFiltersDirty}
           isFormProfileUpdateDirty={isFormProfileUpdateDirty}
         />
-        <SettingsButton />
+        <ButtonSettings />
         <MainLayout>
           <AppRoutes />
         </MainLayout>
-        <AppealModal />
+        <ModalAppeal />
         <SnackbarContainer />
         <Navbar show={isNavbarPage} />
       </AppRoot>

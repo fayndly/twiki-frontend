@@ -1,1 +1,1 @@
-export { PageProfileCardCreate } from "./ui/PageProfileCardCreate.tsx";
+export { PageProfileCardCreate } from "./ui";

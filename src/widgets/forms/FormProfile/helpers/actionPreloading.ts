@@ -1,12 +1,15 @@
+import type { ProfileInitialValues } from "../types";
+
 import type { FormikProps } from "formik";
 import { popup } from "@tma.js/sdk-react";
-import type { ProfileInitialValues } from "../types";
+
+import { paths } from "@/app/routes";
 
 export const fnActionPreloading = async (
   formik: FormikProps<ProfileInitialValues>,
   pathname?: string,
 ) => {
-  if (pathname !== "/profile/update") {
+  if (pathname !== paths.pageProfileCardEdit) {
     return;
   }
 
@@ -34,7 +37,7 @@ export const fnActionPreloading = async (
       });
       const buttonId = await promise;
 
-      buttonId === "ok_city" ? (changes.age = true) : (changes.age = false);
+      changes.city = buttonId === "ok_city";
     }
   }
 
@@ -52,7 +55,7 @@ export const fnActionPreloading = async (
     });
     const buttonId = await promise;
 
-    buttonId === "ok_age" ? (changes.age = true) : (changes.age = false);
+    changes.age = buttonId === "ok_age";
   }
 
   formik.setFieldValue("changes", changes);

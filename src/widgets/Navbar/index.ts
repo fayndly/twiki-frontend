@@ -1,2 +1,2 @@
-export { Navbar } from "./ui/Navbar.tsx";
+export { Navbar } from "./ui";
 export { useScrollDirection } from "./model/useScrollDirection.ts";

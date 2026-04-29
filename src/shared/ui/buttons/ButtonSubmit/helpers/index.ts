@@ -1,0 +1,1 @@
+export { getParams } from "./getParams";

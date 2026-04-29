@@ -1,3 +1,2 @@
-export { useAddSnackbar, getAddSnackbar } from "./store/useSnackbar";
-
-export { SnackbarContainer } from "./ui/SnackbarContainer";
+export { useAddSnackbar, getAddSnackbar } from "./model";
+export { SnackbarContainer } from "./ui";

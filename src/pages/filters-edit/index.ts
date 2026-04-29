@@ -1,1 +1,1 @@
-export { PageFiltersEdit } from "./ui/PageFiltersEdit.tsx";
+export { PageFiltersEdit } from "./ui";

@@ -1,1 +1,1 @@
-export { PageProfileCardsView } from "./ui/PageProfileCardsView.tsx";
+export { PageProfileCardsView } from "./ui";

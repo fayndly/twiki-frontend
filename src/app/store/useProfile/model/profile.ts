@@ -1,8 +1,9 @@
 import { getProfile, updateProfile } from "../api";
+import type { PropsProfileMutationOptions } from "../types";
 
 import { queryOptions } from "@tanstack/react-query";
-import { queryClient } from "../..";
-import type { PropsProfileMutationOptions } from "../types";
+
+import { queryClient } from "@/app/store";
 import { getAddSnackbar } from "@/widgets/SnackbarContainer";
 
 export const profileQueryOptions = (enabled: boolean) =>
@@ -20,7 +21,7 @@ export const profileQueryOptions = (enabled: boolean) =>
 
 export const profileMutationQueryOptions: PropsProfileMutationOptions = {
   mutationFn: updateProfile,
-  onSuccess: async (data: any) => {
+  onSuccess: async (data) => {
     const addSnackbar = getAddSnackbar();
 
     queryClient.setQueryData(["profile"], data);
@@ -30,7 +31,7 @@ export const profileMutationQueryOptions: PropsProfileMutationOptions = {
       "confirm",
     );
   },
-  onError: (err, _vars, _onMutateResult, _context) => {
+  onError: (err) => {
     const addSnackbar = getAddSnackbar();
 
     let header = `${err.name} [${err.status}]`;

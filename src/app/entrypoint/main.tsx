@@ -1,11 +1,9 @@
-import { createRoot } from "react-dom/client";
+import "../styles/global.scss";
+import { init } from "../environment/init-tma.ts";
 import App from "./App";
 
-import "../styles/global.scss";
-
+import { createRoot } from "react-dom/client";
 import { retrieveLaunchParams } from "@tma.js/sdk-react";
-import { init } from "../environment/init-tma.ts";
-
 import { HashRouter } from "react-router";
 
 const root = createRoot(document.getElementById("root")!);
@@ -28,6 +26,6 @@ try {
       </HashRouter>,
     );
   });
-} catch (e) {
-  console.log("error");
+} catch (error) {
+  console.log(error);
 }

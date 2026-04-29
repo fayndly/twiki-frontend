@@ -1,1 +1,1 @@
-export { FormFilters } from "./ui/FormFilters.tsx";
+export { FormFilters } from "./ui";
