@@ -1,11 +1,12 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
 import { getSympathyCards } from "../api";
+import type { StoreItemCardSympathyProfile } from "../types";
 
-import type { ICartSympathy } from "../types";
+import { queryOptions, useQuery } from "@tanstack/react-query";
+
 import type { AxiosErrorDto } from "@/app/api";
 
 const sympathyCardsQueryOptions = () =>
-  queryOptions<ICartSympathy[], AxiosErrorDto>({
+  queryOptions<StoreItemCardSympathyProfile[], AxiosErrorDto>({
     queryKey: ["sympathyCards"],
     queryFn: getSympathyCards,
     retry: false,
@@ -15,7 +16,8 @@ const sympathyCardsQueryOptions = () =>
 export function useSympathyCards() {
   const sympathyCardsQuery = useQuery(sympathyCardsQueryOptions());
 
-  const { data, isPending, isError, isSuccess, refetch, error } = sympathyCardsQuery;
+  const { data, isPending, isError, isSuccess, refetch, error } =
+    sympathyCardsQuery;
 
   return { data, isPending, isError, isSuccess, refetch, error };
 }

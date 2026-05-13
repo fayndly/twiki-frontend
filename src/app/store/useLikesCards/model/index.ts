@@ -1,1 +1,0 @@
-export { useLikesCards } from "./useLikesCards";

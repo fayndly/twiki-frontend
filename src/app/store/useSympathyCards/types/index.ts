@@ -1,5 +1,2 @@
-import type { PropsCardSympathy } from "@/widgets/CardSympathy";
-
-export interface ICartSympathy extends PropsCardSympathy {
-  userId: string;
-}
+export type { StoreItemCardSympathyProfile } from "./store.types";
+export type { DTOSympathyCard } from "./api.types";

@@ -1,28 +1,30 @@
-import { validationSchema, sexOptions } from "../config";
 import type { PropsFormProfile } from "../types";
+import { fnActionPreloading } from "../helpers";
+import { validationSchema } from "../model";
 
 import { useFormik } from "formik";
-
-import { InputText } from "@/shared/inputs/InputText";
-import { InputTextarea } from "@/shared/inputs/InputTextarea";
-import { InputSelect } from "@/shared/inputs/InputSelect";
-import { InputImage } from "@/shared/inputs/InputImage";
-import { InputSearchSelect } from "@/shared/inputs/InputSearchSelect";
-import { SectionLoaderForm } from "@/shared/SectionLoaderForm";
-import {
-  SubmitButton,
-  useButtonSubmitForFormic,
-  submitEventHandler,
-} from "@/shared/SubmitButton";
-import { SectionErrorLoadFormData } from "@/shared/SectionErrorLoadFormData";
-import { SectionInput } from "@/shared/SectionInput";
-import { ListSectionsWrapper } from "@/shared/ListSectionsWrapper";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+
 import { useSetFormDirty } from "@/app/store/useDirtyForms";
-import { fnActionPreloading } from "../helpers";
 import { useFilters } from "@/app/store/useFilters";
-import { useViewingCards } from "@/app/store/useViewingCards";
+import { useViewingCards } from "@/app/store/useProfileCards";
+import { paths } from "@/app/routes";
+
+import { InputText } from "@/shared/ui/inputs/InputText";
+import { InputTextarea } from "@/shared/ui/inputs/InputTextarea";
+import { InputSelect } from "@/shared/ui/inputs/InputSelect";
+import { InputImage } from "@/shared/ui/inputs/InputImage";
+import { InputSearchSelect } from "@/shared/ui/inputs/InputSearchSelect";
+import {
+  ButtonSubmit,
+  useButtonSubmitForFormic,
+  submitEventHandler,
+} from "@/shared/ui/buttons/ButtonSubmit";
+import { SectionInput } from "@/shared/ui/sections/SectionInput";
+import { ListSectionsWrapper } from "@/shared/ui/ListSectionsWrapper";
+import { SectionFeedbackLoading } from "@/shared/ui/sections/SectionFeedbackLoading/";
+import { sexOptions } from "@/shared/consts";
 
 export function FormProfile({
   initialValues,
@@ -62,22 +64,25 @@ export function FormProfile({
   } = formik;
 
   useEffect(() => {
-    if (location.pathname === "/profile/create") {
+    if (location.pathname === paths.pageProfileCardCreate) {
       setFormDirty("profileCreate", dirty);
     }
-    if (location.pathname === "/profile/update") {
+    if (location.pathname === paths.pageProfileCardEdit) {
       setFormDirty("profileUpdate", dirty);
     }
   }, [dirty]);
 
   if (isDataLoading) {
-    return <SectionLoaderForm />;
+    return <SectionFeedbackLoading type="loadingFormData" />;
   }
 
   if (citiesActions.isError || profileActions?.isError) {
     return (
-      <SectionErrorLoadFormData
-        onClick={async () => {
+      <SectionFeedbackLoading
+        type="errorLoadingFormData"
+        header="Ошибка загрузки данных"
+        description="Не удалось загрузить данные анкеты, повторите попытку нажав на кнопку ниже или попробуйте позже"
+        onClickButtonReload={async () => {
           if (citiesActions.isError) {
             await citiesActions.refetch();
           }
@@ -85,8 +90,6 @@ export function FormProfile({
             await profileActions.refetch();
           }
         }}
-        header="Ошибка загрузки данных"
-        description="Не удалось загрузить данные анкеты, повторите попытку нажав на кнопку ниже или попробуйте позже"
       />
     );
   }
@@ -108,7 +111,7 @@ export function FormProfile({
             onChange={() => {
               setFieldTouched("name", true);
             }}
-            hasError={Boolean(errors.name?.length)}
+            hasErrors={Boolean(errors.name?.length)}
             handleChange={handleChange}
             value={values.name}
             type="text"
@@ -123,7 +126,7 @@ export function FormProfile({
             onChange={() => {
               setFieldTouched("age", true);
             }}
-            hasError={Boolean(errors.age?.length)}
+            hasErrors={Boolean(errors.age?.length)}
             handleChange={handleChange}
             value={values.age}
             type="number"
@@ -135,7 +138,7 @@ export function FormProfile({
             onChange={() => {
               setFieldTouched("sex", true);
             }}
-            hasError={Boolean(errors.sex?.length)}
+            hasErrors={Boolean(errors.sex?.length)}
             handleChange={handleChange}
             value={values.sex}
             id="sex"
@@ -143,6 +146,7 @@ export function FormProfile({
             options={sexOptions}
           />
         </SectionInput>
+
         <SectionInput
           errors={[
             errors.description && touched.description ? errors.description : "",
@@ -210,7 +214,7 @@ export function FormProfile({
           />
         </SectionInput>
       </ListSectionsWrapper>
-      <SubmitButton
+      <ButtonSubmit
         onSubmit={() => {
           submitEventHandler(
             formik,

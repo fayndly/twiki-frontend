@@ -7,7 +7,7 @@ export interface ValuesUpdateFilters {
   cityId: string;
 }
 
-export interface FiltersDto {
+export interface DTOFilters {
   age: {
     min: number;
     max: number;

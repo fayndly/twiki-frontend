@@ -1,1 +1,1 @@
-export { PageNotFound } from "./ui/PageNotFound.tsx";
+export { PageNotFound } from "./ui";

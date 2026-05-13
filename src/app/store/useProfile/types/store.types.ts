@@ -4,14 +4,14 @@ import type { ValuesUpdateProfile } from "./api.types";
 import type { UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosErrorDto } from "@/app/api";
 
-export interface StoreItemProfile extends ProfileInitialValues {}
+export type StoreItemProfile = ProfileInitialValues;
 
 type ProfileMutationContext = {
   previousProfile?: StoreItemProfile[];
 };
 
 export type PropsProfileMutationOptions = UseMutationOptions<
-  any,
+  ValuesUpdateProfile,
   AxiosErrorDto,
   ValuesUpdateProfile,
   ProfileMutationContext

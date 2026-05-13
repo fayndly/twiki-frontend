@@ -1,0 +1,22 @@
+.modal {
+  background-color: $tg_secondary_bg_color !important;
+  &_content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0px 16px;
+  }
+
+  &_header::before {
+    display: none;
+  }
+
+  &_header_mobile::before {
+    display: flex;
+    background: $tg_hint_color !important;
+  }
+
+  &_close {
+    cursor: pointer;
+  }
+}

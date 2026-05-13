@@ -2,24 +2,24 @@ import styles from "./MainLayout.module.scss";
 import type { PropsMainLayout } from "../types";
 
 import {
-  useIsTgSettingsButtonSupporting,
-  useIsVisibleSettingsButton,
-} from "@/shared/SettingsButton";
+  useIsTgButtonSettingsSupporting,
+  useIsVisibleButtonSettings,
+} from "@/widgets/ButtonSettings";
 import {
-  useIsTgBackButtonSupporting,
-  useIsVisibleBackButton,
-} from "@/shared/BackButton";
+  useIsTgButtonBackSupporting,
+  useIsVisibleButtonBack,
+} from "@/widgets/ButtonBack";
 
 export function MainLayout({ children }: PropsMainLayout) {
-  const isTgSettingsButtonSupporting = useIsTgSettingsButtonSupporting();
-  const isVisibleSettingsButton = useIsVisibleSettingsButton();
+  const isTgButtonSettingsSupporting = useIsTgButtonSettingsSupporting();
+  const isVisibleButtonSettings = useIsVisibleButtonSettings();
 
-  const isTgBackButtonSupporting = useIsTgBackButtonSupporting();
-  const isVisibleBackButton = useIsVisibleBackButton();
+  const isTgButtonBackSupporting = useIsTgButtonBackSupporting();
+  const isVisibleButtonBack = useIsVisibleButtonBack();
 
   const isShowTopPadding =
-    (!isTgSettingsButtonSupporting && isVisibleSettingsButton) ||
-    (!isTgBackButtonSupporting && isVisibleBackButton);
+    (!isTgButtonSettingsSupporting && isVisibleButtonSettings) ||
+    (!isTgButtonBackSupporting && isVisibleButtonBack);
 
   return (
     <main

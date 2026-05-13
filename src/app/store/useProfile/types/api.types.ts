@@ -1,10 +1,12 @@
-import type { PropsCell } from "@/shared/inputs/InputSearchSelect";
+import type { PropsCell } from "@/shared/ui/inputs/InputSearchSelect";
+
+type Sex = "male" | "female";
 
 export interface ValuesUpdateProfile {
   name: string;
   age: number;
   description: string;
-  sex: "male" | "female";
+  sex: Sex;
   photo: string | File;
   cityId: string | PropsCell;
   changes?: {
@@ -13,11 +15,11 @@ export interface ValuesUpdateProfile {
   };
 }
 
-export interface ProfileDto {
+export interface DTOProfile {
   name: string;
   age: number;
   description: string;
-  sex: "male" | "female";
+  sex: Sex;
   photo: string;
   cityId: string;
 }
